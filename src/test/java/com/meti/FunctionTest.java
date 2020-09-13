@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FunctionTest {
     @Test
+    void singleParameter(){
+        compile("def pass(value : Int) : Int => {return value;}", "int pass(int value){return value;}");
+    }
+
+    @Test
     void empty() {
         compile("def test() : Void => {}", "void test(){}");
     }
