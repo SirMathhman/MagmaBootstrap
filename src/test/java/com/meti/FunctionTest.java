@@ -22,7 +22,7 @@ class FunctionTest {
     @Test
     void name(){
         Compiler compiler = new Compiler();
-        String target = compiler.compile("def test() : Void => {return 0;}");
-        assertEquals("void test(){return 0;}", target);
+        String target = compiler.compile("def test() : Int => {return 0;}");
+        assertEquals("int test(){return 0;}", target);
     }
 }
