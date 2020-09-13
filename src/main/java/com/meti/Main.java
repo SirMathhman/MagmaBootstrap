@@ -30,15 +30,11 @@ public class Main {
         }
         try {
             String source = Files.readString(mainScript);
-            String target = compile(source);
+            String target = Compiler.compile(source);
             write(target);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Failed to read content from main file.", e);
         }
-    }
-
-    private static String compile(String content) {
-        return content;
     }
 
     private static void write(String content) {
