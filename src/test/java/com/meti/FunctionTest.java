@@ -7,25 +7,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FunctionTest {
     @Test
     void singleParameter(){
-        compile("def pass(value : Int) : Int => {return value;}", "int pass(int value){return value;}");
+        compile("int pass(int value){return value;}", "def pass(value : Int) : Int => {return value;}");
     }
 
     @Test
     void multipleParameters(){
-        compile("def apply(start : Int, end : Int) : Int => {}", "int apply(int start,int end){}");
+        compile("int apply(int start,int end){}", "def apply(start : Int, end : Int) : Int => {}");
     }
 
     @Test
     void empty() {
-        compile("def test() : Void => {}", "void test(){}");
+        compile("void test(){}", "def test() : Void => {}");
     }
 
     @Test
     void testMain() {
-        compile("def main() : Int => {return 0;}", "int main(){return 0;}");
+        compile("int main(){return 0;}", "def main() : Int => {return 0;}");
     }
 
-    private void compile(String source, String expectedTarget) {
+    private void compile(String expectedTarget, String source) {
         Compiler compiler = new Compiler();
         String actualTarget = compiler.compile(source);
         assertEquals(expectedTarget, actualTarget);
@@ -33,11 +33,11 @@ class FunctionTest {
 
     @Test
     void value() {
-        compile("def main() : Void => {return 0;}", "void main(){return 0;}");
+        compile("void main(){return 0;}", "def main() : Void => {return 0;}");
     }
 
     @Test
     void name() {
-        compile("def test() : Int => {return 0;}", "int test(){return 0;}");
+        compile("int test(){return 0;}", "def test() : Int => {return 0;}");
     }
 }
