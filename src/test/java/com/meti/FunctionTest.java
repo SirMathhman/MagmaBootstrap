@@ -2,16 +2,14 @@ package com.meti;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class FunctionTest {
+class FunctionTest extends CompileTest {
     @Test
-    void singleParameter(){
+    void singleParameter() {
         compile("int pass(int value){return value;}", "def pass(value : Int) : Int => {return value;}");
     }
 
     @Test
-    void multipleParameters(){
+    void multipleParameters() {
         compile("int apply(int start,int end){}", "def apply(start : Int, end : Int) : Int => {}");
     }
 
@@ -23,12 +21,6 @@ class FunctionTest {
     @Test
     void testMain() {
         compile("int main(){return 0;}", "def main() : Int => {return 0;}");
-    }
-
-    private void compile(String expectedTarget, String source) {
-        Compiler compiler = new Compiler();
-        String actualTarget = compiler.compile(source);
-        assertEquals(expectedTarget, actualTarget);
     }
 
     @Test
