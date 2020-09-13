@@ -11,6 +11,11 @@ class FunctionTest {
     }
 
     @Test
+    void multipleParameters(){
+        compile("def apply(start : Int, end : Int) : Int => {}", "int apply(int start,int end){}");
+    }
+
+    @Test
     void empty() {
         compile("def test() : Void => {}", "void test(){}");
     }
