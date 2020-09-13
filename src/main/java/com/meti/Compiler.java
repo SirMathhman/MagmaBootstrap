@@ -19,7 +19,7 @@ public class Compiler {
                     .map(Field::render)
                     .collect(Collectors.joining(",", "(", ")"));
             String name = content.substring(4, paramStart).trim();
-            int returnStart = content.indexOf(':');
+            int returnStart = content.indexOf(':', paramEnd);
             int returnEnd = content.indexOf("=>");
             String returnString = content.substring(returnStart + 1, returnEnd).trim();
             Type type = resolveString(returnString);
