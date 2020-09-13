@@ -5,7 +5,16 @@ public class Compiler {
         if(content.startsWith("def")) {
             int paramStart = content.indexOf('(');
             String name = content.substring(4, paramStart).trim();
-            return String.format("int %s(){return 0;}", name);
+            int returnStart = content.indexOf(':');
+            int returnEnd = content.indexOf("=>");
+            String returnString = content.substring(returnStart + 1, returnEnd).trim();
+            String renderHeader;
+            if(returnString.equals("Int")) {
+                renderHeader = "int " + name;
+            } else {
+                renderHeader = "void " + name;
+            }
+            return renderHeader + "(){return 0;}";
         }
         return content;
     }

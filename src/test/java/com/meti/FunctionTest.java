@@ -6,23 +6,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FunctionTest {
     @Test
+    void empty() {
+        compile("def test() : Void => {}", "void test(){}");
+    }
+
+    @Test
     void testMain() {
+        compile("def main() : Int => {return 0;}", "int main(){return 0;}");
+    }
+
+    private void compile(String source, String expectedTarget) {
         Compiler compiler = new Compiler();
-        String target = compiler.compile("def main() : Int => {return 0;}");
-        assertEquals("int main(){return 0;}", target);
+        String actualTarget = compiler.compile(source);
+        assertEquals(expectedTarget, actualTarget);
     }
 
     @Test
-    void value(){
-        Compiler compiler = new Compiler();
-        String target = compiler.compile("def main() : Void => {return 0;}");
-        assertEquals("void main(){return 0;}", target);
+    void value() {
+        compile("def main() : Void => {return 0;}", "void main(){return 0;}");
     }
 
     @Test
-    void name(){
-        Compiler compiler = new Compiler();
-        String target = compiler.compile("def test() : Int => {return 0;}");
-        assertEquals("int test(){return 0;}", target);
+    void name() {
+        compile("def test() : Int => {return 0;}", "int test(){return 0;}");
     }
 }
