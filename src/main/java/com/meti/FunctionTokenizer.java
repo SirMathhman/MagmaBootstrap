@@ -29,13 +29,13 @@ public class FunctionTokenizer implements Tokenizer<Node> {
             int end = startOptional.getAsInt();
             List<Field> fields = parseFields(start, end);
             Content name = content.slice(4, start);
-            OptionalInt returnStartOptional = content.indexFromEnd(":");
+            OptionalInt returnStartOptional = content.indexFrom(":", end);
             OptionalInt returnEndOptional = content.index("=>");
             if (returnStartOptional.isPresent() && returnEndOptional.isPresent()) {
                 int returnStart = returnStartOptional.getAsInt();
                 int returnEnd = returnEndOptional.getAsInt();
                 Type type = new ContentType(content.slice(returnStart + 1, returnEnd));
-                content.slice(returnEnd + 2);
+                content.sliceToEnd(returnEnd + 2);
                 String valueString = string.substring(returnEnd + 2).trim();
                 Node value = new ValueNode(valueString);
                 return Optional.of(name.applyToValue((Function<String, Node>) s -> new FunctionNode(s, fields, type, value)));

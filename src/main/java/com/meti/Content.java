@@ -5,9 +5,10 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public interface Content {
+    //TODO: return monad
     <R> R applyToValue(Function<String, R> mapper);
 
-    Content slice(int start);
+    Content sliceToEnd(int start);
 
     Content slice(int start, int end);
 
@@ -20,5 +21,5 @@ public interface Content {
     @Deprecated
     boolean isEmpty();
 
-    OptionalInt indexFromEnd(String value);
+    OptionalInt indexFrom(String sequence, int end);
 }

@@ -35,7 +35,7 @@ public class ChildContent implements Content {
     }
 
     @Override
-    public Content slice(int start) {
+    public Content sliceToEnd(int start) {
         throw new UnsupportedOperationException();
     }
 
@@ -50,7 +50,7 @@ public class ChildContent implements Content {
     }
 
     @Override
-    public OptionalInt indexFromEnd(String value){
+    public OptionalInt indexFrom(String sequence, int end){
         throw new UnsupportedOperationException();
     }
 

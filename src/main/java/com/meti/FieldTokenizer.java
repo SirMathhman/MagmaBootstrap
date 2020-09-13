@@ -22,7 +22,7 @@ public class FieldTokenizer implements Tokenizer<Field> {
         if (separatorOptional.isPresent()) {
             int separator = separatorOptional.getAsInt();
             Content name = content.slice(0, separator);
-            Content typeContent = content.slice(separator + 1);
+            Content typeContent = content.sliceToEnd(separator + 1);
             Type type = new ContentType(typeContent);
             //TODO: replace with monad
             Field field = name.applyToValue((Function<String, Field>) s -> new InlineField(s, type));

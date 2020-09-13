@@ -1,6 +1,6 @@
 package com.meti;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -32,13 +32,17 @@ public class RootContent implements Content {
     }
 
     @Override
-    public Content slice(int start) {
-        throw new UnsupportedOperationException();
+    public Content sliceToEnd(int start) {
+        int length = value.length();
+        return slice(start, length);
     }
 
+    //TODO: deprecate this method because String.split doesn't return content and its indices
     @Override
     public Stream<Content> split(String regex){
-        throw new UnsupportedOperationException();
+        return List.of(value.split(regex))
+                .stream()
+                .map(child -> new ChildContent(this, child, -1, -1));
     }
 
     @Override
@@ -47,12 +51,14 @@ public class RootContent implements Content {
     }
 
     @Override
-    public OptionalInt indexFromEnd(String value){
-        throw new UnsupportedOperationException();
+    public OptionalInt indexFrom(String sequence, int end){
+        int index = value.indexOf(sequence, end);
+        if(index == -1) return OptionalInt.empty();
+        return OptionalInt.of(index);
     }
 
     @Override
     public boolean isPresent() {
-        throw new UnsupportedOperationException();
+        return !value.isBlank();
     }
 }
