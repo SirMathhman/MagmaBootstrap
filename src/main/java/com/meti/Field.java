@@ -1,16 +1,25 @@
 package com.meti;
 
-public class Field implements Node {
-    private final String name;
-    private final Type type;
+import java.util.Optional;
+import java.util.function.Function;
 
-    public Field(String name, Type type) {
-        this.name = name;
-        this.type = type;
+public interface Field extends Node {
+    <R> R applyToType(Function<Type, R> mapping);
+
+    Field copy(Type type);
+
+    @Override
+    default <R> Optional<R> applyToContent(Function<Content, R> function) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public String render() {
-        return type.render(name);
+    default Prototype createPrototype(){
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default Optional<String> render(){
+        throw new UnsupportedOperationException();
     }
 }
