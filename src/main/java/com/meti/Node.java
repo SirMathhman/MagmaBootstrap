@@ -7,13 +7,9 @@ import java.util.stream.Stream;
 public interface Node extends Renderable {
     <R> Optional<R> applyToContent(Function<Content, R> function);
 
-    default Stream<Field> streamFields() {
-        return Stream.empty();
-    }
+    Stream<Field> streamFields();
 
-    default Stream<Node> streamChildren() {
-        return Stream.empty();
-    }
+    Stream<Node> streamChildren();
 
     Prototype createPrototype();
 

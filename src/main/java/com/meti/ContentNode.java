@@ -2,6 +2,7 @@ package com.meti;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class ContentNode implements Node {
     private final Content content;
@@ -22,6 +23,16 @@ public class ContentNode implements Node {
 
     @Override
     public Optional<String> render(){
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Stream<Field> streamFields() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Stream<Node> streamChildren() {
         throw new UnsupportedOperationException();
     }
 }

@@ -1,9 +1,11 @@
 package com.meti;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class FunctionNode implements Node {
     private final Type returnType;
@@ -35,5 +37,18 @@ class FunctionNode implements Node {
                 .flatMap(Optional::stream)
                 .collect(Collectors.joining(",", "(", ")"));
         return Optional.of(returnType.render(name + renderedParameters) + value.render());
+    }
+
+    @Override
+    public Stream<Field> streamFields() {
+        List<Field> list = new ArrayList<>();
+        list.add(new InlineField(name, returnType));
+        list.addAll(parameters);
+        return list.stream();
+    }
+
+    @Override
+    public Stream<Node> streamChildren() {
+        return Stream.of(value);
     }
 }

@@ -38,13 +38,14 @@ public class Compiler {
             Tokenizer<Node> tokenizer = new FunctionTokenizer(content);
             return tokenizer.tokenize();
         } else {
-            throw new IllegalArgumentException("Cannot parse: " + content);
+            throw content.applyToValue(s -> String.format("Cannot parse: %s", s))
+                    .transform(IllegalArgumentException::new);
         }
     }
 
     private Type resolve(Type previous) {
         Type type;
-        if(previous.applyToContent(content -> content.applyToValue("Int"::equals)).orElseThrow()){
+        if (previous.applyToContent(content -> content.applyToValue("Int"::equals)).orElseThrow()) {
             type = IntType.IntType;
         } else {
             type = VoidType.VoidType;
