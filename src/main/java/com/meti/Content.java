@@ -14,7 +14,12 @@ public interface Content {
 
     OptionalInt index(String sequence);
 
+    @Deprecated
     Stream<Content> split(String regex);
+
+    default Stream<Content> splitByStrategy(Strategy strategy) {
+        throw new UnsupportedOperationException();
+    }
 
     boolean isPresent();
 
