@@ -12,12 +12,7 @@ public class FieldTokenizer implements Tokenizer<Field> {
     }
 
     @Override
-    public Field tokenize() {
-        return tokenizeOptionally().orElseThrow();
-    }
-
-    @Override
-    public Optional<Field> tokenizeOptionally() {
+    public Optional<Field> tokenize() {
         OptionalInt separatorOptional = content.index(":");
         if (separatorOptional.isPresent()) {
             int separator = separatorOptional.getAsInt();

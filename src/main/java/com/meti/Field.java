@@ -1,6 +1,7 @@
 package com.meti;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public interface Field extends Node {
@@ -14,12 +15,16 @@ public interface Field extends Node {
     }
 
     @Override
-    default Prototype createPrototype(){
+    default Prototype createPrototype() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    default Optional<String> render(){
+    default Optional<String> render() {
+        throw new UnsupportedOperationException();
+    }
+
+    default <R> R applyDestruction(BiFunction<String, Type, R> function) {
         throw new UnsupportedOperationException();
     }
 }

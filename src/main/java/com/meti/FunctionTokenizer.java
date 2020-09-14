@@ -8,20 +8,13 @@ import java.util.stream.Collectors;
 
 public class FunctionTokenizer implements Tokenizer<Node> {
     private final Content content;
-    private final String string;
 
-    public FunctionTokenizer(Content content, String string) {
+    public FunctionTokenizer(Content content) {
         this.content = content;
-        this.string = string;
     }
 
     @Override
-    public Node tokenize() {
-        return tokenizeOptionally().orElseThrow();
-    }
-
-    @Override
-    public Optional<Node> tokenizeOptionally() {
+    public Optional<Node> tokenize() {
         OptionalInt startOptional = content.index("(");
         OptionalInt endOptional = content.index(")");
         if (startOptional.isPresent() && endOptional.isPresent()) {
@@ -47,10 +40,11 @@ public class FunctionTokenizer implements Tokenizer<Node> {
         }
     }
 
-    private Optional<Node> tokenizeValidly(List<Field> fields, Content name, int returnStart, int returnEnd) {
+    private Optional<Node> tokenizeValidly(List<Field> parameters, Content name, int returnStart, int returnEnd) {
         Type type = new ContentType(content.slice(returnStart + 1, returnEnd));
         Node value = parseContent(returnEnd);
-        return Optional.of(name.applyToValue((Function<String, Node>) s -> new FunctionNode(s, fields, type, value)));
+        //TODO: Replace sequence here with monad
+        return Optional.of(new FunctionBuilder().withIdentity(name.applyToValue((Function<String, Field>) s -> new InlineField(s, type))).withParameters(parameters).withChild(value).build());
     }
 
     private Node parseContent(int returnEnd) {
@@ -63,6 +57,7 @@ public class FunctionTokenizer implements Tokenizer<Node> {
                 .filter(Content::isPresent)
                 .map(FieldTokenizer::new)
                 .map(FieldTokenizer::tokenize)
+                .flatMap(Optional::stream)
                 .collect(Collectors.toList());
     }
 }

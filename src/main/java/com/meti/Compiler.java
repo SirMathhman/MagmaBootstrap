@@ -1,5 +1,8 @@
 package com.meti;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 public class Compiler {
 
     String compile(String content) {
@@ -25,23 +28,14 @@ public class Compiler {
     }
 
     private Node parseChild(Node previous) {
-        return previous.applyToContent(this::parseContent).orElseThrow();
+        return previous.applyToContent(this::parseContent)
+                .flatMap(Function.identity())
+                .orElseThrow();
     }
 
-    private Node parseContent(Content content) {
+    private Optional<Node> parseContent(Content content) {
         if (content.applyToValue(value -> value.startsWith("def"))) {
-            Tokenizer<Node> tokenizer = new FunctionTokenizer(content, null);
-            return tokenizer.tokenize();
-        } else {
-            throw new IllegalArgumentException("Cannot parse: " + content);
-        }
-    }
-
-
-    @Deprecated
-    private Node parseString(String content) {
-        if (content.startsWith("def")) {
-            Tokenizer<Node> tokenizer = new FunctionTokenizer(null, content);
+            Tokenizer<Node> tokenizer = new FunctionTokenizer(content);
             return tokenizer.tokenize();
         } else {
             throw new IllegalArgumentException("Cannot parse: " + content);
