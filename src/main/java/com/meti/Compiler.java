@@ -1,6 +1,5 @@
 package com.meti;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Compiler {
@@ -33,7 +32,7 @@ public class Compiler {
 
     private Node parseContent(Content content) {
         return new RootTokenizer(content)
-                .tokenize()
+                .evaluate()
                 .orElseThrow(supplyInvalidParse(content));
     }
 

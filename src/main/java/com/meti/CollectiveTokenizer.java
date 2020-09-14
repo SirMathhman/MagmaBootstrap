@@ -10,13 +10,13 @@ public abstract class CollectiveTokenizer extends AbstractTokenizer {
     }
 
     @Override
-    public Optional<Node> tokenize() {
+    public Optional<Node> evaluate() {
         return streamFactories()
                 .map(factory -> factory.apply(content))
-                .map(Tokenizer::tokenize)
+                .map(Evaluator::evaluate)
                 .flatMap(Optional::stream)
                 .findFirst();
     }
 
-    protected abstract Stream<Function<Content, Tokenizer<Node>>> streamFactories();
+    protected abstract Stream<Function<Content, Evaluator<Node>>> streamFactories();
 }

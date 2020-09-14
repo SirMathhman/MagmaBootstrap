@@ -12,7 +12,7 @@ public class BlockTokenizer extends AbstractTokenizer {
     }
 
     @Override
-    public Optional<Node> tokenize() {
+    public Optional<Node> evaluate() {
         if (content.startsWith("{") && content.endsWith("}")) {
             Content value = content.slice(1, content.length() - 1);
             List<Node> children = value.split(LineStrategy::new)

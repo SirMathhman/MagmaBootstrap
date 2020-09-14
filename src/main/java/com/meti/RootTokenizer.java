@@ -9,7 +9,7 @@ public class RootTokenizer extends CollectiveTokenizer {
     }
 
     @Override
-    protected Stream<Function<Content, Tokenizer<Node>>> streamFactories() {
+    protected Stream<Function<Content, Evaluator<Node>>> streamFactories() {
         return Stream.of(
                 BlockTokenizer::new,
                 FunctionTokenizer::new
