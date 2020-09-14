@@ -34,22 +34,27 @@ public class Compiler {
     }
 
     private Optional<Node> parseContent(Content content) {
-        if (content.value().apply(value -> value.startsWith("def"))) {
+        if (content.value().append("def").apply(String::startsWith)) {
             Tokenizer<Node> tokenizer = new FunctionTokenizer(content);
             return tokenizer.tokenize();
         } else {
-            throw content.value().apply(s -> String.format("Cannot parse: %s", s))
+            throw content.value().append("Cannot parse: %s")
+                    .swap().apply(String::format)
                     .transform(IllegalArgumentException::new);
         }
     }
 
     private Type resolve(Type previous) {
         Type type;
-        if (previous.applyToContent(content -> content.value().apply("Int"::equals)).orElseThrow()) {
+        if (previous.applyToContent(this::isInt).orElseThrow()) {
             type = IntType.IntType;
         } else {
             type = VoidType.VoidType;
         }
         return type;
+    }
+
+    private boolean isInt(Content content) {
+        return content.value().apply("Int"::equals);
     }
 }

@@ -12,4 +12,8 @@ public class Monad<T> {
     public <R> R apply(Function<T, R> function) {
         return function.apply(value);
     }
+
+    public <R> Dyad<T, R> append(R other) {
+        return new Dyad<>(value, other);
+    }
 }

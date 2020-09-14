@@ -45,8 +45,15 @@ public class FunctionTokenizer implements Tokenizer<Node> {
     private Optional<Node> tokenizeValidly(List<Field> parameters, Content name, int returnStart, int returnEnd) {
         Type type = new ContentType(content.slice(returnStart + 1, returnEnd));
         Node value = parseContent(returnEnd);
-        //TODO: Replace sequence here with monad
-        return Optional.of(new FunctionBuilder().withIdentity(name.value().apply((Function<String, Field>) s -> new InlineField(s, type))).withParameters(parameters).withChild(value).build());
+        return Optional.of(new FunctionBuilder()
+                .withIdentity(createIdentity(name, type))
+                .withParameters(parameters)
+                .withChild(value)
+                .build());
+    }
+
+    private Field createIdentity(Content name, Type type) {
+        return name.value().append(type).apply(InlineField::new);
     }
 
     private Node parseContent(int returnEnd) {

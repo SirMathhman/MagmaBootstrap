@@ -30,6 +30,6 @@ public class InlineField implements Field {
 
     @Override
     public Optional<String> render() {
-        return Optional.of(type.render(name));
+        return type.render(name);
     }
 }

@@ -16,12 +16,7 @@ public class ContentType implements Type {
     }
 
     @Override
-    public String render(String name) {
-        /*
-        TODO: Reduce lambda by adding in content.value().
-        Because it's transformed into a Monad with an apply function(),
-        it still adheres to the principle of a single level of abstraction.
-        */
-        return content.value().apply(value -> value + " " + name);
+    public Optional<String> render(String name) {
+        return Optional.empty();
     }
 }

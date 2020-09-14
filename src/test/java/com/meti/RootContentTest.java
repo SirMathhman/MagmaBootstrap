@@ -1,5 +1,6 @@
 package com.meti;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.OptionalInt;
@@ -13,16 +14,18 @@ class RootContentTest {
     void applyToValue() {
         String expected = "test";
         Content content = new RootContent(expected);
-        String actual = content.value().apply(Function.identity());
-        assertSame(expected, actual);
+        content.value().append(expected)
+                .swap().accept(Assertions::assertSame);
     }
 
     @Test
     void slice() {
         Content content = new RootContent("test");
         Content child = content.slice(1, 2);
-        String actual = child.value().apply(Function.identity());
-        assertEquals("e", actual);
+        child.value()
+                .append("e")
+                .swap()
+                .accept(Assertions::assertEquals);
     }
 
     @Test
@@ -43,8 +46,8 @@ class RootContentTest {
     void sliceToEnd() {
         Content content = new RootContent("test");
         Content child = content.sliceToEnd(1);
-        String value = child.value().apply(Function.identity());
-        assertEquals("est", value);
+        child.value().append("est").swap()
+                .accept(Assertions::assertEquals);
     }
 
     @Test
@@ -55,7 +58,7 @@ class RootContentTest {
     }
 
     @Test
-    void indexFrom(){
+    void indexFrom() {
         Content content = new RootContent("test");
         OptionalInt optionalInt = content.indexFrom("t", 1);
         assertEquals(3, optionalInt.orElseThrow());

@@ -65,6 +65,6 @@ public class ChildContent implements Content {
 
     @Override
     public Monad<String> value(){
-        throw new UnsupportedOperationException();
+        return new Monad<>(value);
     }
 }

@@ -26,17 +26,26 @@ class FunctionNode implements Node {
     }
 
     @Override
-    public Prototype createPrototype(){
+    public Prototype createPrototype() {
         return new FunctionBuilder();
     }
 
     @Override
-    public Optional<String> render(){
-        String renderedParameters = parameters.stream()
+    public Optional<String> render() {
+        String renderedParameters = renderParameters();
+        return returnType.render(name + renderedParameters)
+                .map(this::appendValue);
+    }
+
+    private String appendValue(String s) {
+        return s + value.render();
+    }
+
+    private String renderParameters() {
+        return parameters.stream()
                 .map(Field::render)
                 .flatMap(Optional::stream)
                 .collect(Collectors.joining(",", "(", ")"));
-        return Optional.of(returnType.render(name + renderedParameters) + value.render());
     }
 
     @Override
