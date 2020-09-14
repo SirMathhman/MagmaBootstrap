@@ -46,7 +46,7 @@ public class FunctionTokenizer implements Tokenizer<Node> {
         Type type = new ContentType(content.slice(returnStart + 1, returnEnd));
         Node value = parseContent(returnEnd);
         //TODO: Replace sequence here with monad
-        return Optional.of(new FunctionBuilder().withIdentity(name.applyToValue((Function<String, Field>) s -> new InlineField(s, type))).withParameters(parameters).withChild(value).build());
+        return Optional.of(new FunctionBuilder().withIdentity(name.value().apply((Function<String, Field>) s -> new InlineField(s, type))).withParameters(parameters).withChild(value).build());
     }
 
     private Node parseContent(int returnEnd) {

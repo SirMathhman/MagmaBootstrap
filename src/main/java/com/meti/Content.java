@@ -9,8 +9,7 @@ public interface Content {
 
     char apply(int index);
 
-    //TODO: return monad
-    <R> R applyToValue(Function<String, R> mapper);
+    Monad<String> value();
 
     Content sliceToEnd(int start);
 

@@ -34,18 +34,18 @@ public class Compiler {
     }
 
     private Optional<Node> parseContent(Content content) {
-        if (content.applyToValue(value -> value.startsWith("def"))) {
+        if (content.value().apply(value -> value.startsWith("def"))) {
             Tokenizer<Node> tokenizer = new FunctionTokenizer(content);
             return tokenizer.tokenize();
         } else {
-            throw content.applyToValue(s -> String.format("Cannot parse: %s", s))
+            throw content.value().apply(s -> String.format("Cannot parse: %s", s))
                     .transform(IllegalArgumentException::new);
         }
     }
 
     private Type resolve(Type previous) {
         Type type;
-        if (previous.applyToContent(content -> content.applyToValue("Int"::equals)).orElseThrow()) {
+        if (previous.applyToContent(content -> content.value().apply("Int"::equals)).orElseThrow()) {
             type = IntType.IntType;
         } else {
             type = VoidType.VoidType;

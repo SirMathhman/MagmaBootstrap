@@ -22,6 +22,6 @@ public class ContentType implements Type {
         Because it's transformed into a Monad with an apply function(),
         it still adheres to the principle of a single level of abstraction.
         */
-        return content.applyToValue(value -> value + " " + name);
+        return content.value().apply(value -> value + " " + name);
     }
 }

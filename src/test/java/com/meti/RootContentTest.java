@@ -13,7 +13,7 @@ class RootContentTest {
     void applyToValue() {
         String expected = "test";
         Content content = new RootContent(expected);
-        String actual = content.applyToValue(Function.identity());
+        String actual = content.value().apply(Function.identity());
         assertSame(expected, actual);
     }
 
@@ -21,7 +21,7 @@ class RootContentTest {
     void slice() {
         Content content = new RootContent("test");
         Content child = content.slice(1, 2);
-        String actual = child.applyToValue(Function.identity());
+        String actual = child.value().apply(Function.identity());
         assertEquals("e", actual);
     }
 
@@ -43,7 +43,7 @@ class RootContentTest {
     void sliceToEnd() {
         Content content = new RootContent("test");
         Content child = content.sliceToEnd(1);
-        String value = child.applyToValue(Function.identity());
+        String value = child.value().apply(Function.identity());
         assertEquals("est", value);
     }
 

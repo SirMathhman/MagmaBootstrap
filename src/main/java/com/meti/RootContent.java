@@ -12,11 +12,6 @@ public class RootContent implements Content {
     }
 
     @Override
-    public <R> R applyToValue(Function<String, R> mapper) {
-        return mapper.apply(value);
-    }
-
-    @Override
     public Content slice(int start, int end) {
         String child = value.substring(start, end);
         String formatted = child.trim();
@@ -60,6 +55,11 @@ public class RootContent implements Content {
 
     @Override
     public Stream<Content> splitByStrategy(Function<Content, Strategy> constructor) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Monad<String> value(){
         throw new UnsupportedOperationException();
     }
 }

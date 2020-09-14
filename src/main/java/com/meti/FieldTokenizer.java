@@ -20,7 +20,7 @@ public class FieldTokenizer implements Tokenizer<Field> {
             Content typeContent = content.sliceToEnd(separator + 1);
             Type type = new ContentType(typeContent);
             //TODO: replace with monad
-            Field field = name.applyToValue((Function<String, Field>) s -> new InlineField(s, type));
+            Field field = name.value().apply((Function<String, Field>) s -> new InlineField(s, type));
             return Optional.of(field);
         } else {
             return Optional.empty();
