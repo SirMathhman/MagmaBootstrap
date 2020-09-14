@@ -31,31 +31,40 @@ public class ChildContent implements Content {
 
     @Override
     public OptionalInt index(String sequence){
-        throw new UnsupportedOperationException();
+        int index = value.indexOf(sequence);
+        if(index == -1) return OptionalInt.empty();
+        else return OptionalInt.of(index);
     }
 
     @Override
     public Content sliceToEnd(int start) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Stream<Content> split(String regex){
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return value.isBlank();
+        return slice(start, value.length());
     }
 
     @Override
     public OptionalInt indexFrom(String sequence, int end){
-        throw new UnsupportedOperationException();
+        int index = value.indexOf(sequence, end);
+        if(index == -1) return OptionalInt.empty();
+        else return OptionalInt.of(index);
     }
 
     @Override
     public boolean isPresent() {
-        throw new UnsupportedOperationException();
+        return !value.isBlank();
+    }
+
+    @Override
+    public int length(){
+        return value.length();
+    }
+
+    @Override
+    public char apply(int index){
+        return value.charAt(index);
+    }
+
+    @Override
+    public Stream<Content> splitByStrategy(Function<Content, Strategy> constructor) {
+        return constructor.apply(this).split();
     }
 }

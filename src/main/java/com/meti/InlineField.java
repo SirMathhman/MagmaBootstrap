@@ -1,5 +1,7 @@
 package com.meti;
 
+import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class InlineField implements Field {
@@ -21,4 +23,13 @@ public class InlineField implements Field {
         return new InlineField(name, type);
     }
 
+    @Override
+    public <R> R applyDestruction(BiFunction<String, Type, R> function) {
+        return function.apply(name, type);
+    }
+
+    @Override
+    public Optional<String> render() {
+        return Optional.of(type.render(name));
+    }
 }

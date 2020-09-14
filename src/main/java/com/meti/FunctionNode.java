@@ -3,17 +3,18 @@ package com.meti;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 class FunctionNode implements Node {
-    private final Type type;
+    private final Type returnType;
     private final String name;
-    private final List<Field> fields;
+    private final List<Field> parameters;
     private final Node value;
 
-    public FunctionNode(String name, List<Field> fields, Type type, Node value) {
-        this.type = type;
+    public FunctionNode(String name, List<Field> parameters, Type returnType, Node value) {
+        this.returnType = returnType;
         this.name = name;
-        this.fields = fields;
+        this.parameters = parameters;
         this.value = value;
     }
 
@@ -24,11 +25,15 @@ class FunctionNode implements Node {
 
     @Override
     public Prototype createPrototype(){
-        throw new UnsupportedOperationException();
+        return new FunctionBuilder();
     }
 
     @Override
     public Optional<String> render(){
-        throw new UnsupportedOperationException();
+        String renderedParameters = parameters.stream()
+                .map(Field::render)
+                .flatMap(Optional::stream)
+                .collect(Collectors.joining(",", "(", ")"));
+        return Optional.of(returnType.render(name + renderedParameters) + value.render());
     }
 }

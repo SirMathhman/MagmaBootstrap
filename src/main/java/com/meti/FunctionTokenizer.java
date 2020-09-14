@@ -1,10 +1,12 @@
 package com.meti;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FunctionTokenizer implements Tokenizer<Node> {
     private final Content content;
@@ -53,11 +55,53 @@ public class FunctionTokenizer implements Tokenizer<Node> {
     }
 
     private List<Field> parseFields(int start, int end) {
-        return content.slice(start + 1, end).split(",")
+        return content.slice(start + 1, end).splitByStrategy(ParameterStrategy::new)
                 .filter(Content::isPresent)
                 .map(FieldTokenizer::new)
                 .map(FieldTokenizer::tokenize)
                 .flatMap(Optional::stream)
                 .collect(Collectors.toList());
+    }
+
+    //TODO: make immutable
+    private static class ParameterStrategy implements Strategy {
+        private final Content parent;
+        private StringBuilder builder = new StringBuilder();
+        private final List<Content> arguments = new ArrayList<>();
+        private int start = 0;
+        private int end = 0;
+        private int depth = 0;
+
+        public ParameterStrategy(Content parent) {
+            this.parent = parent;
+        }
+
+        @Override
+        public Stream<Content> split() {
+            int length = parent.length();
+            for (int i = 0; i < length; i++) {
+                char c = parent.apply(i);
+                if (c == ',' && depth == 0) {
+                    append();
+                } else {
+                    if (c == '(') depth++;
+                    if (c == ')') depth--;
+                    builder.append(c);
+                    end++;
+                }
+            }
+            append();
+            return arguments.stream();
+        }
+
+        private void append() {
+            String value = builder.toString();
+            builder = new StringBuilder();
+            if (!value.isEmpty()) {
+                ChildContent child = new ChildContent(parent, value, start, end);
+                arguments.add(child);
+                start = end;
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.meti;
 
-import java.util.List;
 import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -37,19 +36,6 @@ public class RootContent implements Content {
         return slice(start, length);
     }
 
-    //TODO: deprecate this method because String.split doesn't return content and its indices
-    @Override
-    public Stream<Content> split(String regex){
-        return List.of(value.split(regex))
-                .stream()
-                .map(child -> new ChildContent(this, child, -1, -1));
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return value.isBlank();
-    }
-
     @Override
     public OptionalInt indexFrom(String sequence, int end){
         int index = value.indexOf(sequence, end);
@@ -60,5 +46,20 @@ public class RootContent implements Content {
     @Override
     public boolean isPresent() {
         return !value.isBlank();
+    }
+
+    @Override
+    public int length(){
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public char apply(int index){
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Stream<Content> splitByStrategy(Function<Content, Strategy> constructor) {
+        throw new UnsupportedOperationException();
     }
 }

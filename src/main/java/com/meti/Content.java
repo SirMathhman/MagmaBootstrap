@@ -5,6 +5,10 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public interface Content {
+    int length();
+
+    char apply(int index);
+
     //TODO: return monad
     <R> R applyToValue(Function<String, R> mapper);
 
@@ -14,17 +18,9 @@ public interface Content {
 
     OptionalInt index(String sequence);
 
-    @Deprecated
-    Stream<Content> split(String regex);
-
-    default Stream<Content> splitByStrategy(Strategy strategy) {
-        throw new UnsupportedOperationException();
-    }
+    Stream<Content> splitByStrategy(Function<Content, Strategy> constructor);
 
     boolean isPresent();
-
-    @Deprecated
-    boolean isEmpty();
 
     OptionalInt indexFrom(String sequence, int end);
 }

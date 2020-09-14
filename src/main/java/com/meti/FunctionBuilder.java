@@ -13,7 +13,8 @@ public class FunctionBuilder implements Node.Prototype {
     }
 
     public FunctionBuilder withIdentity(Field identity) {
-        this.fields.set(0, identity);
+        if (fields.isEmpty()) fields.add(identity);
+        else fields.set(0, identity);
         return this;
     }
 

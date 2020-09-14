@@ -4,9 +4,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public interface Node {
-    Optional<String> render();
-
+public interface Node extends Renderable {
     <R> Optional<R> applyToContent(Function<Content, R> function);
 
     default Stream<Field> streamFields() {
