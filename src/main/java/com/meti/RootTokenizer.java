@@ -13,7 +13,8 @@ public class RootTokenizer extends CollectiveTokenizer {
         return Stream.of(
                 ReturnTokenizer::new,
                 BlockTokenizer::new,
-                FunctionTokenizer::new
+                FunctionTokenizer::new,
+                IntegerTokenizer::new
         );
     }
 }

@@ -76,7 +76,7 @@ public class ReturnTokenizer extends AbstractTokenizer {
 
         @Override
         public Optional<String> render() {
-            return Optional.of("return " + value.render().orElseThrow());
+            return Optional.of("return " + value.render().orElseThrow() + ";");
         }
     }
 }
