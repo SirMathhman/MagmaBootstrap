@@ -7,11 +7,9 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FunctionTokenizer implements Tokenizer<Node> {
-    private final Content content;
-
+public class FunctionTokenizer extends AbstractTokenizer {
     public FunctionTokenizer(Content content) {
-        this.content = content;
+        super(content);
     }
 
     @Override
@@ -61,7 +59,7 @@ public class FunctionTokenizer implements Tokenizer<Node> {
     }
 
     private List<Field> parseFields(int start, int end) {
-        return content.slice(start + 1, end).splitByStrategy(ParameterStrategy::new)
+        return content.slice(start + 1, end).split(ParameterStrategy::new)
                 .filter(Content::isPresent)
                 .map(FieldTokenizer::new)
                 .map(FieldTokenizer::tokenize)

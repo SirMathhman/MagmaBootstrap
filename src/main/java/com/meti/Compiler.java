@@ -1,7 +1,7 @@
 package com.meti;
 
-import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class Compiler {
 
@@ -28,20 +28,19 @@ public class Compiler {
     }
 
     private Node parseChild(Node previous) {
-        return previous.applyToContent(this::parseContent)
-                .flatMap(Function.identity())
-                .orElseThrow();
+        return previous.applyToContent(this::parseContent).orElseThrow();
     }
 
-    private Optional<Node> parseContent(Content content) {
-        if (content.value().append("def").apply(String::startsWith)) {
-            Tokenizer<Node> tokenizer = new FunctionTokenizer(content);
-            return tokenizer.tokenize();
-        } else {
-            throw content.value().append("Cannot parse: %s")
-                    .swap().apply(String::format)
-                    .transform(IllegalArgumentException::new);
-        }
+    private Node parseContent(Content content) {
+        return new RootTokenizer(content)
+                .tokenize()
+                .orElseThrow(supplyInvalidParse(content));
+    }
+
+    private Supplier<IllegalArgumentException> supplyInvalidParse(Content content) {
+        return () -> content.value().append("Cannot parse: %s")
+                .swap().apply(String::format)
+                .transform(IllegalArgumentException::new);
     }
 
     private Type resolve(Type previous) {
