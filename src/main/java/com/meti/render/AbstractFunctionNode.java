@@ -5,6 +5,7 @@ import com.meti.type.Type;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -15,11 +16,13 @@ class AbstractFunctionNode extends ParentNode {
     private final Type returnType;
     private final String name;
     private final List<Field> parameters;
+    private final List<FieldFlag> flags;
 
-    public AbstractFunctionNode(String name, List<Field> parameters, Type returnType) {
+    public AbstractFunctionNode(String name, List<Field> parameters, Type returnType, List<FieldFlag> flags) {
         this.returnType = returnType;
         this.name = name;
         this.parameters = parameters;
+        this.flags = flags;
     }
 
     @Override
@@ -29,13 +32,17 @@ class AbstractFunctionNode extends ParentNode {
 
     @Override
     public Prototype createPrototype() {
-        return new ConcreteFunctionBuilder();
+        return new AbstractFunctionBuilder();
     }
 
     @Override
     public Optional<String> render() {
-        String renderedParameters = renderParameters();
-        return returnType.render(name + renderedParameters);
+        if (flags.contains(FieldFlag.NATIVE)) {
+            return Optional.of("");
+        } else {
+            String renderedParameters = renderParameters();
+            return returnType.render(name + renderedParameters);
+        }
     }
 
     private String renderParameters() {
@@ -48,7 +55,7 @@ class AbstractFunctionNode extends ParentNode {
     @Override
     public Stream<Field> streamFields() {
         List<Field> list = new ArrayList<>();
-        list.add(new InlineField(name, returnType));
+        list.add(new InlineField(name, returnType, flags));
         list.addAll(parameters);
         return list.stream();
     }
@@ -59,7 +66,7 @@ class AbstractFunctionNode extends ParentNode {
     }
 
     @Override
-    public Monad<NodeGroup> group(){
-        return new Monad<>(NodeGroup.ConcreteFunction);
+    public Monad<NodeGroup> group() {
+        return new Monad<>(NodeGroup.AbstractFunction);
     }
 }

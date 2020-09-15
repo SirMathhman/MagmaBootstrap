@@ -51,8 +51,12 @@ public class ConcreteFunctionBuilder implements Node.Prototype {
         }
     }
 
-    private ConreteFunctionNode createNode(String name, Type returnType) {
+    private ConcreteFunctionNode createNode(String name, Type returnType) {
         List<Field> parameters = fields.subList(1, fields.size());
-        return new ConreteFunctionNode(name, parameters, returnType, value);
+        if(value == null) {
+            String message = String.format("Concrete function '%s' must have a value.", name);
+            throw new IllegalStateException(message);
+        }
+        return new ConcreteFunctionNode(name, parameters, returnType, value);
     }
 }

@@ -4,14 +4,12 @@ import com.meti.content.ChildContent;
 import com.meti.content.Content;
 import com.meti.content.Strategy;
 import com.meti.evaluate.FieldEvaluator;
+import com.meti.evaluate.FlagStrategy;
 import com.meti.render.*;
 import com.meti.type.ContentType;
 import com.meti.type.Type;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,42 +33,62 @@ public class FunctionTokenizer extends AbstractTokenizer {
 
     private Optional<Node> tokenizeWithParameters(int start, int end) {
         List<Field> fields = parseFields(start, end);
-        Content name = content.slice(4, start);
+        Content keyString = content.slice(0, start);
+        OptionalInt separatorOptional = keyString.lastIndex(" ");
+        Content name;
+        List<FieldFlag> flags;
+        if (separatorOptional.isPresent()) {
+            int separator = separatorOptional.getAsInt();
+            name = keyString.sliceToEnd(separator + 1);
+            flags = keyString.slice(0, separator)
+                    .split(FlagStrategy::new)
+                    .filter(Content::isPresent)
+                    .map(this::getApply)
+                    .collect(Collectors.toList());
+        } else {
+            name = content;
+            flags = Collections.emptyList();
+        }
         OptionalInt returnSeparator = content.indexFrom(":", end);
         OptionalInt contentSeparator = content.index("=>");
         if (returnSeparator.isPresent()) {
             int returnStart = returnSeparator.getAsInt();
             if (contentSeparator.isPresent()) {
                 int returnEnd = contentSeparator.getAsInt();
-                return parseConcrete(fields, name, returnStart, returnEnd);
+                ContentType type = new ContentType(content.slice(returnStart + 1, returnEnd));
+                Field identity = createIdentity(name, type, flags);
+                return buildConcrete(fields, identity, parseContent(returnEnd));
             } else {
-                return parseAbstract(fields, name, returnStart);
+                final ContentType type = new ContentType(content.sliceToEnd(returnStart + 1));
+                Field identity = createIdentity(name, type, flags);
+                return buildAbstract(fields, identity);
             }
         } else {
             return Optional.empty();
         }
     }
 
-    private Optional<Node> parseAbstract(List<Field> parameters, Content name, int returnSeparator) {
-        Type type = new ContentType(content.sliceToEnd(returnSeparator + 1));
+    private FieldFlag getApply(Content content) {
+        return content.value().map(String::toUpperCase).apply(FieldFlag::valueOf);
+    }
+
+    private Optional<Node> buildAbstract(List<Field> parameters, Field identity) {
         return Optional.of(new AbstractFunctionBuilder()
-                .withIdentity(createIdentity(name, type))
+                .withIdentity(identity)
                 .withParameters(parameters)
                 .build());
     }
 
-    private Optional<Node> parseConcrete(List<Field> parameters, Content name, int returnStart, int returnEnd) {
-        Type type = new ContentType(content.slice(returnStart + 1, returnEnd));
-        Node value = parseContent(returnEnd);
+    private Optional<Node> buildConcrete(List<Field> parameters, Field identity, Node value) {
         return Optional.of(new ConcreteFunctionBuilder()
-                .withIdentity(createIdentity(name, type))
+                .withIdentity(identity)
                 .withParameters(parameters)
                 .withChild(value)
                 .build());
     }
 
-    private Field createIdentity(Content name, Type type) {
-        return name.value().append(type).apply(InlineField::new);
+    private Field createIdentity(Content name, Type type, List<FieldFlag> flags) {
+        return name.value().append(type).append(flags).apply(InlineField::new);
     }
 
     private Node parseContent(int returnEnd) {

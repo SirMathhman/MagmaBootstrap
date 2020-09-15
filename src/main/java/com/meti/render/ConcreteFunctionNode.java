@@ -5,19 +5,20 @@ import com.meti.util.Monad;
 import com.meti.type.Type;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class ConreteFunctionNode extends ParentNode {
+class ConcreteFunctionNode extends ParentNode {
     private final Type returnType;
     private final String name;
     private final List<Field> parameters;
     private final Node value;
 
-    public ConreteFunctionNode(String name, List<Field> parameters, Type returnType, Node value) {
+    public ConcreteFunctionNode(String name, List<Field> parameters, Type returnType, Node value) {
         this.returnType = returnType;
         this.name = name;
         this.parameters = parameters;
@@ -55,7 +56,7 @@ class ConreteFunctionNode extends ParentNode {
     @Override
     public Stream<Field> streamFields() {
         List<Field> list = new ArrayList<>();
-        list.add(new InlineField(name, returnType));
+        list.add(new InlineField(name, returnType, Collections.emptyList()));
         list.addAll(parameters);
         return list.stream();
     }

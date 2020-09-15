@@ -13,19 +13,19 @@ public class AbstractFunctionBuilder implements Node.Prototype {
         this(Collections.emptyList());
     }
 
+    public AbstractFunctionBuilder(List<Field> fields) {
+        this.fields = new ArrayList<>(fields);
+    }
+
     public AbstractFunctionBuilder withIdentity(Field identity) {
         if (fields.isEmpty()) fields.add(identity);
         else fields.set(0, identity);
         return this;
     }
 
-    public AbstractFunctionBuilder withParameters(List<Field> parameters){
+    public AbstractFunctionBuilder withParameters(List<Field> parameters) {
         this.fields.addAll(parameters);
         return this;
-    }
-
-    public AbstractFunctionBuilder(List<Field> fields) {
-        this.fields = new ArrayList<>(fields);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class AbstractFunctionBuilder implements Node.Prototype {
         if (fields.isEmpty()) {
             throw new IllegalStateException("No return type was provided.");
         } else {
-            return fields.get(0).applyDestruction(this::createNode);
+            return fields.get(0).destroy().apply(this::assemble);
         }
     }
 
-    private AbstractFunctionNode createNode(String name, Type returnType) {
+    private AbstractFunctionNode assemble(String name, Type returnType, List<FieldFlag> flags) {
         List<Field> parameters = fields.subList(1, fields.size());
-        return new AbstractFunctionNode(name, parameters, returnType);
+        return new AbstractFunctionNode(name, parameters, returnType, flags);
     }
 }
