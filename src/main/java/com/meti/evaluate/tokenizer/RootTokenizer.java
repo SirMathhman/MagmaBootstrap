@@ -19,6 +19,7 @@ public class RootTokenizer extends CollectiveTokenizer {
                 BlockTokenizer::new,
                 FunctionTokenizer::new,
                 IntegerTokenizer::new,
+                DeclareTokenizer::new,
                 VariableTokenizer::new
         );
     }

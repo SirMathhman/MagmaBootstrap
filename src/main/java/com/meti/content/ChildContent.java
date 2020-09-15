@@ -21,6 +21,11 @@ public class ChildContent implements Content {
     }
 
     @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
     public Content slice(int start, int end) {
         String child = value.substring(start, end);
         String formatted = child.trim();
@@ -28,9 +33,9 @@ public class ChildContent implements Content {
     }
 
     @Override
-    public OptionalInt index(String sequence){
+    public OptionalInt index(String sequence) {
         int index = value.indexOf(sequence);
-        if(index == -1) return OptionalInt.empty();
+        if (index == -1) return OptionalInt.empty();
         else return OptionalInt.of(index);
     }
 
@@ -40,9 +45,9 @@ public class ChildContent implements Content {
     }
 
     @Override
-    public OptionalInt indexFrom(String sequence, int end){
+    public OptionalInt indexFrom(String sequence, int end) {
         int index = value.indexOf(sequence, end);
-        if(index == -1) return OptionalInt.empty();
+        if (index == -1) return OptionalInt.empty();
         else return OptionalInt.of(index);
     }
 
@@ -64,12 +69,12 @@ public class ChildContent implements Content {
     }
 
     @Override
-    public int length(){
+    public int length() {
         return value.length();
     }
 
     @Override
-    public char apply(int index){
+    public char apply(int index) {
         return value.charAt(index);
     }
 
@@ -79,7 +84,7 @@ public class ChildContent implements Content {
     }
 
     @Override
-    public Monad<String> value(){
+    public Monad<String> value() {
         return new Monad<>(value);
     }
 
