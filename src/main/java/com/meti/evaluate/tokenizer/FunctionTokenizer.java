@@ -1,8 +1,8 @@
 package com.meti.evaluate.tokenizer;
 
-import com.meti.content.Strategy;
 import com.meti.content.ChildContent;
 import com.meti.content.Content;
+import com.meti.content.Strategy;
 import com.meti.evaluate.FieldEvaluator;
 import com.meti.render.*;
 import com.meti.type.ContentType;
@@ -36,21 +36,33 @@ public class FunctionTokenizer extends AbstractTokenizer {
     private Optional<Node> tokenizeWithParameters(int start, int end) {
         List<Field> fields = parseFields(start, end);
         Content name = content.slice(4, start);
-        OptionalInt returnStartOptional = content.indexFrom(":", end);
-        OptionalInt returnEndOptional = content.index("=>");
-        if (returnStartOptional.isPresent() && returnEndOptional.isPresent()) {
-            int returnStart = returnStartOptional.getAsInt();
-            int returnEnd = returnEndOptional.getAsInt();
-            return tokenizeValidly(fields, name, returnStart, returnEnd);
+        OptionalInt returnSeparator = content.indexFrom(":", end);
+        OptionalInt contentSeparator = content.index("=>");
+        if (returnSeparator.isPresent()) {
+            int returnStart = returnSeparator.getAsInt();
+            if (contentSeparator.isPresent()) {
+                int returnEnd = contentSeparator.getAsInt();
+                return parseConcrete(fields, name, returnStart, returnEnd);
+            } else {
+                return parseAbstract(fields, name, returnStart);
+            }
         } else {
             return Optional.empty();
         }
     }
 
-    private Optional<Node> tokenizeValidly(List<Field> parameters, Content name, int returnStart, int returnEnd) {
+    private Optional<Node> parseAbstract(List<Field> parameters, Content name, int returnSeparator) {
+        Type type = new ContentType(content.sliceToEnd(returnSeparator + 1));
+        return Optional.of(new AbstractFunctionBuilder()
+                .withIdentity(createIdentity(name, type))
+                .withParameters(parameters)
+                .build());
+    }
+
+    private Optional<Node> parseConcrete(List<Field> parameters, Content name, int returnStart, int returnEnd) {
         Type type = new ContentType(content.slice(returnStart + 1, returnEnd));
         Node value = parseContent(returnEnd);
-        return Optional.of(new FunctionBuilder()
+        return Optional.of(new ConcreteFunctionBuilder()
                 .withIdentity(createIdentity(name, type))
                 .withParameters(parameters)
                 .withChild(value)
@@ -78,8 +90,8 @@ public class FunctionTokenizer extends AbstractTokenizer {
     //TODO: make immutable
     private static class ParameterStrategy implements Strategy {
         private final Content parent;
-        private StringBuilder builder = new StringBuilder();
         private final List<Content> arguments = new ArrayList<>();
+        private StringBuilder builder = new StringBuilder();
         private int start = 0;
         private int end = 0;
         private int depth = 0;

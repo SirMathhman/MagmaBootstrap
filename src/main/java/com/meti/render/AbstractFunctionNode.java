@@ -1,8 +1,8 @@
 package com.meti.render;
 
 import com.meti.content.Content;
-import com.meti.util.Monad;
 import com.meti.type.Type;
+import com.meti.util.Monad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,38 +11,31 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class FunctionNode extends ParentNode {
+class AbstractFunctionNode extends ParentNode {
     private final Type returnType;
     private final String name;
     private final List<Field> parameters;
-    private final Node value;
 
-    public FunctionNode(String name, List<Field> parameters, Type returnType, Node value) {
+    public AbstractFunctionNode(String name, List<Field> parameters, Type returnType) {
         this.returnType = returnType;
         this.name = name;
         this.parameters = parameters;
-        this.value = value;
     }
 
     @Override
     public <R> Optional<R> applyToContent(Function<Content, R> function) {
-        throw new UnsupportedOperationException();
+        return Optional.empty();
     }
 
     @Override
     public Prototype createPrototype() {
-        return new FunctionBuilder();
+        return new ConcreteFunctionBuilder();
     }
 
     @Override
     public Optional<String> render() {
         String renderedParameters = renderParameters();
-        return returnType.render(name + renderedParameters)
-                .map(this::appendValue);
-    }
-
-    private String appendValue(String s) {
-        return s + value.render().orElseThrow();
+        return returnType.render(name + renderedParameters);
     }
 
     private String renderParameters() {
@@ -62,11 +55,11 @@ class FunctionNode extends ParentNode {
 
     @Override
     public Stream<Node> streamChildren() {
-        return Stream.of(value);
+        return Stream.empty();
     }
 
     @Override
     public Monad<NodeGroup> group(){
-        return new Monad<>(NodeGroup.Function);
+        return new Monad<>(NodeGroup.ConcreteFunction);
     }
 }

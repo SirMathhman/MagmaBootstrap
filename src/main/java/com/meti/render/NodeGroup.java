@@ -3,7 +3,7 @@ package com.meti.render;
 import java.util.function.Predicate;
 
 public enum NodeGroup {
-    Function,
+    ConcreteFunction,
     Variable, Block, Return, Integer, Declare, Reference, Dereference;
 
     public Predicate<NodeGroup> matches() {
