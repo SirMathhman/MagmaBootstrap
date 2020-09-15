@@ -1,5 +1,6 @@
 package com.meti;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 public class Monad<T> {
@@ -15,5 +16,9 @@ public class Monad<T> {
 
     public <R> Dyad<T, R> append(R other) {
         return new Dyad<>(value, other);
+    }
+
+    public Optional<T> toOption() {
+        return Optional.of(value);
     }
 }
