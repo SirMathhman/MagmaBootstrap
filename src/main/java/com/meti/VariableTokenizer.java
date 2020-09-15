@@ -46,6 +46,10 @@ public class VariableTokenizer extends AbstractTokenizer {
             return content.value().toOption();
         }
 
+        @Override
+        public Monad<NodeGroup> group(){
+            return new Monad<>(NodeGroup.Variable);
+        }
     }
 
     private static class VariablePrototype implements Node.Prototype {
