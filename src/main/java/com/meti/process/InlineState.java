@@ -20,11 +20,6 @@ public class InlineState implements State {
     }
 
     @Override
-    public Monad<CallStack> callStack() {
-        return new Monad<>(stack);
-    }
-
-    @Override
     public Monad<Node> node() {
         return new Monad<>(node);
     }

@@ -8,8 +8,6 @@ import com.meti.util.Monad;
 public interface State {
     Dyad<Node, CallStack> destroy();
 
-    Monad<CallStack> callStack();
-
     Monad<Node> node();
 
     State with(CallStack stack);

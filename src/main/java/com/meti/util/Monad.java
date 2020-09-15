@@ -23,10 +23,6 @@ public class Monad<T> {
         return Optional.of(value);
     }
 
-    public <R> Monad<R> map(Function<T, R> function) {
-        return new Monad<>(function.apply(value));
-    }
-
     public boolean test(Predicate<T> predicate) {
         return predicate.test(value);
     }
