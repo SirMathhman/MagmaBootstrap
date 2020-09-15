@@ -2,7 +2,7 @@ package com.meti;
 
 import com.meti.content.Content;
 import com.meti.content.RootContent;
-import com.meti.evaluate.RootTokenizer;
+import com.meti.evaluate.tokenizer.RootTokenizer;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
 import com.meti.render.ContentNode;
