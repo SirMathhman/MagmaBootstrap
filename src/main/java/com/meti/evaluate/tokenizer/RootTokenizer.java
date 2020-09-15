@@ -15,6 +15,7 @@ public class RootTokenizer extends CollectiveTokenizer {
     @Override
     protected Stream<Function<Content, Evaluator<Node>>> streamFactories() {
         return Stream.of(
+                ReferenceTokenizer::new,
                 ReturnTokenizer::new,
                 BlockTokenizer::new,
                 FunctionTokenizer::new,

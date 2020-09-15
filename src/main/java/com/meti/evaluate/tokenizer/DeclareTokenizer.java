@@ -76,7 +76,9 @@ public class DeclareTokenizer extends AbstractTokenizer {
 
         @Override
         public Optional<String> render() {
-            return Optional.of(identity.render().orElseThrow() + "=" + value.render().orElseThrow() + ";");
+            String renderedIdentity = identity.render().orElseThrow(() -> new IllegalStateException(String.format("Identity '%s' had nothing to render.", identity)));
+            String renderedValue = value.render().orElseThrow(() -> new IllegalStateException(String.format("Value '%s' had nothing to render.", value)));
+            return Optional.of(renderedIdentity + "=" + renderedValue + ";");
         }
 
         private static class DeclarePrototype implements Prototype {

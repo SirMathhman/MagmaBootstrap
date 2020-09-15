@@ -36,16 +36,20 @@ public class ReferenceNode extends ParentNode {
 
     @Override
     public Prototype createPrototype() {
-        return new ReferencePrototype(value);
+        return new ReferencePrototype();
     }
 
     @Override
     public Optional<String> render() {
-        return Optional.empty();
+        return Optional.of("&" + value.render().orElseThrow());
     }
 
     private static class ReferencePrototype implements Prototype {
         private final Node value;
+
+        private ReferencePrototype() {
+            this(null);
+        }
 
         private ReferencePrototype(Node value) {
             this.value = value;
