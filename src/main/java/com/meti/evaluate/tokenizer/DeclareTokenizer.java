@@ -3,10 +3,7 @@ package com.meti.evaluate.tokenizer;
 import com.meti.CompileException;
 import com.meti.content.Content;
 import com.meti.evaluate.FieldEvaluator;
-import com.meti.render.ContentNode;
-import com.meti.render.Field;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.render.*;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -43,7 +40,7 @@ public class DeclareTokenizer extends AbstractTokenizer {
         };
     }
 
-    private static class DeclareNode implements Node {
+    private static class DeclareNode extends ParentNode {
         private final Field identity;
         private final Node value;
 

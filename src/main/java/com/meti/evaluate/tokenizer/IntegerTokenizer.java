@@ -35,7 +35,7 @@ public class IntegerTokenizer extends AbstractTokenizer {
         }
     }
 
-    private static class IntNode implements Node {
+    private static class IntNode extends LeafNode {
         private final int value;
 
         public IntNode(int value) {
