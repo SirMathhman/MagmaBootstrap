@@ -7,4 +7,9 @@ public class DeclareTest extends CompileTest{
     void define(){
         assertCompile("int main(){int x=5;return 0;}", "def main() : Int => {const x : Int = 5;return 0;}");
     }
+
+    @Test
+    void defineInScope(){
+        assertCompile("int main(){int value=420;return value;}", "def main() : Int => {const value : Int = 420; return value;}");
+    }
 }
