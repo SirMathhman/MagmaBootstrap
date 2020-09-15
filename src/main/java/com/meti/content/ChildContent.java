@@ -97,4 +97,11 @@ public class ChildContent implements Content {
     public boolean endsWith(String sequence) {
         return value.endsWith(sequence);
     }
+
+    @Override
+    public OptionalInt lastIndex(String sequence){
+        int index = value.lastIndexOf(sequence);
+        if(index == -1) return OptionalInt.empty();
+        else return OptionalInt.of(index);
+    }
 }

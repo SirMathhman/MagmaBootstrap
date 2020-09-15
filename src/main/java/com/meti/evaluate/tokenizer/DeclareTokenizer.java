@@ -79,7 +79,7 @@ public class DeclareTokenizer extends AbstractTokenizer {
 
         @Override
         public Optional<String> render() {
-            return Optional.of(identity.render().orElseThrow() + "=" + value.render().orElseThrow());
+            return Optional.of(identity.render().orElseThrow() + "=" + value.render().orElseThrow() + ";");
         }
 
         private static class DeclarePrototype implements Prototype {
