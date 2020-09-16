@@ -14,8 +14,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FunctionTokenizer extends AbstractTokenizer {
-    public FunctionTokenizer(Content content) {
+public class FunctionNodeTokenizer extends AbstractNodeTokenizer {
+    public FunctionNodeTokenizer(Content content) {
         super(content);
     }
 

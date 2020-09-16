@@ -2,13 +2,13 @@ package com.meti;
 
 import com.meti.content.Content;
 import com.meti.content.RootContent;
-import com.meti.evaluate.tokenizer.MagmaTokenizer;
+import com.meti.evaluate.tokenizer.MagmaNodeTokenizer;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
 import com.meti.render.ContentNode;
 import com.meti.render.Field;
 import com.meti.render.Node;
-import com.meti.resolve.MagmaResolver;
+import com.meti.resolve.MagmaTypeTokenizer;
 import com.meti.type.Type;
 
 import java.util.function.Function;
@@ -43,7 +43,7 @@ public class Compiler {
     }
 
     private Node parseContent(Content content) {
-        return new MagmaTokenizer(content)
+        return new MagmaNodeTokenizer(content)
                 .evaluate()
                 .orElseThrow(supplyInvalidParse(content));
     }
@@ -58,7 +58,7 @@ public class Compiler {
         Type parent;
         //TODO: simplify condition
         if (previous.applyToContent(Function.identity()).isPresent()) {
-            parent = new MagmaResolver(previous).resolve().orElseThrow(() -> invalidateType(previous));
+            parent = new MagmaTypeTokenizer(previous).tokenize().orElseThrow(() -> invalidateType(previous));
         } else {
             parent = previous;
         }

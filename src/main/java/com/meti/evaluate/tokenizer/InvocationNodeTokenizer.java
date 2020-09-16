@@ -13,8 +13,8 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Stream;
 
-public class InvocationTokenizer extends AbstractTokenizer {
-    public InvocationTokenizer(Content content) {
+public class InvocationNodeTokenizer extends AbstractNodeTokenizer {
+    public InvocationNodeTokenizer(Content content) {
         super(content);
     }
 
