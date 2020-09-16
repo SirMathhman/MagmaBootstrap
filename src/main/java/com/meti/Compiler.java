@@ -11,17 +11,15 @@ import com.meti.render.Node;
 import com.meti.resolve.MagmaResolver;
 import com.meti.type.Type;
 
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Compiler {
-
     String compile(String content) {
-        Node node = parseChild(new ContentNode(new RootContent(content)));
+        Node root = new ContentNode(new RootContent("{" + content + "}"));
+        Node tree = tokenize(root);
         Processor processor = new MagmaProcessor();
-        return processor.process(node)
+        return processor.process(tree)
                 .apply(Node::render)
                 .orElseThrow();
     }
@@ -31,14 +29,14 @@ public class Compiler {
         return field.copy(newType);
     }
 
-    private Node parseChild(Node previous) {
+    private Node tokenize(Node previous) {
         Node node = previous.applyToContent(this::parseContent).orElseThrow();
         Node.Prototype prototype = node.createPrototype();
         Node.Prototype withFields = node.streamFields()
                 .map(this::resolveField)
                 .reduce(prototype, Node.Prototype::withField, (previous1, next) -> next);
         Node.Prototype withChildren = node.streamChildren()
-                .map(this::parseChild)
+                .map(this::tokenize)
                 .reduce(withFields, Node.Prototype::withChild, (previous1, next) -> next);
         return withChildren.build();
     }
