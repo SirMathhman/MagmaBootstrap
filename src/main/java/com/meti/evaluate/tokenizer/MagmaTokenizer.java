@@ -7,8 +7,8 @@ import com.meti.render.Node;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RootTokenizer extends CollectiveTokenizer {
-    public RootTokenizer(Content content) {
+public class MagmaTokenizer extends CollectiveTokenizer {
+    public MagmaTokenizer(Content content) {
         super(content);
     }
 
@@ -18,6 +18,7 @@ public class RootTokenizer extends CollectiveTokenizer {
                 DereferenceTokenizer::new,
                 ReferenceTokenizer::new,
                 ReturnTokenizer::new,
+                InvocationTokenizer::new,
                 BlockTokenizer::new,
                 FunctionTokenizer::new,
                 IntegerTokenizer::new,

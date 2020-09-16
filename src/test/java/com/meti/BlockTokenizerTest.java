@@ -4,7 +4,7 @@ import com.meti.content.Content;
 import com.meti.content.RootContent;
 import com.meti.evaluate.tokenizer.BlockTokenizer;
 import com.meti.evaluate.Evaluator;
-import com.meti.evaluate.tokenizer.RootTokenizer;
+import com.meti.evaluate.tokenizer.MagmaTokenizer;
 import com.meti.render.BlockNode;
 import com.meti.render.ContentNode;
 import com.meti.render.Node;
@@ -44,7 +44,7 @@ class BlockTokenizerTest {
     @Test
     void validChild(){
         Content content = new RootContent("{10}");
-        Evaluator<Node> evaluator = new RootTokenizer(content);
+        Evaluator<Node> evaluator = new MagmaTokenizer(content);
         Optional<Node> optional = evaluator.evaluate();
         Node result = optional.orElseThrow();
         assertEquals(new BlockNode(new ContentNode(new RootContent("10"))), result);

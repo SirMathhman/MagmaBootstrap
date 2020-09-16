@@ -2,7 +2,7 @@ package com.meti;
 
 import com.meti.content.Content;
 import com.meti.content.RootContent;
-import com.meti.evaluate.tokenizer.RootTokenizer;
+import com.meti.evaluate.tokenizer.MagmaTokenizer;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
 import com.meti.render.ContentNode;
@@ -19,9 +19,10 @@ public class Compiler {
         Node root = new ContentNode(new RootContent("{" + content + "}"));
         Node tree = tokenize(root);
         Processor processor = new MagmaProcessor();
-        return processor.process(tree)
+        String output = processor.process(tree)
                 .apply(Node::render)
                 .orElseThrow();
+        return output.substring(1, output.length() - 1);
     }
 
     private Field resolveField(Field field) {
@@ -42,7 +43,7 @@ public class Compiler {
     }
 
     private Node parseContent(Content content) {
-        return new RootTokenizer(content)
+        return new MagmaTokenizer(content)
                 .evaluate()
                 .orElseThrow(supplyInvalidParse(content));
     }
