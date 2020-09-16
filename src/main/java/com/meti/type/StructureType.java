@@ -5,6 +5,7 @@ import com.meti.render.Field;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -17,6 +18,10 @@ public class StructureType implements Type {
     public StructureType(Content name, List<Field> fields) {
         this.name = name;
         this.fields = fields;
+    }
+
+    public StructureType(Content name) {
+        this(name, Collections.emptyList());
     }
 
     @Override
@@ -45,7 +50,7 @@ public class StructureType implements Type {
     }
 
     @Override
-    public Monad<TypeGroup> group(){
+    public Monad<TypeGroup> group() {
         return new Monad<>(TypeGroup.Structure);
     }
 
