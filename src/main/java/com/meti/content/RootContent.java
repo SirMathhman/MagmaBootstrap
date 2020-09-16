@@ -10,6 +10,11 @@ import java.util.stream.Stream;
 public class RootContent implements Content {
     private final String value;
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
     public RootContent(String value) {
         this.value = value;
     }
