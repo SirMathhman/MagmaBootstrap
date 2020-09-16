@@ -4,7 +4,7 @@ import com.meti.content.ChildContent;
 import com.meti.content.Content;
 import com.meti.content.Strategy;
 import com.meti.render.ContentNode;
-import com.meti.render.InvocationNode;
+import com.meti.render.MappingNode;
 import com.meti.render.Node;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class InvocationNodeTokenizer extends AbstractNodeTokenizer {
                         .filter(Content::isPresent)
                         .map(ContentNode::new)
                         .reduce(new ArrayList<>(), this::join, (contents, contents2) -> contents2);
-                return Optional.of(new InvocationNode(caller, arguments));
+                return Optional.of(new MappingNode(caller, arguments));
             } else {
                 return Optional.empty();
             }
