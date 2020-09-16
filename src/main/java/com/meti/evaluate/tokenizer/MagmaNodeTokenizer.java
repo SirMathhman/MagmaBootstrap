@@ -25,6 +25,7 @@ public class MagmaNodeTokenizer extends CollectiveNodeTokenizer {
                 FunctionNodeTokenizer::new,
                 IntegerNodeTokenizer::new,
                 DeclareNodeTokenizer::new,
+                FieldNodeTokenizer::new,
                 VariableNodeTokenizer::new
         );
     }

@@ -32,4 +32,9 @@ public class StructureTest extends CompileTest {
     void multipleConstruct() {
         assertCompile("struct Pair{unsigned char value0;unsigned int value1;};int main(){struct Pair value={2,2};return 0;}", "struct Pair{value0 : U8;value1 : U16}def main() : I16 => {const value : Pair = <Pair>{2, 2}; return 0;}");
     }
+
+    @Test
+    void fields(){
+        assertCompile("struct Wrapper{int value;};int main(){struct Wrapper instance={0};return instance.value;}", "struct Wrapper{value : I16}def main() : I16 => {const instance : Wrapper = {0};return instance.value;}");
+    }
 }
