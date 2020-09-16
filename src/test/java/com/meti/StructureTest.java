@@ -15,7 +15,7 @@ public class StructureTest extends CompileTest {
 
     @Test
     void multipleDefine() {
-        assertCompile("strCuct Pair{unsigned char value0;unsigned int value1;};int main(){return 0;}", "struct Pair{value0 : U8;value1 : U16}def main() : I16 => {return 0;}");
+        assertCompile("struct Pair{unsigned char value0;unsigned int value1;};int main(){return 0;}", "struct Pair{value0 : U8;value1 : U16}def main() : I16 => {return 0;}");
     }
 
     @Test
