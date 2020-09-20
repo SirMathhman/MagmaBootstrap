@@ -1,6 +1,6 @@
 package com.meti.evaluate;
 
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.render.Field;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ class FieldEvaluatorTest {
 
     @Test
     void testConst() {
-        Evaluator<Field> evaluator = new FieldEvaluator(new RootContent("const x : Int"));
+        Evaluator<Field> evaluator = new FieldEvaluator(new StringContent("const x : Int"));
         Optional<Field> optional = evaluator.evaluate();
         assertTrue(optional.isPresent());
         Field field = optional.get();

@@ -1,7 +1,7 @@
 package com.meti.render;
 
 import com.meti.content.Content;
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.type.StructureType;
 import com.meti.type.Type;
 import com.meti.util.Monad;
@@ -99,7 +99,7 @@ public class StructureNode implements Node {
 
         private StructureNode getStructureNode(String s, Type type) {
             List<Field> fields = type.streamFields().collect(Collectors.toList());
-            return new StructureNode(new RootContent(s), fields);
+            return new StructureNode(new StringContent(s), fields);
         }
     }
 }

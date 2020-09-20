@@ -1,7 +1,7 @@
 package com.meti.evaluate.tokenizer;
 
 import com.meti.content.Content;
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.content.Strategy;
 import com.meti.render.ConstructionNode;
 import com.meti.render.ContentNode;
@@ -50,7 +50,7 @@ public class ConstructionTokenizer extends AbstractNodeTokenizer {
             return content.value()
                     .map(value -> value.split(","))
                     .apply(Arrays::stream)
-                    .map(RootContent::new);
+                    .map(StringContent::new);
         }
     }
 }

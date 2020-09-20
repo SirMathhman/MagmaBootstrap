@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MappingNode extends InvocationNode {
+    public MappingNode(Node caller, Node... arguments) {
+        this(caller, List.of(arguments));
+    }
+
     public MappingNode(Node caller, List<Node> arguments) {
         super(caller, arguments);
     }

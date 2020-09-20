@@ -1,7 +1,7 @@
 package com.meti;
 
 import com.meti.content.Content;
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.util.load.ClassPath;
 import com.meti.evaluate.tokenizer.MagmaNodeTokenizer;
 import com.meti.process.MagmaProcessor;
@@ -25,7 +25,7 @@ public class Compiler {
     }
 
     String compile(String content) {
-        Node root = new ContentNode(new RootContent("{" + content + "}"));
+        Node root = new ContentNode(new StringContent("{" + content + "}"));
         Node tree = tokenize(root);
         Processor processor = new MagmaProcessor();
         String output = processor.process(tree)

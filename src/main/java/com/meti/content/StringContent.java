@@ -7,7 +7,7 @@ import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RootContent implements Content {
+public class StringContent implements Content {
     private final String value;
 
     @Override
@@ -15,7 +15,7 @@ public class RootContent implements Content {
         return formattedValue();
     }
 
-    public RootContent(String value) {
+    public StringContent(String value) {
         this.value = value;
     }
 

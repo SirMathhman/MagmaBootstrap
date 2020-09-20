@@ -1,7 +1,7 @@
 package com.meti.util.load;
 
 import com.meti.content.Content;
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.render.ContentNode;
 import com.meti.render.EmptyNode;
 import com.meti.render.Node;
@@ -29,7 +29,7 @@ public class MappedClassPath extends AbstractClassPath {
                 return Optional.of(new EmptyNode());
             } else {
                 loaded.add(packageName);
-                return Optional.of(new ContentNode(new RootContent(contentMap.get(packageName))));
+                return Optional.of(new ContentNode(new StringContent(contentMap.get(packageName))));
             }
         } else {
             String message = String.format("'%s' isn't loaded as a valid import in: %s", packageName, contentMap.keySet());

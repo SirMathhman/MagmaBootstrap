@@ -1,10 +1,9 @@
 package com.meti.evaluate.tokenizer;
 
 import com.meti.content.Content;
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.content.Strategy;
 import com.meti.render.ImportNode;
-import com.meti.render.IncludeNode;
 import com.meti.render.Node;
 import com.meti.util.load.ClassPath;
 
@@ -49,7 +48,7 @@ public class ImportTokenizer extends AbstractNodeTokenizer {
                     .apply(Arrays::stream)
                     .filter(s -> !s.isBlank())
                     .map(String::trim)
-                    .map(RootContent::new);
+                    .map(StringContent::new);
         }
     }
 }

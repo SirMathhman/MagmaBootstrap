@@ -2,7 +2,7 @@ package com.meti.util.load;
 
 import com.meti.CompileException;
 import com.meti.content.Content;
-import com.meti.content.RootContent;
+import com.meti.content.StringContent;
 import com.meti.render.ContentNode;
 import com.meti.render.EmptyNode;
 import com.meti.render.Node;
@@ -47,7 +47,7 @@ public class PathClassPath extends AbstractClassPath {
 
     private Node readPathToNode(Path result) throws IOException {
         String importValue = Files.readString(result);
-        RootContent content = new RootContent(importValue);
+        StringContent content = new StringContent(importValue);
         loaded.add(result);
         return new ContentNode(content);
     }
