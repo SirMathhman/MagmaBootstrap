@@ -8,6 +8,8 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class MagmaNodeTokenizer extends CollectiveNodeTokenizer {
+    private final ImportTokenizerFactory factory = new ImportTokenizerFactory();
+
     public MagmaNodeTokenizer(Content content) {
         super(content);
     }
@@ -15,7 +17,7 @@ public class MagmaNodeTokenizer extends CollectiveNodeTokenizer {
     @Override
     protected Stream<Function<Content, Evaluator<Node>>> streamFactories() {
         return Stream.of(
-                ImportTokenizer::new,
+                factory::create,
                 CastTokenizer::new,
                 ConstructionTokenizer::new,
                 StructureNodeTokenizer::new,
@@ -31,4 +33,5 @@ public class MagmaNodeTokenizer extends CollectiveNodeTokenizer {
                 VariableNodeTokenizer::new
         );
     }
+
 }
