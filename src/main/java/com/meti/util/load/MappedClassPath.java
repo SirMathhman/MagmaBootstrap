@@ -3,6 +3,7 @@ package com.meti.util.load;
 import com.meti.content.Content;
 import com.meti.content.RootContent;
 import com.meti.render.ContentNode;
+import com.meti.render.EmptyNode;
 import com.meti.render.Node;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MappedClassPath implements ClassPath {
+public class MappedClassPath extends AbstractClassPath {
     private final Map<String, String> contentMap;
     private final List<String> loaded = new ArrayList<>();
 
@@ -25,7 +26,7 @@ public class MappedClassPath implements ClassPath {
         String packageName = packages.map(Content::asString).collect(Collectors.joining("."));
         if (contentMap.containsKey(packageName)) {
             if (loaded.contains(packageName)) {
-                return Optional.empty();
+                return Optional.of(new EmptyNode());
             } else {
                 loaded.add(packageName);
                 return Optional.of(new ContentNode(new RootContent(contentMap.get(packageName))));

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class PathClassPath implements ClassPath {
+public class PathClassPath extends AbstractClassPath {
     private final Path root;
     private final List<Path> loaded = new ArrayList<>();
 

@@ -8,4 +8,6 @@ import java.util.stream.Stream;
 
 public interface ClassPath {
     Optional<Node> read(Stream<Content> packages);
+
+    Optional<Node> loadNative(Content header);
 }

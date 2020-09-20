@@ -10,6 +10,7 @@ import com.meti.util.load.ClassPath;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class ImportTokenizer extends AbstractNodeTokenizer {
@@ -24,7 +25,7 @@ public class ImportTokenizer extends AbstractNodeTokenizer {
     public Optional<Node> evaluate() {
         if (content.startsWith("import native")) {
             Content value = this.content.sliceToEnd(13);
-            return Optional.of(new IncludeNode(value));
+            return Optional.of(value).flatMap((Function<Content, Optional<Node>>) classPath::loadNative);
         }
         if (content.startsWith("import ")) {
             Content value = content.sliceToEnd(7);

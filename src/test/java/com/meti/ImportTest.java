@@ -17,6 +17,11 @@ public class ImportTest extends CompileTest {
         assertCompile("void dummy(){}", "import dummy.Dummy2");
     }
 
+    @Test
+    void conflicts(){
+        assertCompile("int main(){return 0;}", "import Dummy;import Dummy;");
+    }
+
     @Override
     protected ClassPath createClassPath() {
         return new MappedClassPath(Map.of(

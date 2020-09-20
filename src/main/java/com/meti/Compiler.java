@@ -13,6 +13,7 @@ import com.meti.resolve.MagmaTypeTokenizer;
 import com.meti.type.Type;
 import com.meti.type.TypeGroup;
 
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -39,15 +40,20 @@ public class Compiler {
     }
 
     private Node tokenize(Node previous) {
-        Node node = previous.applyToContent(this::parseContent).orElseThrow();
-        Node.Prototype prototype = node.createPrototype();
-        Node.Prototype withFields = node.streamFields()
-                .map(this::resolveField)
-                .reduce(prototype, Node.Prototype::withField, (previous1, next) -> next);
-        Node.Prototype withChildren = node.streamChildren()
-                .map(this::tokenize)
-                .reduce(withFields, Node.Prototype::withChild, (previous1, next) -> next);
-        return withChildren.build();
+        Optional<Node> optional = previous.applyToContent(this::parseContent);
+        if (optional.isPresent()) {
+            Node node = optional.orElseThrow();
+            Node.Prototype prototype = node.createPrototype();
+            Node.Prototype withFields = node.streamFields()
+                    .map(this::resolveField)
+                    .reduce(prototype, Node.Prototype::withField, (previous1, next) -> next);
+            Node.Prototype withChildren = node.streamChildren()
+                    .map(this::tokenize)
+                    .reduce(withFields, Node.Prototype::withChild, (previous1, next) -> next);
+            return withChildren.build();
+        } else {
+            return previous;
+        }
     }
 
     private Node parseContent(Content content) {
