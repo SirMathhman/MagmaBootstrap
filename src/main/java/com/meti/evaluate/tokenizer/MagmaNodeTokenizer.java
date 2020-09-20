@@ -20,6 +20,7 @@ public class MagmaNodeTokenizer extends CollectiveNodeTokenizer {
     protected Stream<Function<Content, Evaluator<Node>>> streamFactories() {
         return Stream.of(
                 factory::create,
+                StringTokenizer::new,
                 NewTokenizer::new,
                 CastTokenizer::new,
                 ConstructionTokenizer::new,
