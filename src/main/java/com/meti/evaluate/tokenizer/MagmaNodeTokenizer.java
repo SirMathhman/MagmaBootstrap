@@ -3,15 +3,17 @@ package com.meti.evaluate.tokenizer;
 import com.meti.content.Content;
 import com.meti.evaluate.Evaluator;
 import com.meti.render.Node;
+import com.meti.util.load.ClassPath;
 
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class MagmaNodeTokenizer extends CollectiveNodeTokenizer {
-    private final ImportTokenizerFactory factory = new ImportTokenizerFactory();
+    private final ImportTokenizerFactory factory;
 
-    public MagmaNodeTokenizer(Content content) {
+    public MagmaNodeTokenizer(Content content, ClassPath classPath) {
         super(content);
+        this.factory = new ImportTokenizerFactory(classPath);
     }
 
     @Override

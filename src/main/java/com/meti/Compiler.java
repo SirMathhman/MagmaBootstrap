@@ -2,6 +2,7 @@ package com.meti;
 
 import com.meti.content.Content;
 import com.meti.content.RootContent;
+import com.meti.util.load.ClassPath;
 import com.meti.evaluate.tokenizer.MagmaNodeTokenizer;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
@@ -16,6 +17,12 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Compiler {
+    public final ClassPath classPath;
+
+    public Compiler(ClassPath classPath) {
+        this.classPath = classPath;
+    }
+
     String compile(String content) {
         Node root = new ContentNode(new RootContent("{" + content + "}"));
         Node tree = tokenize(root);
@@ -44,7 +51,7 @@ public class Compiler {
     }
 
     private Node parseContent(Content content) {
-        return new MagmaNodeTokenizer(content)
+        return new MagmaNodeTokenizer(content, classPath)
                 .evaluate()
                 .orElseThrow(supplyInvalidParse(content));
     }
