@@ -1,6 +1,4 @@
-package com.meti.evaluate.tokenizer;
-
-import com.meti.render.Node;
+package com.meti.render;
 
 public abstract class LeafNode implements Node {
     @Override
