@@ -1,17 +1,16 @@
 package com.meti.evaluate.processable;
 
-import com.meti.stack.CallStack;
-import com.meti.render.NodeGroup;
 import com.meti.process.State;
 import com.meti.render.Field;
 import com.meti.render.Node;
+import com.meti.stack.CallStack;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FunctionPreProcessable implements Processable {
-    private final State previous;
+public abstract class FunctionPreProcessable implements Processable {
+    protected final State previous;
 
     public FunctionPreProcessable(State previous) {
         this.previous = previous;
@@ -19,28 +18,18 @@ public class FunctionPreProcessable implements Processable {
 
     @Override
     public Optional<State> evaluate() {
-        return previous.destroy()
-                .map(this::preprocess)
-                .append(previous)
-                .swap().map(State::with)
-                .toOption();
+        return previous.foldStackByNode(this::test, this::defineFields);
     }
 
-    private CallStack preprocess(Node node, CallStack stack) {
-        return node.group().test(NodeGroup.ConcreteFunction.matches()) ?
-                defineFields(node, stack) : stack;
-    }
+    protected abstract boolean test(Node node);
 
     private CallStack defineFields(Node node, CallStack stack) {
         List<Field> fields = node.streamFields().collect(Collectors.toList());
         CallStack withIdentity = defineIdentity(fields, stack);
-        return defineParameters(fields, withIdentity);
+        return after(fields, withIdentity);
     }
 
-    private CallStack defineParameters(List<Field> fields, CallStack withIdentity) {
-        List<Field> parameters = fields.subList(1, fields.size());
-        return withIdentity.enter().defineAll(parameters);
-    }
+    protected abstract CallStack after(List<Field> fields, CallStack withIdentity);
 
     private CallStack defineIdentity(List<Field> fields, CallStack stack) {
         Field identity = fields.get(0);

@@ -5,7 +5,6 @@ import com.meti.type.Type;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -67,6 +66,6 @@ class AbstractFunctionNode extends ParentNode {
 
     @Override
     public Monad<NodeGroup> group() {
-        return new Monad<>(NodeGroup.AbstractFunction);
+        return new Monad<>(NodeGroup.Abstraction);
     }
 }

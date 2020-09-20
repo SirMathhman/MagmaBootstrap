@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 
 class FunctionTest extends CompileTest {
     @Test
+    void invokeNative(){
+        assertCompile("", "import native stdio;native def printf(format : String, value : Any) : Void;def main() : I16 => {printf(\"%s\", \"Hello World!\");return 0;}");
+    }
+
+    @Test
     void validateNative(){
         assertCompile("", "native def printf(format : String, value : Any) : Void");
     }

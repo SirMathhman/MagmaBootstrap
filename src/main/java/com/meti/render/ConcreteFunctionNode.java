@@ -68,6 +68,6 @@ class ConcreteFunctionNode extends ParentNode {
 
     @Override
     public Monad<NodeGroup> group(){
-        return new Monad<>(NodeGroup.ConcreteFunction);
+        return new Monad<>(NodeGroup.Implementation);
     }
 }

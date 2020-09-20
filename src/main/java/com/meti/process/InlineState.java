@@ -5,6 +5,10 @@ import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;
 
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+
 public class InlineState implements State {
     private final Node node;
     private final CallStack stack;
@@ -12,6 +16,11 @@ public class InlineState implements State {
     public InlineState(Node node, CallStack stack) {
         this.node = node;
         this.stack = stack;
+    }
+
+    @Override
+    public Optional<State> foldStackByNode(Predicate<Node> predicate, BiFunction<Node, CallStack, CallStack> mapping) {
+        return predicate.test(node) ? Optional.of(new InlineState(node, mapping.apply(node, stack))) : Optional.empty();
     }
 
     @Override

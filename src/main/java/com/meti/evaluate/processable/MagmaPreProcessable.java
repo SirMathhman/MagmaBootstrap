@@ -13,7 +13,8 @@ public class MagmaPreProcessable extends CollectiveProcessable {
     @Override
     protected Stream<Function<State, Processable>> streamPreprocessors() {
         return Stream.of(
-            FunctionPreProcessable::new
+                ImplementationPreProcessable::new,
+                AbstractionPreProcessable::new
         );
     }
 }
