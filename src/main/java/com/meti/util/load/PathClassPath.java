@@ -3,9 +3,9 @@ package com.meti.util.load;
 import com.meti.CompileException;
 import com.meti.content.Content;
 import com.meti.content.StringContent;
-import com.meti.render.ContentNode;
-import com.meti.render.EmptyNode;
-import com.meti.render.Node;
+import com.meti.feature.ContentNode;
+import com.meti.feature.Empty;
+import com.meti.feature.Node;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,7 +41,7 @@ public class PathClassPath extends AbstractClassPath {
     Optional<Node> read(Path result) throws IOException {
         Node res = !loaded.contains(result) ?
                 readPathToNode(result) :
-                new EmptyNode();
+                new Empty();
         return Optional.of(res);
     }
 

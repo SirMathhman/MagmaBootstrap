@@ -2,11 +2,10 @@ package com.meti.evaluate.processable.fix;
 
 import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.stack.CallStack;
-import com.meti.render.NodeGroup;
 import com.meti.process.State;
 import com.meti.UndefinedException;
 import com.meti.content.Content;
-import com.meti.render.Node;
+import com.meti.feature.Node;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -22,7 +21,7 @@ public class VariableFixer extends AbstractProcessable {
     }
 
     private Optional<State> process(Node node, CallStack stack) {
-        if(node.group().test(NodeGroup.Variable.matches())) {
+        if(node.group().test(Node.Group.Variable.matches())) {
             node.applyToContent(content -> testDefinition(content, stack))
                     .orElseThrow()
                     .ifPresent(thrown());

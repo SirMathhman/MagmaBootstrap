@@ -1,7 +1,6 @@
 package com.meti.process;
 
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Node;
 import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;
@@ -12,7 +11,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface State {
-    boolean has(NodeGroup group);
+    boolean has(Node.Group group);
 
     Optional<State> foldStackByNode(Predicate<Node> predicate, BiFunction<Node, CallStack, CallStack> mapping);
 

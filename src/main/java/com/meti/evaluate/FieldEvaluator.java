@@ -1,9 +1,8 @@
 package com.meti.evaluate;
 
 import com.meti.content.Content;
-import com.meti.render.Field;
-import com.meti.render.FieldFlag;
-import com.meti.render.InlineField;
+import com.meti.feature.Field;
+import com.meti.feature.InlineField;
 import com.meti.type.ContentType;
 import com.meti.type.Type;
 
@@ -41,8 +40,8 @@ public class FieldEvaluator implements Evaluator<Field> {
         } else {
             int nameSeparator = optional.getAsInt();
             Content flagString = keyString.slice(0, nameSeparator);
-            List<FieldFlag> flags = parseFlags(flagString);
-            if(flags.contains(FieldFlag.CONST) || flags.contains(FieldFlag.LET)) {
+            List<Field.Flag> flags = parseFlags(flagString);
+            if(flags.contains(Field.Flag.CONST) || flags.contains(Field.Flag.LET)) {
                 Content name = keyString.sliceToEnd(nameSeparator + 1);
                 Content typeContent = content.sliceToEnd(typeSeparator + 1);
                 Type type = new ContentType(typeContent);
@@ -56,17 +55,17 @@ public class FieldEvaluator implements Evaluator<Field> {
         }
     }
 
-    private List<FieldFlag> parseFlags(Content flagString) {
+    private List<Field.Flag> parseFlags(Content flagString) {
         return flagString.split(FlagStrategy::new)
                 .filter(Content::isPresent)
                 .map(this::prepareFlags)
                 .collect(Collectors.toList());
     }
 
-    private FieldFlag prepareFlags(Content content) {
+    private Field.Flag prepareFlags(Content content) {
         return content.value()
                 .map(String::toUpperCase)
-                .apply(FieldFlag::valueOf);
+                .apply(Field.Flag::valueOf);
     }
 
 }

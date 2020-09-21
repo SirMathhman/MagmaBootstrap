@@ -1,6 +1,6 @@
 package com.meti.stack;
 
-import com.meti.render.Field;
+import com.meti.feature.Field;
 import com.meti.type.Type;
 import com.meti.util.Monad;
 

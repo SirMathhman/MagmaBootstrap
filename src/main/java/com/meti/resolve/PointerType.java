@@ -1,7 +1,7 @@
 package com.meti.resolve;
 
 import com.meti.content.Content;
-import com.meti.render.Field;
+import com.meti.feature.Field;
 import com.meti.type.Type;
 import com.meti.type.TypeGroup;
 import com.meti.util.Monad;

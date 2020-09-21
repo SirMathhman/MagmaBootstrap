@@ -2,9 +2,9 @@ package com.meti.util.load;
 
 import com.meti.content.Content;
 import com.meti.content.StringContent;
-import com.meti.render.ContentNode;
-import com.meti.render.EmptyNode;
-import com.meti.render.Node;
+import com.meti.feature.ContentNode;
+import com.meti.feature.Empty;
+import com.meti.feature.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class MappedClassPath extends AbstractClassPath {
         String packageName = packages.map(Content::asString).collect(Collectors.joining("."));
         if (contentMap.containsKey(packageName)) {
             if (loaded.contains(packageName)) {
-                return Optional.of(new EmptyNode());
+                return Optional.of(new Empty());
             } else {
                 loaded.add(packageName);
                 return Optional.of(new ContentNode(new StringContent(contentMap.get(packageName))));

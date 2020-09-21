@@ -1,7 +1,7 @@
 package com.meti.type;
 
 import com.meti.content.Content;
-import com.meti.render.Field;
+import com.meti.feature.Field;
 import com.meti.util.Monad;
 
 import java.util.*;

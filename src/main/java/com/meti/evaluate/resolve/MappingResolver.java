@@ -1,8 +1,7 @@
 package com.meti.evaluate.resolve;
 
 import com.meti.process.State;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Node;
 import com.meti.type.Type;
 import com.meti.util.Monad;
 
@@ -35,7 +34,7 @@ public class MappingResolver extends AbstractResolver {
                 .orElseThrow();
     }
 
-    private boolean isMapping(NodeGroup nodeGroup) {
-        return nodeGroup == NodeGroup.Mapping;
+    private boolean isMapping(Node.Group group) {
+        return group == Node.Group.Mapping;
     }
 }

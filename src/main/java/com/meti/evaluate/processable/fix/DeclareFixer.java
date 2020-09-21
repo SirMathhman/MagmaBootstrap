@@ -2,9 +2,8 @@ package com.meti.evaluate.processable.fix;
 
 import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.process.State;
-import com.meti.render.Field;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Field;
+import com.meti.feature.Node;
 import com.meti.type.Type;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ public class DeclareFixer extends AbstractProcessable {
 
     @Override
     public Optional<State> evaluate() {
-        if (previous.has(NodeGroup.Declare)) {
+        if (previous.has(Node.Group.Declare)) {
             return Optional.of(previous.transformByNode(this::transformImpl));
         }
         return Optional.empty();

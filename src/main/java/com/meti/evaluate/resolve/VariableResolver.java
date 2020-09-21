@@ -2,8 +2,7 @@ package com.meti.evaluate.resolve;
 
 import com.meti.content.Content;
 import com.meti.process.State;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Node;
 import com.meti.stack.CallStack;
 import com.meti.type.Type;
 import com.meti.util.Monad;
@@ -32,7 +31,7 @@ public class VariableResolver extends AbstractResolver {
         return content.value().apply(callStack::resolve);
     }
 
-    private boolean isVariable(com.meti.render.Node node) {
-        return node.group().test(NodeGroup.Variable.matches());
+    private boolean isVariable(Node node) {
+        return node.group().test(Node.Group.Variable.matches());
     }
 }

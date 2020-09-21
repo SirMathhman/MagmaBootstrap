@@ -4,9 +4,8 @@ import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.evaluate.resolve.MagmaResolver;
 import com.meti.evaluate.resolve.Resolver;
 import com.meti.process.State;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
-import com.meti.render.ProcedureNode;
+import com.meti.feature.Node;
+import com.meti.feature.block.Procedure;
 import com.meti.type.PrimitiveType;
 import com.meti.type.Type;
 import com.meti.util.Monad;
@@ -34,11 +33,11 @@ public class ProcedureFixer extends AbstractProcessable {
         return Optional.empty();
     }
 
-    private ProcedureNode mapToProcedure(Node node) {
+    private Procedure mapToProcedure(Node node) {
         List<Node> children = node.streamChildren().collect(Collectors.toList());
         Node caller = children.get(0);
         List<Node> arguments = children.subList(1, children.size());
-        return new ProcedureNode(caller, arguments);
+        return new Procedure(caller, arguments);
     }
 
     private Monad<Type> findType() {
@@ -56,6 +55,6 @@ public class ProcedureFixer extends AbstractProcessable {
     }
 
     private boolean isMapping(Node value) {
-        return value.group().test(NodeGroup.Mapping.matches());
+        return value.group().test(Node.Group.Mapping.matches());
     }
 }

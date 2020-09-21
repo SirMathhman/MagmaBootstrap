@@ -1,10 +1,9 @@
 package com.meti.evaluate.processable.load;
 
 import com.meti.stack.CallStack;
-import com.meti.render.NodeGroup;
 import com.meti.process.State;
-import com.meti.render.Field;
-import com.meti.render.Node;
+import com.meti.feature.Field;
+import com.meti.feature.Node;
 
 import java.util.List;
 
@@ -21,6 +20,6 @@ public class ImplementationLoader extends FunctionLoader {
 
     @Override
     protected boolean test(Node node) {
-        return NodeGroup.Implementation.matches(node);
+        return Node.Group.Implementation.matches(node);
     }
 }

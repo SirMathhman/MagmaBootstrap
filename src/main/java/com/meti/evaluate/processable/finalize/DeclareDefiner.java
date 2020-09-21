@@ -2,9 +2,8 @@ package com.meti.evaluate.processable.finalize;
 
 import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.process.State;
-import com.meti.render.Field;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Field;
+import com.meti.feature.Node;
 import com.meti.stack.CallStack;
 
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class DeclareDefiner extends AbstractProcessable {
                 .orElseThrow();
     }
 
-    private boolean isDeclaration(com.meti.render.Node node) {
-        return node.group().test(NodeGroup.Declare.matches());
+    private boolean isDeclaration(Node node) {
+        return node.group().test(Node.Group.Declare.matches());
     }
 }

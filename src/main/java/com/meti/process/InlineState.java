@@ -1,7 +1,6 @@
 package com.meti.process;
 
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Node;
 import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;
@@ -56,7 +55,7 @@ public class InlineState implements State {
     }
 
     @Override
-    public boolean has(NodeGroup group) {
+    public boolean has(Node.Group group) {
         return node().test(group::matches);
     }
 

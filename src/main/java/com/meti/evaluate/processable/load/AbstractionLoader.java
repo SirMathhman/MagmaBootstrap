@@ -1,9 +1,8 @@
 package com.meti.evaluate.processable.load;
 
 import com.meti.process.State;
-import com.meti.render.Field;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
+import com.meti.feature.Field;
+import com.meti.feature.Node;
 import com.meti.stack.CallStack;
 
 import java.util.List;
@@ -20,6 +19,6 @@ public class AbstractionLoader extends FunctionLoader {
 
     @Override
     protected boolean test(Node node) {
-        return NodeGroup.Abstraction.matches(node);
+        return Node.Group.Abstraction.matches(node);
     }
 }
