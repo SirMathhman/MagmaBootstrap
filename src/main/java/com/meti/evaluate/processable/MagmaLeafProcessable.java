@@ -1,5 +1,6 @@
 package com.meti.evaluate.processable;
 
+import com.meti.evaluate.processable.fix.VariableFixer;
 import com.meti.process.State;
 
 import java.util.function.Function;
@@ -12,6 +13,6 @@ public class MagmaLeafProcessable extends CollectiveProcessable {
 
     @Override
     protected Stream<Function<State, Processable>> streamPreprocessors() {
-        return Stream.of(VariableProcessable::new);
+        return Stream.of(VariableFixer::new);
     }
 }

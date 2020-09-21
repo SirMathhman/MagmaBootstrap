@@ -1,5 +1,6 @@
-package com.meti.evaluate.processable;
+package com.meti.evaluate.processable.finalize;
 
+import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.process.State;
 import com.meti.render.Field;
 import com.meti.render.Node;
@@ -8,14 +9,14 @@ import com.meti.stack.CallStack;
 
 import java.util.Optional;
 
-public class DeclarePostProcessable extends AbstractProcessable{
-    public DeclarePostProcessable(State previous) {
+public class DeclareDefiner extends AbstractProcessable {
+    public DeclareDefiner(State previous) {
         super(previous);
     }
 
     @Override
     public Optional<State> evaluate() {
-        if(previous.node().test(this::isDeclaration)) {
+        if (previous.node().test(this::isDeclaration)) {
             CallStack newStack = previous.destroy().apply(this::define);
             return Optional.ofNullable(previous.with(newStack));
         }

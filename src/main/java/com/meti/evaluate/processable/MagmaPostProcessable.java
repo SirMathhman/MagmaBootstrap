@@ -1,5 +1,7 @@
 package com.meti.evaluate.processable;
 
+import com.meti.evaluate.processable.finalize.DeclareDefiner;
+import com.meti.evaluate.processable.fix.ProcedureFixer;
 import com.meti.process.State;
 
 import java.util.function.Function;
@@ -13,7 +15,7 @@ public class MagmaPostProcessable extends CollectiveProcessable{
     @Override
     protected Stream<Function<State, Processable>> streamPreprocessors() {
         return Stream.of(
-                DeclarePostProcessable::new,
+                DeclareDefiner::new,
                 ProcedureFixer::new
         );
     }

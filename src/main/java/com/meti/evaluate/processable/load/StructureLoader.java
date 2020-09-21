@@ -1,12 +1,13 @@
-package com.meti.evaluate.processable;
+package com.meti.evaluate.processable.load;
 
+import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.process.State;
 import com.meti.render.NodeGroup;
 
 import java.util.Optional;
 
-public class StructurePreProcessable extends AbstractProcessable {
-    public StructurePreProcessable(State previous) {
+public class StructureLoader extends AbstractProcessable {
+    public StructureLoader(State previous) {
         super(previous);
     }
 

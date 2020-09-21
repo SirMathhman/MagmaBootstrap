@@ -1,5 +1,8 @@
 package com.meti.evaluate.processable;
 
+import com.meti.evaluate.processable.load.AbstractionLoader;
+import com.meti.evaluate.processable.load.ImplementationLoader;
+import com.meti.evaluate.processable.load.StructureLoader;
 import com.meti.process.State;
 
 import java.util.function.Function;
@@ -13,7 +16,7 @@ public class MagmaPreProcessable extends CollectiveProcessable {
     @Override
     protected Stream<Function<State, Processable>> streamPreprocessors() {
         return Stream.of(
-                StructurePreProcessable::new,
+                StructureLoader::new,
                 ImplementationLoader::new,
                 AbstractionLoader::new
         );

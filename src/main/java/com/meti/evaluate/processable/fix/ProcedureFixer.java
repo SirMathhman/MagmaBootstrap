@@ -1,5 +1,6 @@
-package com.meti.evaluate.processable;
+package com.meti.evaluate.processable.fix;
 
+import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.evaluate.resolve.MagmaResolver;
 import com.meti.evaluate.resolve.Resolver;
 import com.meti.process.State;

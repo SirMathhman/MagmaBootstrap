@@ -1,5 +1,6 @@
-package com.meti.evaluate.processable;
+package com.meti.evaluate.processable.load;
 
+import com.meti.evaluate.processable.Processable;
 import com.meti.process.State;
 import com.meti.render.Field;
 import com.meti.render.Node;

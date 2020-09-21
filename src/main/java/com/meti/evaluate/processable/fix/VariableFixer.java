@@ -1,5 +1,6 @@
-package com.meti.evaluate.processable;
+package com.meti.evaluate.processable.fix;
 
+import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.stack.CallStack;
 import com.meti.render.NodeGroup;
 import com.meti.process.State;
@@ -10,8 +11,8 @@ import com.meti.render.Node;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class VariableProcessable extends AbstractProcessable{
-    public VariableProcessable(State previous) {
+public class VariableFixer extends AbstractProcessable {
+    public VariableFixer(State previous) {
         super(previous);
     }
 
@@ -42,7 +43,7 @@ public class VariableProcessable extends AbstractProcessable{
 
     private Optional<UndefinedException> createUndefined(Content content, CallStack stack) {
         return content.value().append(stack)
-                .map(VariableProcessable.this::createUndefined)
+                .map(VariableFixer.this::createUndefined)
                 .toOption();
     }
 
