@@ -1,9 +1,5 @@
-package com.meti.process;
+package com.meti.render;
 
-import com.meti.render.Field;
-import com.meti.render.InlineField;
-import com.meti.render.Node;
-import com.meti.render.NodeGroup;
 import com.meti.type.Type;
 import com.meti.util.Monad;
 
