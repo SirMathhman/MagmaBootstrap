@@ -1,8 +1,8 @@
 package com.meti.render;
 
 import com.meti.content.Content;
-import com.meti.util.Monad;
 import com.meti.type.Type;
+import com.meti.util.Monad;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,12 +38,7 @@ class ConcreteFunctionNode extends ParentNode {
     @Override
     public Optional<String> render() {
         String renderedParameters = renderParameters();
-        return returnType.renderOptionally(name + renderedParameters)
-                .map(this::appendValue);
-    }
-
-    private String appendValue(String s) {
-        return s + value.render().orElseThrow();
+        return Optional.of(returnType.render(name + renderedParameters) + value.render().orElseThrow());
     }
 
     private String renderParameters() {
@@ -67,7 +62,7 @@ class ConcreteFunctionNode extends ParentNode {
     }
 
     @Override
-    public Monad<NodeGroup> group(){
+    public Monad<NodeGroup> group() {
         return new Monad<>(NodeGroup.Implementation);
     }
 }

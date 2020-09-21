@@ -42,7 +42,7 @@ public class InlineField implements Field {
 
     @Override
     public Optional<String> render() {
-        return type.renderOptionally(name);
+        return Optional.ofNullable(type.render(name));
     }
 
     @Override

@@ -14,9 +14,6 @@ public interface Type {
 
     <R> Optional<R> applyToContent(Function<Content, R> function);
 
-    @Deprecated
-    Optional<String> renderOptionally(String name);
-
     String render(String name);
 
     String render();

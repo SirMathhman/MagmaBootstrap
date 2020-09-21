@@ -16,8 +16,7 @@ public abstract class FormattedType implements Type {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Optional<String> renderOptionally(String name){
+    private Optional<String> renderOptionally(String name){
         return Optional.of(String.format(createFormat(), name));
     }
 

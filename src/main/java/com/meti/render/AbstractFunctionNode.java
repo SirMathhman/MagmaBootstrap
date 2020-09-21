@@ -40,7 +40,7 @@ class AbstractFunctionNode extends ParentNode {
             return Optional.of("");
         } else {
             String renderedParameters = renderParameters();
-            return returnType.renderOptionally(name + renderedParameters);
+            return Optional.ofNullable(returnType.render(name + renderedParameters));
         }
     }
 

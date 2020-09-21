@@ -35,8 +35,7 @@ public enum PrimitiveType implements Type {
         return Optional.empty();
     }
 
-    @Override
-    public Optional<String> renderOptionally(String name) {
+    private Optional<String> renderOptionally(String name) {
         return Optional.of(value + " " + name);
     }
 

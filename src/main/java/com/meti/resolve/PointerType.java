@@ -22,9 +22,8 @@ class PointerType implements Type {
         return Optional.empty();
     }
 
-    @Override
-    public Optional<String> renderOptionally(String name) {
-        return Optional.of(child.renderOptionally("* " + name).orElseThrow());
+    private Optional<String> renderOptionally(String name) {
+        return Optional.of(child.render("* " + name));
     }
 
     @Override

@@ -20,8 +20,7 @@ public class ContentType implements Type {
         return Optional.of(content).map(function);
     }
 
-    @Override
-    public Optional<String> renderOptionally(String name) {
+    private Optional<String> renderOptionally(String name) {
         return Optional.empty();
     }
 

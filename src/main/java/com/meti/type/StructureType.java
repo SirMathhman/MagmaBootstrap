@@ -26,8 +26,7 @@ public class StructureType implements Type {
         return Optional.of(name).map(function);
     }
 
-    @Override
-    public Optional<String> renderOptionally(String name) {
+    private Optional<String> renderOptionally(String name) {
         return this.name.value().map(inner -> "struct " + inner + " " + name).toOption();
     }
 
