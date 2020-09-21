@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class TypeField implements Field{
+public class TypeField implements Field {
     private final Type type;
 
     public TypeField(Type type) {
@@ -53,6 +53,6 @@ public class TypeField implements Field{
 
     @Override
     public Optional<String> render() {
-        return Optional.ofNullable(type.renderOptionally().orElseThrow(() -> new IllegalStateException("Cannot renderOptionally type: " + type)));
+        return Optional.ofNullable(type.render());
     }
 }

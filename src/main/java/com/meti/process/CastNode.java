@@ -41,18 +41,10 @@ public class CastNode extends FreeNode {
 
     @Override
     public Optional<String> render() {
-        return type.renderOptionally()
-                .map(String::trim)
-                .map(this::formatCast)
-                .map(this::formatValue);
-    }
-
-    private String formatValue(String value) {
-        return value + this.value.render().orElseThrow();
-    }
-
-    private String formatCast(String value) {
-        return String.format("(%s)", value);
+        String renderedType = type.render().trim();
+        String encapsulated = String.format("(%s)", renderedType);
+        String renderedValue = this.value.render().orElseThrow();
+        return Optional.of(encapsulated + renderedValue);
     }
 
     private static class CastPrototype implements Prototype {

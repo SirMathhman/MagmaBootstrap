@@ -46,8 +46,7 @@ class PointerType implements Type {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Optional<String> renderOptionally() {
+    private Optional<String> renderOptionally() {
         return renderOptionally("");
     }
 

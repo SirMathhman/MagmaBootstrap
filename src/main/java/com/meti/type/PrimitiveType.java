@@ -59,8 +59,7 @@ public enum PrimitiveType implements Type {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Optional<String> renderOptionally() {
+    private Optional<String> renderOptionally() {
         return renderOptionally("");
     }
 

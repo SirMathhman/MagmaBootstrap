@@ -24,9 +24,6 @@ public interface Type {
 
     Stream<Field> streamFields();
 
-    @Deprecated
-    Optional<String> renderOptionally();
-
     interface Prototype {
         Prototype withChild(Type child);
 

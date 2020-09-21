@@ -44,8 +44,7 @@ public class ContentType implements Type {
         return new Monad<>(TypeGroup.Content);
     }
 
-    @Override
-    public Optional<String> renderOptionally() {
+    private Optional<String> renderOptionally() {
         return renderOptionally("");
     }
 

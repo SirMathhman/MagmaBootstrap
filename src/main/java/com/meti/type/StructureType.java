@@ -50,8 +50,7 @@ public class StructureType implements Type {
         return new Monad<>(TypeGroup.Structure);
     }
 
-    @Override
-    public Optional<String> renderOptionally() {
+    private Optional<String> renderOptionally() {
         return renderOptionally("");
     }
 
