@@ -27,7 +27,7 @@ public class StructureType implements Type {
     }
 
     @Override
-    public Optional<String> render(String name) {
+    public Optional<String> renderOptionally(String name) {
         return this.name.value().map(inner -> "struct " + inner + " " + name).toOption();
     }
 
@@ -49,6 +49,21 @@ public class StructureType implements Type {
     @Override
     public Monad<TypeGroup> group() {
         return new Monad<>(TypeGroup.Structure);
+    }
+
+    @Override
+    public Optional<String> renderOptionally() {
+        return renderOptionally("");
+    }
+
+    @Override
+    public String render(String name) {
+        return renderOptionally().orElseThrow();
+    }
+
+    @Override
+    public String render(){
+        return render("");
     }
 
     private static class StructureTypePrototype implements Prototype {

@@ -2,6 +2,7 @@ package com.meti.type;
 
 import com.meti.content.Content;
 import com.meti.render.Field;
+import com.meti.render.Renderable;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -13,7 +14,12 @@ public interface Type {
 
     <R> Optional<R> applyToContent(Function<Content, R> function);
 
-    Optional<String> render(String name);
+    @Deprecated
+    Optional<String> renderOptionally(String name);
+
+    String render(String name);
+
+    String render();
 
     Prototype createPrototype();
 
@@ -21,9 +27,8 @@ public interface Type {
 
     Stream<Field> streamFields();
 
-    default Optional<String> render() {
-        return render("");
-    }
+    @Deprecated
+    Optional<String> renderOptionally();
 
     interface Prototype {
         Prototype withChild(Type child);

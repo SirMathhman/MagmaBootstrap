@@ -23,8 +23,8 @@ class PointerType implements Type {
     }
 
     @Override
-    public Optional<String> render(String name) {
-        return Optional.of(child.render("* " + name).orElseThrow());
+    public Optional<String> renderOptionally(String name) {
+        return Optional.of(child.renderOptionally("* " + name).orElseThrow());
     }
 
     @Override
@@ -45,5 +45,20 @@ class PointerType implements Type {
     @Override
     public Monad<TypeGroup> group(){
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<String> renderOptionally() {
+        return renderOptionally("");
+    }
+
+    @Override
+    public String render(String name) {
+        return renderOptionally().orElseThrow();
+    }
+
+    @Override
+    public String render(){
+        return render("");
     }
 }

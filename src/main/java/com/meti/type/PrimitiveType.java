@@ -36,7 +36,7 @@ public enum PrimitiveType implements Type {
     }
 
     @Override
-    public Optional<String> render(String name) {
+    public Optional<String> renderOptionally(String name) {
         return Optional.of(value + " " + name);
     }
 
@@ -58,6 +58,21 @@ public enum PrimitiveType implements Type {
     @Override
     public Monad<TypeGroup> group(){
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<String> renderOptionally() {
+        return renderOptionally("");
+    }
+
+    @Override
+    public String render(String name) {
+        return renderOptionally().orElseThrow();
+    }
+
+    @Override
+    public String render(){
+        return render("");
     }
 
     private class PrimitivePrototype implements Prototype {

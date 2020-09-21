@@ -38,7 +38,7 @@ class ConcreteFunctionNode extends ParentNode {
     @Override
     public Optional<String> render() {
         String renderedParameters = renderParameters();
-        return returnType.render(name + renderedParameters)
+        return returnType.renderOptionally(name + renderedParameters)
                 .map(this::appendValue);
     }
 

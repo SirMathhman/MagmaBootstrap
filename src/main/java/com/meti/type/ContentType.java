@@ -21,7 +21,7 @@ public class ContentType implements Type {
     }
 
     @Override
-    public Optional<String> render(String name) {
+    public Optional<String> renderOptionally(String name) {
         return Optional.empty();
     }
 
@@ -43,5 +43,20 @@ public class ContentType implements Type {
     @Override
     public Monad<TypeGroup> group(){
         return new Monad<>(TypeGroup.Content);
+    }
+
+    @Override
+    public Optional<String> renderOptionally() {
+        return renderOptionally("");
+    }
+
+    @Override
+    public String render(String name) {
+        return renderOptionally().orElseThrow();
+    }
+
+    @Override
+    public String render(){
+        return render("");
     }
 }

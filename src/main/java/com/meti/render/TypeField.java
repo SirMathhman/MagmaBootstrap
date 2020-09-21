@@ -1,6 +1,5 @@
 package com.meti.render;
 
-import com.meti.content.Content;
 import com.meti.type.Type;
 import com.meti.util.Monad;
 import com.meti.util.Triad;
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class TypeField implements Field{
     private final Type type;
@@ -55,6 +53,6 @@ public class TypeField implements Field{
 
     @Override
     public Optional<String> render() {
-        return Optional.ofNullable(type.render().orElseThrow(() -> new IllegalStateException("Cannot render type: " + type)));
+        return Optional.ofNullable(type.renderOptionally().orElseThrow(() -> new IllegalStateException("Cannot renderOptionally type: " + type)));
     }
 }

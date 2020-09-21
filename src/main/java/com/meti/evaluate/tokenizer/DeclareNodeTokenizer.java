@@ -76,8 +76,8 @@ public class DeclareNodeTokenizer extends AbstractNodeTokenizer {
 
         @Override
         public Optional<String> render() {
-            String renderedIdentity = identity.render().orElseThrow(() -> new IllegalStateException(String.format("Identity '%s' had nothing to render.", identity)));
-            String renderedValue = value.render().orElseThrow(() -> new IllegalStateException(String.format("Value '%s' had nothing to render.", value)));
+            String renderedIdentity = identity.render().orElseThrow(() -> new IllegalStateException(String.format("Identity '%s' had nothing to renderOptionally.", identity)));
+            String renderedValue = value.render().orElseThrow(() -> new IllegalStateException(String.format("Value '%s' had nothing to renderOptionally.", value)));
             return Optional.of(renderedIdentity + "=" + renderedValue + ";");
         }
 

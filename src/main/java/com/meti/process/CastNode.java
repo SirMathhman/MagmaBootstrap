@@ -8,7 +8,6 @@ import com.meti.type.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class CastNode extends FreeNode {
@@ -42,7 +41,7 @@ public class CastNode extends FreeNode {
 
     @Override
     public Optional<String> render() {
-        return type.render()
+        return type.renderOptionally()
                 .map(String::trim)
                 .map(this::formatCast)
                 .map(this::formatValue);
