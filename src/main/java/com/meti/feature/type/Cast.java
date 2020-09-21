@@ -59,8 +59,8 @@ public class Cast extends Free {
         }
 
         @Override
-        public Prototype withField(Field field) {
-            return field.type()
+        public Prototype withField(Field fieldNode) {
+            return fieldNode.type()
                     .append(value)
                     .apply(CastPrototype::new);
         }

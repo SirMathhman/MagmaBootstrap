@@ -21,7 +21,7 @@ public class FieldTokenizer extends AbstractNodeTokenizer {
             Content parentContent = content.slice(0, separator);
             Node parent = new ContentNode(parentContent);
             Content fieldName = content.sliceToEnd(separator + 1);
-            return Optional.of(new Field(parent, fieldName));
+            return Optional.of(new FieldNode(parent, fieldName));
         }
         return Optional.empty();
     }

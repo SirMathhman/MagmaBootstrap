@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FieldEvaluatorTest {
+class FieldNodeEvaluatorTest {
 
     @Test
     void testConst() {

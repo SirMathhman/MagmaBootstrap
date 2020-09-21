@@ -10,11 +10,11 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class Field extends Parent {
+public class FieldNode extends Parent {
     private final Content fieldName;
     private final Node parent;
 
-    public Field(Node parent, Content fieldName) {
+    public FieldNode(Node parent, Content fieldName) {
         this.fieldName = fieldName;
         this.parent = parent;
     }
@@ -91,7 +91,7 @@ public class Field extends Parent {
 
         @Override
         public Node build() {
-            return new Field(parent, fieldName);
+            return new FieldNode(parent, fieldName);
         }
 
         @Override
