@@ -1,11 +1,11 @@
 package com.meti.feature.type.primitive;
 
-import com.meti.feature.AbstractNodeTokenizer;
-import com.meti.feature.Leaf;
+import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
+import com.meti.feature.render.Leaf;
 import com.meti.util.Monad;
 import com.meti.content.Content;
-import com.meti.feature.Field;
-import com.meti.feature.Node;
+import com.meti.feature.render.Field;
+import com.meti.feature.render.Node;
 
 import java.math.BigInteger;
 import java.util.List;

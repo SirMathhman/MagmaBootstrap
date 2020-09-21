@@ -1,7 +1,6 @@
 package com.meti.feature.type.structure;
 
-import com.meti.feature.type.structure.StructureType;
-import com.meti.feature.Type;
+import com.meti.feature.scope.Type;
 import com.meti.resolve.AbstractTypeTokenizer;
 
 import java.util.Optional;

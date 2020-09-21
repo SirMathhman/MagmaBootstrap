@@ -1,7 +1,9 @@
 package com.meti.evaluate;
 
 import com.meti.content.StringContent;
-import com.meti.feature.Field;
+import com.meti.feature.evaluate.Evaluator;
+import com.meti.feature.render.Field;
+import com.meti.feature.evaluate.FieldEvaluator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

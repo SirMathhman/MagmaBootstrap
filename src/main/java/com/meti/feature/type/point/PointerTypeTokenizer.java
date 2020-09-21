@@ -1,8 +1,8 @@
 package com.meti.feature.type.point;
 
 import com.meti.content.Content;
-import com.meti.feature.ContentType;
-import com.meti.feature.Type;
+import com.meti.feature.render.ContentType;
+import com.meti.feature.scope.Type;
 import com.meti.resolve.AbstractTypeTokenizer;
 
 import java.util.Optional;

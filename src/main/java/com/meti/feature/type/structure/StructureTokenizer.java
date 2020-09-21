@@ -3,10 +3,10 @@ package com.meti.feature.type.structure;
 import com.meti.content.Content;
 import com.meti.content.StringContent;
 import com.meti.content.Strategy;
-import com.meti.evaluate.FieldEvaluator;
-import com.meti.feature.AbstractNodeTokenizer;
-import com.meti.feature.Field;
-import com.meti.feature.Node;
+import com.meti.feature.evaluate.FieldEvaluator;
+import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
+import com.meti.feature.render.Field;
+import com.meti.feature.render.Node;
 
 import java.util.*;
 import java.util.stream.Collectors;

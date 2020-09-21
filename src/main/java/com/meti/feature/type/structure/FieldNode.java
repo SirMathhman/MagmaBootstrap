@@ -1,8 +1,9 @@
 package com.meti.feature.type.structure;
 
 import com.meti.content.Content;
-import com.meti.feature.Node;
-import com.meti.feature.Parent;
+import com.meti.feature.render.Node;
+import com.meti.feature.render.Parent;
+import com.meti.feature.render.Field;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class FieldNode extends Parent {
     }
 
     @Override
-    public Stream<com.meti.feature.Field> streamFields() {
+    public Stream<Field> streamFields() {
         return Stream.empty();
     }
 
@@ -55,7 +56,7 @@ public class FieldNode extends Parent {
     }
 
     @Override
-    public Prototype create(com.meti.feature.Field field) {
+    public Prototype create(Field field) {
         throw new UnsupportedOperationException();
     }
 
@@ -80,7 +81,7 @@ public class FieldNode extends Parent {
         }
 
         @Override
-        public Prototype withField(com.meti.feature.Field field) {
+        public Prototype withField(Field field) {
             return this;
         }
 
@@ -100,7 +101,7 @@ public class FieldNode extends Parent {
         }
 
         @Override
-        public List<com.meti.feature.Field> listFields() {
+        public List<Field> listFields() {
             throw new UnsupportedOperationException();
         }
 

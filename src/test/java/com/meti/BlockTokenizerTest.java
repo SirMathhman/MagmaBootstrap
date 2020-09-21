@@ -3,12 +3,12 @@ package com.meti;
 import com.meti.content.Content;
 import com.meti.content.StringContent;
 import com.meti.feature.block.BlockTokenizer;
-import com.meti.evaluate.Evaluator;
-import com.meti.feature.MagmaNodeTokenizer;
+import com.meti.feature.evaluate.Evaluator;
+import com.meti.feature.evaluate.tokenize.MagmaNodeTokenizer;
 import com.meti.util.load.PathClassPath;
 import com.meti.feature.block.Block;
-import com.meti.feature.ContentNode;
-import com.meti.feature.Node;
+import com.meti.feature.render.ContentNode;
+import com.meti.feature.render.Node;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;

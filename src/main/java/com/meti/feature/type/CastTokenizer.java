@@ -1,12 +1,12 @@
 package com.meti.feature.type;
 
-import com.meti.CompileException;
+import com.meti.feature.CompileException;
 import com.meti.content.Content;
-import com.meti.feature.AbstractNodeTokenizer;
-import com.meti.feature.ContentNode;
-import com.meti.feature.Node;
-import com.meti.feature.ContentType;
-import com.meti.feature.Type;
+import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
+import com.meti.feature.render.ContentNode;
+import com.meti.feature.render.Node;
+import com.meti.feature.render.ContentType;
+import com.meti.feature.scope.Type;
 
 import java.util.Optional;
 import java.util.OptionalInt;

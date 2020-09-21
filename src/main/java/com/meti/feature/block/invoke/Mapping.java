@@ -1,6 +1,6 @@
 package com.meti.feature.block.invoke;
 
-import com.meti.feature.Node;
+import com.meti.feature.render.Node;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;

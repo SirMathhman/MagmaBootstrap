@@ -1,7 +1,7 @@
 package com.meti.stack;
 
-import com.meti.feature.Field;
-import com.meti.feature.Type;
+import com.meti.feature.render.Field;
+import com.meti.feature.scope.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;

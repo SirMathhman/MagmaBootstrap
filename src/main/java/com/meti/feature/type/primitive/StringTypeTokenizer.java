@@ -2,8 +2,7 @@ package com.meti.feature.type.primitive;
 
 import com.meti.content.Content;
 import com.meti.feature.type.point.PointerType;
-import com.meti.feature.type.primitive.PrimitiveType;
-import com.meti.feature.Type;
+import com.meti.feature.scope.Type;
 import com.meti.resolve.AbstractTypeTokenizer;
 
 import java.util.Optional;

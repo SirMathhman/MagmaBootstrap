@@ -1,8 +1,8 @@
 package com.meti.feature.type.primitive;
 
 import com.meti.content.Content;
-import com.meti.feature.AbstractNodeTokenizer;
-import com.meti.feature.Node;
+import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
+import com.meti.feature.render.Node;
 
 import java.util.Optional;
 

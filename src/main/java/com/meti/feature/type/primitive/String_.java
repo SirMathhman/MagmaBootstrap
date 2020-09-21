@@ -1,10 +1,10 @@
 package com.meti.feature.type.primitive;
 
 import com.meti.content.Content;
-import com.meti.feature.Leaf;
-import com.meti.feature.Node;
-import com.meti.feature.PassPrototype;
-import com.meti.feature.UntypedNode;
+import com.meti.feature.render.Leaf;
+import com.meti.feature.render.Node;
+import com.meti.feature.render.PassPrototype;
+import com.meti.feature.scope.UntypedNode;
 import com.meti.util.Monad;
 
 import java.util.Optional;

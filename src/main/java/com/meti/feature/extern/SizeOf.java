@@ -1,9 +1,9 @@
 package com.meti.feature.extern;
 
 import com.meti.content.Content;
-import com.meti.feature.Field;
-import com.meti.feature.Leaf;
-import com.meti.feature.Node;
+import com.meti.feature.render.Field;
+import com.meti.feature.render.Leaf;
+import com.meti.feature.render.Node;
 import com.meti.util.Monad;
 
 import java.util.List;

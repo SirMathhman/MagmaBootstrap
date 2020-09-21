@@ -1,6 +1,6 @@
 package com.meti.process;
 
-import com.meti.feature.Node;
+import com.meti.feature.render.Node;
 import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;

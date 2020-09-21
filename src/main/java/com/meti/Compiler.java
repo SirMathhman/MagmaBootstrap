@@ -2,14 +2,15 @@ package com.meti;
 
 import com.meti.content.Content;
 import com.meti.content.StringContent;
+import com.meti.feature.*;
+import com.meti.feature.evaluate.tokenize.MagmaNodeTokenizer;
+import com.meti.feature.render.ContentNode;
+import com.meti.feature.render.Node;
+import com.meti.feature.scope.Type;
 import com.meti.util.load.ClassPath;
-import com.meti.feature.MagmaNodeTokenizer;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
-import com.meti.feature.ContentNode;
-import com.meti.feature.Node;
 import com.meti.resolve.MagmaTypeTokenizer;
-import com.meti.feature.Type;
 
 import java.util.Optional;
 import java.util.function.Function;

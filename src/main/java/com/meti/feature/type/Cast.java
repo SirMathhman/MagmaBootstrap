@@ -1,7 +1,10 @@
 package com.meti.feature.type;
 
-import com.meti.feature.*;
-import com.meti.feature.Type;
+import com.meti.feature.scope.Type;
+import com.meti.feature.render.Field;
+import com.meti.feature.render.Free;
+import com.meti.feature.render.InlineField;
+import com.meti.feature.render.Node;
 import com.meti.util.Monad;
 
 import java.util.List;

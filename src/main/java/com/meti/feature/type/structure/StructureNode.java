@@ -2,12 +2,12 @@ package com.meti.feature.type.structure;
 
 import com.meti.content.Content;
 import com.meti.content.StringContent;
-import com.meti.feature.Field;
-import com.meti.feature.InlineField;
-import com.meti.feature.Node;
-import com.meti.feature.Renderable;
+import com.meti.feature.render.Field;
+import com.meti.feature.render.InlineField;
+import com.meti.feature.render.Node;
+import com.meti.feature.scope.Renderable;
 import com.meti.stack.CallStack;
-import com.meti.feature.Type;
+import com.meti.feature.scope.Type;
 import com.meti.util.Monad;
 import com.meti.util.TriFunction;
 

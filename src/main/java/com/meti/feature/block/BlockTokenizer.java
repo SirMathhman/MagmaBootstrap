@@ -3,9 +3,9 @@ package com.meti.feature.block;
 import com.meti.content.Strategy;
 import com.meti.content.ChildContent;
 import com.meti.content.Content;
-import com.meti.feature.AbstractNodeTokenizer;
-import com.meti.feature.ContentNode;
-import com.meti.feature.Node;
+import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
+import com.meti.feature.render.ContentNode;
+import com.meti.feature.render.Node;
 
 import java.util.ArrayList;
 import java.util.List;
