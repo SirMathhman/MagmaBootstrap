@@ -11,10 +11,6 @@ import java.util.function.Function;
 public interface Field extends Renderable {
     Monad<String> name();
 
-    <R> R applyToType(Function<Type, R> mapping);
-
-    Field copy(Type type);
-
     <R> R applyDestruction(BiFunction<String, Type, R> function);
 
     Triad<String, Type, List<FieldFlag>> destroy();
@@ -22,4 +18,6 @@ public interface Field extends Renderable {
     <R> R applyToName(Function<String, R> mapping);
 
     Monad<Type> type();
+
+    Field transformByType(Function<Type, Type> mapping);
 }

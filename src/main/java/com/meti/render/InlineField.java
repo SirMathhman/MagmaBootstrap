@@ -25,13 +25,11 @@ public class InlineField implements Field {
         this.flags = flags;
     }
 
-    @Override
-    public <R> R applyToType(Function<Type, R> mapping) {
+    private <R> R applyToType(Function<Type, R> mapping) {
         return mapping.apply(type);
     }
 
-    @Override
-    public Field copy(Type type) {
+    private Field copy(Type type) {
         return new InlineField(name, type, flags);
     }
 
@@ -63,5 +61,11 @@ public class InlineField implements Field {
     @Override
     public Monad<Type> type() {
         return new Monad<>(type);
+    }
+
+    @Override
+    public Field transformByType(Function<Type, Type> mapping) {
+        Type newType = applyToType(mapping);
+        return copy(newType);
     }
 }

@@ -35,8 +35,7 @@ public class Compiler {
     }
 
     private Field resolveField(Field field) {
-        Type newType = field.applyToType(this::resolve);
-        return field.copy(newType);
+        return field.transformByType(this::resolve);
     }
 
     private Node tokenize(Node previous) {
