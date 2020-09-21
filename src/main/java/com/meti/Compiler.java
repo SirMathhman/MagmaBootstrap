@@ -9,8 +9,7 @@ import com.meti.process.Processor;
 import com.meti.feature.ContentNode;
 import com.meti.feature.Node;
 import com.meti.resolve.MagmaTypeTokenizer;
-import com.meti.type.Type;
-import com.meti.type.TypeGroup;
+import com.meti.feature.Type;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -65,7 +64,7 @@ public class Compiler {
     private Type resolve(Type previous) {
         Type parent;
         //TODO: simplify condition
-        if (previous.applyToContent(Function.identity()).isPresent() && previous.group().test(TypeGroup.Content.matches())) {
+        if (previous.applyToContent(Function.identity()).isPresent() && previous.group().test(Type.Group.Content.matches())) {
             parent = new MagmaTypeTokenizer(previous).tokenize().orElseThrow(() -> invalidateType(previous));
         } else {
             parent = previous;

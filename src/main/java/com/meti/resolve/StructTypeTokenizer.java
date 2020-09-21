@@ -1,7 +1,7 @@
 package com.meti.resolve;
 
-import com.meti.type.StructureType;
-import com.meti.type.Type;
+import com.meti.feature.type.StructureType;
+import com.meti.feature.Type;
 
 import java.util.Optional;
 

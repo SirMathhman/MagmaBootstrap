@@ -1,8 +1,8 @@
 package com.meti.resolve;
 
 import com.meti.content.Content;
-import com.meti.type.PrimitiveType;
-import com.meti.type.Type;
+import com.meti.feature.type.PrimitiveType;
+import com.meti.feature.Type;
 
 import java.util.Arrays;
 import java.util.Optional;

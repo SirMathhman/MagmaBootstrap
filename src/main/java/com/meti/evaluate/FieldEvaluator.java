@@ -3,8 +3,8 @@ package com.meti.evaluate;
 import com.meti.content.Content;
 import com.meti.feature.Field;
 import com.meti.feature.InlineField;
-import com.meti.type.ContentType;
-import com.meti.type.Type;
+import com.meti.feature.ContentType;
+import com.meti.feature.Type;
 
 import java.util.*;
 import java.util.stream.Collectors;

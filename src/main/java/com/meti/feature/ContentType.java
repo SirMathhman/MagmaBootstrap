@@ -1,7 +1,6 @@
-package com.meti.type;
+package com.meti.feature;
 
 import com.meti.content.Content;
-import com.meti.feature.Field;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -36,8 +35,8 @@ public class ContentType implements Type {
     }
 
     @Override
-    public Monad<TypeGroup> group(){
-        return new Monad<>(TypeGroup.Content);
+    public Monad<Group> group(){
+        return new Monad<>(Group.Content);
     }
 
     @Override

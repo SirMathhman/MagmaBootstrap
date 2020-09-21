@@ -1,7 +1,6 @@
-package com.meti.type;
+package com.meti.feature;
 
 import com.meti.content.Content;
-import com.meti.feature.Field;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -36,7 +35,7 @@ public abstract class FormattedType implements Type {
     }
 
     @Override
-    public Monad<TypeGroup> group(){
+    public Monad<Group> group(){
         throw new UnsupportedOperationException();
     }
 

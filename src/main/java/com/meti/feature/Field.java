@@ -1,6 +1,5 @@
 package com.meti.feature;
 
-import com.meti.type.Type;
 import com.meti.util.Monad;
 import com.meti.util.Triad;
 

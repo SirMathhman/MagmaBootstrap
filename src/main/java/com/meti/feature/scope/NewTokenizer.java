@@ -8,8 +8,8 @@ import com.meti.feature.Node;
 import com.meti.feature.TypeField;
 import com.meti.feature.block.Mapping;
 import com.meti.feature.extern.SizeOf;
-import com.meti.type.ContentType;
-import com.meti.type.Type;
+import com.meti.feature.ContentType;
+import com.meti.feature.Type;
 
 import java.util.Optional;
 

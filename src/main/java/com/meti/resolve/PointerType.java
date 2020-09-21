@@ -2,8 +2,7 @@ package com.meti.resolve;
 
 import com.meti.content.Content;
 import com.meti.feature.Field;
-import com.meti.type.Type;
-import com.meti.type.TypeGroup;
+import com.meti.feature.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -42,7 +41,7 @@ class PointerType implements Type {
     }
 
     @Override
-    public Monad<TypeGroup> group(){
+    public Monad<Group> group(){
         throw new UnsupportedOperationException();
     }
 

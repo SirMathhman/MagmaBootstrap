@@ -1,15 +1,15 @@
-package com.meti.type;
+package com.meti.feature;
 
 import com.meti.content.Content;
-import com.meti.feature.Field;
 import com.meti.util.Monad;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public interface Type {
-    Monad<TypeGroup> group();
+    Monad<Group> group();
 
     <R> Optional<R> applyToContent(Function<Content, R> function);
 
@@ -29,5 +29,13 @@ public interface Type {
         Prototype withField(Field field);
 
         Type build();
+    }
+
+    enum Group {
+        Content, Structure;
+
+        public Predicate<Group> matches() {
+            return typeGroup -> typeGroup == this;
+        }
     }
 }

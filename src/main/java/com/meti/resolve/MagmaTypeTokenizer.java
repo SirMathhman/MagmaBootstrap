@@ -1,6 +1,6 @@
 package com.meti.resolve;
 
-import com.meti.type.Type;
+import com.meti.feature.Type;
 
 import java.util.function.Function;
 import java.util.stream.Stream;

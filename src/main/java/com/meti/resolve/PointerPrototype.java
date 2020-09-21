@@ -1,7 +1,7 @@
 package com.meti.resolve;
 
 import com.meti.feature.Field;
-import com.meti.type.Type;
+import com.meti.feature.Type;
 
 class PointerPrototype implements Type.Prototype {
     private final Type child;

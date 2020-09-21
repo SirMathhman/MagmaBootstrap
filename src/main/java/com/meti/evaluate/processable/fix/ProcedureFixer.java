@@ -6,8 +6,8 @@ import com.meti.evaluate.resolve.Resolver;
 import com.meti.process.State;
 import com.meti.feature.Node;
 import com.meti.feature.block.Procedure;
-import com.meti.type.PrimitiveType;
-import com.meti.type.Type;
+import com.meti.feature.type.PrimitiveType;
+import com.meti.feature.Type;
 import com.meti.util.Monad;
 
 import java.util.List;

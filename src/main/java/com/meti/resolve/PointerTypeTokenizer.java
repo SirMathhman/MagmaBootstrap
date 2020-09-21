@@ -1,8 +1,8 @@
 package com.meti.resolve;
 
 import com.meti.content.Content;
-import com.meti.type.ContentType;
-import com.meti.type.Type;
+import com.meti.feature.ContentType;
+import com.meti.feature.Type;
 
 import java.util.Optional;
 import java.util.function.Function;

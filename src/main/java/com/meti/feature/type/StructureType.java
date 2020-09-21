@@ -1,7 +1,8 @@
-package com.meti.type;
+package com.meti.feature.type;
 
 import com.meti.content.Content;
 import com.meti.feature.Field;
+import com.meti.feature.Type;
 import com.meti.util.Monad;
 
 import java.util.*;
@@ -46,8 +47,8 @@ public class StructureType implements Type {
     }
 
     @Override
-    public Monad<TypeGroup> group() {
-        return new Monad<>(TypeGroup.Structure);
+    public Monad<Group> group() {
+        return new Monad<>(Group.Structure);
     }
 
     private Optional<String> renderOptionally() {

@@ -4,7 +4,7 @@ import com.meti.evaluate.processable.AbstractProcessable;
 import com.meti.process.State;
 import com.meti.feature.Field;
 import com.meti.feature.Node;
-import com.meti.type.Type;
+import com.meti.feature.Type;
 
 import java.util.Optional;
 

@@ -4,7 +4,7 @@ import com.meti.content.Content;
 import com.meti.process.State;
 import com.meti.feature.Node;
 import com.meti.stack.CallStack;
-import com.meti.type.Type;
+import com.meti.feature.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;

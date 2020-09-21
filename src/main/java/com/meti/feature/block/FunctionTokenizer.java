@@ -7,8 +7,8 @@ import com.meti.content.Strategy;
 import com.meti.evaluate.FieldEvaluator;
 import com.meti.evaluate.FlagStrategy;
 import com.meti.feature.*;
-import com.meti.type.ContentType;
-import com.meti.type.Type;
+import com.meti.feature.ContentType;
+import com.meti.feature.Type;
 
 import java.util.*;
 import java.util.stream.Collectors;

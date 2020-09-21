@@ -1,7 +1,7 @@
 package com.meti.evaluate.resolve;
 
 import com.meti.process.State;
-import com.meti.type.Type;
+import com.meti.feature.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;

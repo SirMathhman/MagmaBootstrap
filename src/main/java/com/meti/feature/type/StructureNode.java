@@ -7,8 +7,7 @@ import com.meti.feature.InlineField;
 import com.meti.feature.Node;
 import com.meti.feature.Renderable;
 import com.meti.stack.CallStack;
-import com.meti.type.StructureType;
-import com.meti.type.Type;
+import com.meti.feature.Type;
 import com.meti.util.Monad;
 import com.meti.util.TriFunction;
 
