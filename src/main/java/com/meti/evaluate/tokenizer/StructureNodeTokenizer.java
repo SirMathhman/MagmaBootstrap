@@ -8,10 +8,7 @@ import com.meti.render.Field;
 import com.meti.render.Node;
 import com.meti.render.StructureNode;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,12 +25,12 @@ public class StructureNodeTokenizer extends AbstractNodeTokenizer{
                 int separator = separatorOptional.getAsInt();
                 Content name = content.slice(7, separator);
                 Content fieldString = content.slice(separator + 1, content.length() - 1);
-                List<Field> fields = fieldString.split(FieldStrategy::new)
+                Set<Field> fields = fieldString.split(FieldStrategy::new)
                         .filter(Content::isPresent)
                         .map(FieldEvaluator::new)
                         .map(FieldEvaluator::evaluate)
                         .map(Optional::orElseThrow)
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toSet());
                 return Optional.of(new StructureNode(name, fields));
             } else {
                 return Optional.empty();

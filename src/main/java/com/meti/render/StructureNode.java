@@ -2,6 +2,7 @@ package com.meti.render;
 
 import com.meti.content.Content;
 import com.meti.content.StringContent;
+import com.meti.stack.CallStack;
 import com.meti.type.StructureType;
 import com.meti.type.Type;
 import com.meti.util.Monad;
@@ -10,15 +11,21 @@ import com.meti.util.TriFunction;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StructureNode implements Node {
     private final Content name;
-    private final List<Field> fields;
+    private final Set<Field> fields;
 
-    public StructureNode(Content name, List<Field> fields) {
+    @Override
+    public CallStack define(CallStack stack) {
+        return stack.define(name.asString(), fields);
+    }
+
+    public StructureNode(Content name, Set<Field> fields) {
         this.name = name;
         this.fields = fields;
     }
@@ -98,7 +105,7 @@ public class StructureNode implements Node {
         }
 
         private StructureNode getStructureNode(String s, Type type) {
-            List<Field> fields = type.streamFields().collect(Collectors.toList());
+            Set<Field> fields = type.streamFields().collect(Collectors.toSet());
             return new StructureNode(new StringContent(s), fields);
         }
     }

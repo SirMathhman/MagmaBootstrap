@@ -4,24 +4,21 @@ import com.meti.content.Content;
 import com.meti.render.Field;
 import com.meti.util.Monad;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class StructureType implements Type {
     private final Content name;
-    private final List<Field> fields;
+    private final Set<Field> fields;
 
-    public StructureType(Content name, List<Field> fields) {
+    public StructureType(Content name, Set<Field> fields) {
         this.name = name;
         this.fields = fields;
     }
 
     public StructureType(Content name) {
-        this(name, Collections.emptyList());
+        this(name, Collections.emptySet());
     }
 
     @Override
@@ -55,14 +52,14 @@ public class StructureType implements Type {
     }
 
     private static class StructureTypePrototype implements Prototype {
-        private final List<Field> fields;
+        private final Set<Field> fields;
         private final Content name;
 
         private StructureTypePrototype(Content name) {
-            this(name, new ArrayList<>());
+            this(name, new HashSet<>());
         }
 
-        private StructureTypePrototype(Content name, List<Field> fields) {
+        private StructureTypePrototype(Content name, Set<Field> fields) {
             this.name = name;
             this.fields = fields;
         }
@@ -74,7 +71,7 @@ public class StructureType implements Type {
 
         @Override
         public Prototype withField(Field field) {
-            List<Field> newFields = new ArrayList<>(fields);
+            Set<Field> newFields = new HashSet<>(fields);
             newFields.add(field);
             return new StructureTypePrototype(name, newFields);
         }

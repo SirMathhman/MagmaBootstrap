@@ -4,10 +4,8 @@ import com.meti.render.Field;
 import com.meti.type.Type;
 import com.meti.util.Monad;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class ImmutableCallStack implements CallStack {
@@ -37,6 +35,13 @@ public class ImmutableCallStack implements CallStack {
     }
 
     @Override
+    public CallStack define(String name, Set<Field> fields) {
+        Frame frame = popLast().define(name, fields);
+        frames.push(frame);
+        return new ImmutableCallStack(frames);
+    }
+
+    @Override
     public Optional<Monad<Type>> resolve(String name) {
         return frames.stream()
                 .filter(frame -> frame.isDefined(name))
@@ -60,7 +65,7 @@ public class ImmutableCallStack implements CallStack {
 
     @Override
     public CallStack defineAll(List<Field> fields) {
-        return fields.stream().reduce(this, CallStack::define, (oldStack, newStack) -> newStack);
+        return fields.stream().reduce(this, (BiFunction<CallStack, Field, CallStack>) CallStack::define, (oldStack, newStack) -> newStack);
     }
 
     @Override
