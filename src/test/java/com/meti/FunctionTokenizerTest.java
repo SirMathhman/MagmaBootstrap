@@ -3,7 +3,7 @@ package com.meti;
 import com.meti.content.Content;
 import com.meti.content.StringContent;
 import com.meti.evaluate.Evaluator;
-import com.meti.feature.block.FunctionTokenizer;
+import com.meti.feature.block.function.FunctionTokenizer;
 import com.meti.feature.Node;
 import org.junit.jupiter.api.Test;
 

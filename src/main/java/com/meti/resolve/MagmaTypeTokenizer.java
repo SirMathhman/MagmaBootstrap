@@ -1,6 +1,10 @@
 package com.meti.resolve;
 
 import com.meti.feature.Type;
+import com.meti.feature.type.point.PointerTypeTokenizer;
+import com.meti.feature.type.primitive.PrimitiveTypeTokenizer;
+import com.meti.feature.type.primitive.StringTypeTokenizer;
+import com.meti.feature.type.structure.StructTypeTokenizer;
 
 import java.util.function.Function;
 import java.util.stream.Stream;

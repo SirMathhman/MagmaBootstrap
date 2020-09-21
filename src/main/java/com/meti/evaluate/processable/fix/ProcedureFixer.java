@@ -5,8 +5,8 @@ import com.meti.evaluate.resolve.MagmaResolver;
 import com.meti.evaluate.resolve.Resolver;
 import com.meti.process.State;
 import com.meti.feature.Node;
-import com.meti.feature.block.Procedure;
-import com.meti.feature.type.PrimitiveType;
+import com.meti.feature.block.invoke.Procedure;
+import com.meti.feature.type.primitive.PrimitiveType;
 import com.meti.feature.Type;
 import com.meti.util.Monad;
 
