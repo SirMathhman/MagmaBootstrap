@@ -7,7 +7,6 @@ import com.meti.evaluate.tokenizer.MagmaNodeTokenizer;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
 import com.meti.render.ContentNode;
-import com.meti.render.Field;
 import com.meti.render.Node;
 import com.meti.resolve.MagmaTypeTokenizer;
 import com.meti.type.Type;
@@ -34,17 +33,13 @@ public class Compiler {
         return output.substring(1, output.length() - 1);
     }
 
-    private Field resolveField(Field field) {
-        return field.transformByType(this::resolve);
-    }
-
     private Node tokenize(Node previous) {
         Optional<Node> optional = previous.applyToContent(this::parseContent);
         if (optional.isPresent()) {
             Node node = optional.orElseThrow();
             Node.Prototype prototype = node.createPrototype();
             Node.Prototype withFields = node.streamFields()
-                    .map(this::resolveField)
+                    .map(field -> field.transformByType(this::resolve))
                     .reduce(prototype, Node.Prototype::withField, (previous1, next) -> next);
             Node.Prototype withChildren = node.streamChildren()
                     .map(this::tokenize)
@@ -77,7 +72,7 @@ public class Compiler {
         }
         Type.Prototype prototype = parent.createPrototype();
         Type.Prototype withFields = parent.streamFields()
-                .map(this::resolveField)
+                .map(field -> field.transformByType(this::resolve))
                 .reduce(prototype, Type.Prototype::withField, (oldPrototype, newPrototype) -> newPrototype);
         Type.Prototype withChildren = parent.streamChildren()
                 .map(this::resolve)
