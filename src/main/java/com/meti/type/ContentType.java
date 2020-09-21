@@ -20,10 +20,6 @@ public class ContentType implements Type {
         return Optional.of(content).map(function);
     }
 
-    private Optional<String> renderOptionally(String name) {
-        return Optional.empty();
-    }
-
     @Override
     public Prototype createPrototype(){
         throw new UnsupportedOperationException();
@@ -44,13 +40,11 @@ public class ContentType implements Type {
         return new Monad<>(TypeGroup.Content);
     }
 
-    private Optional<String> renderOptionally() {
-        return renderOptionally("");
-    }
-
     @Override
     public String render(String name) {
-        return renderOptionally().orElseThrow();
+        String message = "Cannot render ContentType of value '%s' with name '%s'.";
+        String formatted = String.format(message, content, name);
+        throw new UnsupportedOperationException(formatted);
     }
 
     @Override
