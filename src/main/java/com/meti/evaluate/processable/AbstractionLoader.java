@@ -8,8 +8,8 @@ import com.meti.stack.CallStack;
 
 import java.util.List;
 
-public class AbstractionPreProcessable extends FunctionPreProcessable {
-    public AbstractionPreProcessable(State previous) {
+public class AbstractionLoader extends FunctionLoader {
+    public AbstractionLoader(State previous) {
         super(previous);
     }
 

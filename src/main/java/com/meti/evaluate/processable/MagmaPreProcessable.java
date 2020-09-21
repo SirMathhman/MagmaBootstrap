@@ -14,8 +14,8 @@ public class MagmaPreProcessable extends CollectiveProcessable {
     protected Stream<Function<State, Processable>> streamPreprocessors() {
         return Stream.of(
                 StructurePreProcessable::new,
-                ImplementationPreProcessable::new,
-                AbstractionPreProcessable::new
+                ImplementationLoader::new,
+                AbstractionLoader::new
         );
     }
 }

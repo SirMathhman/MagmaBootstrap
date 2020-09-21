@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class FunctionPreProcessable implements Processable {
+public abstract class FunctionLoader implements Processable {
     protected final State previous;
 
-    public FunctionPreProcessable(State previous) {
+    public FunctionLoader(State previous) {
         this.previous = previous;
     }
 

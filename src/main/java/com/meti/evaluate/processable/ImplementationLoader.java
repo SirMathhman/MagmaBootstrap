@@ -8,8 +8,8 @@ import com.meti.render.Node;
 
 import java.util.List;
 
-public class ImplementationPreProcessable extends FunctionPreProcessable {
-    public ImplementationPreProcessable(State previous) {
+public class ImplementationLoader extends FunctionLoader {
+    public ImplementationLoader(State previous) {
         super(previous);
     }
 
