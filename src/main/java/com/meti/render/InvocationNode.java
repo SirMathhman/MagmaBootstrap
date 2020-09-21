@@ -53,4 +53,21 @@ public abstract class InvocationNode extends ParentNode {
     private String renderCaller() {
         return caller.render().orElseThrow();
     }
+
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
 }

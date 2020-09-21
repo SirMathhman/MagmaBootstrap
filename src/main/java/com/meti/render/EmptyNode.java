@@ -3,6 +3,7 @@ package com.meti.render;
 import com.meti.content.Content;
 import com.meti.util.Monad;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -41,6 +42,21 @@ public class EmptyNode extends LeafNode implements UntypedNode {
         @Override
         public Node build() {
             return new EmptyNode();
+        }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype merge(Prototype other) {
+            throw new UnsupportedOperationException();
         }
     }
 }

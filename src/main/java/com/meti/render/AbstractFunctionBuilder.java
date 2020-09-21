@@ -53,4 +53,19 @@ public class AbstractFunctionBuilder implements Node.Prototype {
         List<Field> parameters = fields.subList(1, fields.size());
         return new AbstractFunctionNode(name, parameters, returnType, flags);
     }
+
+    @Override
+    public List<Node> listChildren() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Field> listFields() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Node.Prototype merge(Node.Prototype other) {
+        throw new UnsupportedOperationException();
+    }
 }

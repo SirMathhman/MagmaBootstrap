@@ -51,6 +51,23 @@ public class ConstructionNode extends ParentNode {
                 .collect(Collectors.joining(",", "{" ,"}")));
     }
 
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
     private static class ConstructionPrototype implements Prototype {
         private final List<Node> children;
 
@@ -77,6 +94,21 @@ public class ConstructionNode extends ParentNode {
         @Override
         public Node build() {
             return new ConstructionNode(children);
+        }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype merge(Prototype other) {
+            throw new UnsupportedOperationException();
         }
     }
 }

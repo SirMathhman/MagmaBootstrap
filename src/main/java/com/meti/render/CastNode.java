@@ -3,6 +3,7 @@ package com.meti.render;
 import com.meti.type.Type;
 import com.meti.util.Monad;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -71,6 +72,21 @@ public class CastNode extends FreeNode {
         @Override
         public Node build() {
             return new CastNode(type, value);
+        }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype merge(Prototype other) {
+            throw new UnsupportedOperationException();
         }
     }
 }

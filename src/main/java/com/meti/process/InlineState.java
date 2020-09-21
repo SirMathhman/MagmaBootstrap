@@ -1,12 +1,14 @@
 package com.meti.process;
 
 import com.meti.render.Node;
+import com.meti.render.NodeGroup;
 import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class InlineState implements State {
@@ -46,5 +48,20 @@ public class InlineState implements State {
     @Override
     public Monad<CallStack> stack() {
         return new Monad<>(stack);
+    }
+
+    @Override
+    public State transformByNode(Function<Node, Node> mapping){
+        return with(node().apply(mapping));
+    }
+
+    @Override
+    public boolean has(NodeGroup group) {
+        return node().test(group::matches);
+    }
+
+    @Override
+    public State define(){
+        return destroy().apply((node, stack) -> with(node.define(stack)));
     }
 }

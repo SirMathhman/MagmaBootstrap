@@ -7,6 +7,7 @@ import com.meti.render.Node;
 import com.meti.render.NodeGroup;
 import com.meti.util.Monad;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -68,6 +69,21 @@ class Variable extends LeafNode {
         @Override
         public Node build() {
             return new Variable(content);
+        }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype merge(Prototype other) {
+            throw new UnsupportedOperationException();
         }
     }
 }

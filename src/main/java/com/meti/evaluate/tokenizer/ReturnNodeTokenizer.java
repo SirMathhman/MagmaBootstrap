@@ -4,6 +4,7 @@ import com.meti.render.*;
 import com.meti.util.Monad;
 import com.meti.content.Content;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -49,6 +50,21 @@ public class ReturnNodeTokenizer extends AbstractNodeTokenizer {
             if(value == null) throw new IllegalStateException("Value is not set.");
             return new ReturnNode(value);
         }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Node.Prototype merge(Node.Prototype other) {
+            throw new UnsupportedOperationException();
+        }
     }
 
     private static class ReturnNode extends ParentNode {
@@ -86,6 +102,23 @@ public class ReturnNodeTokenizer extends AbstractNodeTokenizer {
         @Override
         public Monad<NodeGroup> group(){
             return new Monad<>(NodeGroup.Return);
+        }
+
+        @Override
+        public Prototype create(Node child){
+            return createPrototype().withChild(child);
+        }
+
+        @Override
+        public Prototype create(Field field) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype createWithChildren() {
+            return streamChildren()
+                    .map(this::create)
+                    .reduce(createPrototype(), Prototype::merge);
         }
     }
 }

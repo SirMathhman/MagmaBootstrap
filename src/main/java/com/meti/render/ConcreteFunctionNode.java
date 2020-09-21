@@ -65,4 +65,21 @@ class ConcreteFunctionNode extends ParentNode {
     public Monad<NodeGroup> group() {
         return new Monad<>(NodeGroup.Implementation);
     }
+
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
 }

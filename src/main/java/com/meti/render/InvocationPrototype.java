@@ -33,4 +33,19 @@ public abstract class InvocationPrototype implements Node.Prototype {
     }
 
     protected abstract Node build(Node caller, List<Node> arguments);
+
+    @Override
+    public List<Node> listChildren() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Field> listFields() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Node.Prototype merge(Node.Prototype other) {
+        throw new UnsupportedOperationException();
+    }
 }

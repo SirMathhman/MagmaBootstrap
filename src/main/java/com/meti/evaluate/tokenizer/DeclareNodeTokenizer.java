@@ -6,8 +6,7 @@ import com.meti.evaluate.FieldEvaluator;
 import com.meti.render.*;
 import com.meti.util.Monad;
 
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -76,9 +75,26 @@ public class DeclareNodeTokenizer extends AbstractNodeTokenizer {
 
         @Override
         public Optional<String> render() {
-            String renderedIdentity = identity.render().orElseThrow(() -> new IllegalStateException(String.format("Identity '%s' had nothing to renderOptionally.", identity)));
-            String renderedValue = value.render().orElseThrow(() -> new IllegalStateException(String.format("Value '%s' had nothing to renderOptionally.", value)));
+            String renderedIdentity = identity.render().orElseThrow(() -> new IllegalStateException(String.format("Identity '%s' had nothing to render.", identity)));
+            String renderedValue = value.render().orElseThrow(() -> new IllegalStateException(String.format("Value '%s' had nothing to render.", value)));
             return Optional.of(renderedIdentity + "=" + renderedValue + ";");
+        }
+
+        @Override
+        public Prototype create(Node child){
+            return new DeclarePrototype(child);
+        }
+
+        @Override
+        public Prototype create(Field field) {
+            return new DeclarePrototype(field);
+        }
+
+        @Override
+        public Prototype createWithChildren() {
+            return streamChildren()
+                    .map(this::create)
+                    .reduce(createPrototype(), Prototype::merge);
         }
 
         private static class DeclarePrototype implements Prototype {
@@ -87,6 +103,14 @@ public class DeclareNodeTokenizer extends AbstractNodeTokenizer {
 
             public DeclarePrototype() {
                 this(null, null);
+            }
+
+            public DeclarePrototype(Node value) {
+                this(null, value);
+            }
+
+            public DeclarePrototype(Field identity) {
+                this(identity, null);
             }
 
             public DeclarePrototype(Field identity, Node value) {
@@ -109,6 +133,43 @@ public class DeclareNodeTokenizer extends AbstractNodeTokenizer {
                 if (identity == null) throw new IllegalStateException("No identity was provided.");
                 if (value == null) throw new IllegalStateException("No value was provided.");
                 return new DeclareNode(identity, value);
+            }
+
+            @Override
+            public List<Node> listChildren() {
+                return Collections.singletonList(value);
+            }
+
+            @Override
+            public List<Field> listFields() {
+                return Collections.singletonList(identity);
+            }
+
+            @Override
+            public Prototype merge(Prototype other) {
+                Prototype prototype = new DeclarePrototype();
+                Prototype withIdentity = mergeIdentity(other).map(prototype::withField).orElse(prototype);
+                return mergeValue(other).map(withIdentity::withChild).orElse(withIdentity);
+            }
+
+            private Optional<Field> mergeIdentity(Prototype other) {
+                List<Field> identities = new ArrayList<>();
+                identities.add(identity);
+                identities.addAll(other.listFields());
+                identities.removeIf(Objects::isNull);
+                if(identities.isEmpty()) return Optional.empty();
+                if(identities.size() > 1) throw new IllegalStateException("Too many identities were provided.");
+                return Optional.ofNullable(identities.get(0));
+            }
+
+            private Optional<Node> mergeValue(Prototype other) {
+                List<Node> children = new ArrayList<>();
+                children.add(value);
+                children.addAll(other.listChildren());
+                children.removeIf(Objects::isNull);
+                if(children.size() < 1) return Optional.empty();
+                if(children.size() > 1) throw new IllegalStateException("Too many values were provided.");
+                return Optional.ofNullable(children.get(0));
             }
         }
     }

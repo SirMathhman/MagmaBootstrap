@@ -77,6 +77,23 @@ public class StructureNode implements Node {
                 .collect(Collectors.joining("", "{", "}")) + ";");
     }
 
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
     private static class StructureNodePrototype implements Prototype {
         private final Field identity;
 
@@ -107,6 +124,21 @@ public class StructureNode implements Node {
         private StructureNode getStructureNode(String s, Type type) {
             Set<Field> fields = type.streamFields().collect(Collectors.toSet());
             return new StructureNode(new StringContent(s), fields);
+        }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype merge(Prototype other) {
+            throw new UnsupportedOperationException();
         }
     }
 }

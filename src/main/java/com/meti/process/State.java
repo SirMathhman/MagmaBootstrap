@@ -8,12 +8,11 @@ import com.meti.util.Monad;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface State {
-    default boolean has(NodeGroup group) {
-        return node().test(group::matches);
-    }
+    boolean has(NodeGroup group);
 
     Optional<State> foldStackByNode(Predicate<Node> predicate, BiFunction<Node, CallStack, CallStack> mapping);
 
@@ -27,7 +26,7 @@ public interface State {
 
     Monad<CallStack> stack();
 
-    default State define(){
-        return destroy().apply((node, stack) -> with(node.define(stack)));
-    }
+    State define();
+
+    State transformByNode(Function<Node, Node> mapping);
 }

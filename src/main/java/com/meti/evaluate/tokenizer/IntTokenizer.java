@@ -8,6 +8,7 @@ import com.meti.render.Field;
 import com.meti.render.Node;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -87,6 +88,21 @@ public class IntTokenizer extends AbstractNodeTokenizer {
             @Override
             public Node build() {
                 return new Int(value);
+            }
+
+            @Override
+            public List<Node> listChildren() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public List<Field> listFields() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Prototype merge(Prototype other) {
+                throw new UnsupportedOperationException();
             }
         }
     }

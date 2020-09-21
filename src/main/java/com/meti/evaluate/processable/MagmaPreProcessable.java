@@ -1,5 +1,6 @@
 package com.meti.evaluate.processable;
 
+import com.meti.evaluate.processable.fix.DeclareFixer;
 import com.meti.evaluate.processable.load.AbstractionLoader;
 import com.meti.evaluate.processable.load.ImplementationLoader;
 import com.meti.evaluate.processable.load.StructureLoader;
@@ -18,7 +19,8 @@ public class MagmaPreProcessable extends CollectiveProcessable {
         return Stream.of(
                 StructureLoader::new,
                 ImplementationLoader::new,
-                AbstractionLoader::new
+                AbstractionLoader::new,
+                DeclareFixer::new
         );
     }
 }

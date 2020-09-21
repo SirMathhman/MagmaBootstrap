@@ -3,6 +3,7 @@ package com.meti.render;
 import com.meti.content.Content;
 import com.meti.util.Monad;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -31,12 +32,12 @@ public class SizeOf extends LeafNode {
 
     @Override
     public Prototype createPrototype() {
-        return new PrototypeImpl(identity);
+        return new PrototypeImpl();
     }
 
     @Override
     public Optional<String> render() {
-        return Optional.of("sizeof(" + identity.render().orElseThrow(() -> new IllegalStateException("Cannot renderOptionally identity: " + identity)) + ")");
+        return Optional.of("sizeof(" + identity.render().orElseThrow(() -> new IllegalStateException("Cannot render identity: " + identity)) + ")");
     }
 
     private static class PrototypeImpl implements Prototype {
@@ -62,7 +63,23 @@ public class SizeOf extends LeafNode {
 
         @Override
         public Node build() {
+            if(identity == null) throw new IllegalStateException("No identity was provided.");
             return new SizeOf(identity);
+        }
+
+        @Override
+        public List<Node> listChildren() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public List<Field> listFields() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Prototype merge(Prototype other) {
+            throw new UnsupportedOperationException();
         }
     }
 }
