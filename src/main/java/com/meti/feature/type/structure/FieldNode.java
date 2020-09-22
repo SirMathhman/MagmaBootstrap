@@ -67,6 +67,16 @@ public class FieldNode extends Parent {
                 .reduce(createPrototype(), Prototype::merge);
     }
 
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Node transformChildren(Function<Node, Node> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class FieldNodePrototype implements Prototype {
         private final Content fieldName;
         private final Node parent;

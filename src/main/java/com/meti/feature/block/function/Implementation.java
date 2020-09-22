@@ -87,6 +87,16 @@ class Implementation extends Parent {
                 .reduce(createPrototype(), Prototype::merge);
     }
 
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Node transformChildren(Function<Node, Node> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     public static class Builder implements Prototype {
         private final List<Field> fields;
         private final Node value;

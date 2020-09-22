@@ -8,13 +8,4 @@ public abstract class Parent implements Node {
         return true;
     }
 
-    @Override
-    public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
-    }
 }

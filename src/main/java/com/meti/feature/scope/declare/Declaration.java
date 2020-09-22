@@ -68,6 +68,16 @@ class Declaration extends Parent {
                 .reduce(createPrototype(), Prototype::merge);
     }
 
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Node transformChildren(Function<Node, Node> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class DeclarePrototype implements Prototype {
         private final Field identity;
         private final Node value;
