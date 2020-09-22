@@ -10,11 +10,11 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-class Declare extends Parent {
+class Declaration extends Parent {
     private final Field identity;
     private final Node value;
 
-    public Declare(Field identity, Node value) {
+    public Declaration(Field identity, Node value) {
         this.identity = identity;
         this.value = value;
     }
@@ -103,7 +103,7 @@ class Declare extends Parent {
         public Node build() {
             if (identity == null) throw new IllegalStateException("No identity was provided.");
             if (value == null) throw new IllegalStateException("No value was provided.");
-            return new Declare(identity, value);
+            return new Declaration(identity, value);
         }
 
         @Override

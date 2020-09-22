@@ -27,7 +27,7 @@ public class DeclarationTokenizer extends AbstractNodeTokenizer {
                     .orElseThrow(createIdentityFailure(identityContent));
             Content valueContent = content.sliceToEnd(separator + 1);
             Node value = new ContentNode(valueContent);
-            return Optional.of(new Declare(identity, value));
+            return Optional.of(new Declaration(identity, value));
         }
         return Optional.empty();
     }

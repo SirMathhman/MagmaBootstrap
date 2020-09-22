@@ -22,7 +22,7 @@ public class IntTokenizer extends AbstractNodeTokenizer {
             //checking range per https://en.wikipedia.org/wiki/C_data_types
             if (capsule.compareTo(START) > 0 && capsule.compareTo(END) < 0) {
                 int value = capsule.intValueExact();
-                return Optional.of(new Int(value));
+                return Optional.of(new Int_(value));
             } else {
                 return Optional.empty();
             }

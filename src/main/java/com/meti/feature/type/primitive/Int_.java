@@ -11,10 +11,10 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-class Int extends Leaf {
+public class Int_ extends Leaf {
     private final int value;
 
-    public Int(int value) {
+    public Int_(int value) {
         this.value = value;
     }
 
@@ -61,7 +61,7 @@ class Int extends Leaf {
 
         @Override
         public Node build() {
-            return new Int(value);
+            return new Int_(value);
         }
 
         @Override
