@@ -40,6 +40,11 @@ public interface Node extends Renderable {
         return create(newIdentity);
     }
 
+    @Override
+    default String render() {
+        return renderOptionally().orElseThrow(() -> new UnrenderableException("Not renderable."));
+    }
+
     interface Prototype {
         Prototype withField(Field field);
 

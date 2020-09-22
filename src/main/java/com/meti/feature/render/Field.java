@@ -22,6 +22,11 @@ public interface Field extends Renderable {
 
     Field transformByType(Function<Type, Type> mapping);
 
+    @Override
+    default String render() {
+        return renderOptionally().orElseThrow(() -> new UnrenderableException("Not renderable."));
+    }
+
     enum Flag {
         CONST,
         LET,
