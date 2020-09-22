@@ -62,6 +62,16 @@ public class StructureType implements Type {
         return group().test(group.matches());
     }
 
+    @Override
+    public Type transformField(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Type transformChildren(Function<Type, Type> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class StructureTypePrototype implements Prototype {
         private final Set<Field> fields;
         private final Content name;

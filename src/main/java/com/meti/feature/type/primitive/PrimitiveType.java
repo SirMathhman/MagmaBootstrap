@@ -71,6 +71,16 @@ public enum PrimitiveType implements Type {
         return group().test(group.matches());
     }
 
+    @Override
+    public Type transformField(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Type transformChildren(Function<Type, Type> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     private class PrimitivePrototype implements Prototype {
         @Override
         public Prototype withChild(Type child) {

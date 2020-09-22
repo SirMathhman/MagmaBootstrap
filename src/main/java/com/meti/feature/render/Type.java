@@ -9,6 +9,10 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public interface Type {
+    Type transformField(Function<Field, Field> mapping);
+
+    Type transformChildren(Function<Type, Type> mapping);
+
     Monad<Group> group();
 
     <R> Optional<R> applyToContent(Function<Content, R> function);

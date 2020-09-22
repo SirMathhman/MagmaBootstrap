@@ -59,4 +59,14 @@ public class Pointer implements Type {
     public boolean is(Group group) {
         return group().test(group.matches());
     }
+
+    @Override
+    public Type transformField(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Type transformChildren(Function<Type, Type> mapping) {
+        throw new UnsupportedOperationException();
+    }
 }
