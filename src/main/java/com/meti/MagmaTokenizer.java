@@ -21,7 +21,7 @@ public class MagmaTokenizer implements Tokenizer {
 
     @Override
     public Node tokenize(Node previous) {
-        Optional<Node> optional = previous.applyToContent((Content content) -> parseContent(content, classPath));
+        Optional<Node> optional = previous.applyToContent(this::parseContent);
         if (optional.isPresent()) {
             Node node = optional.orElseThrow();
             Node.Prototype prototype = node.createPrototype();
@@ -65,7 +65,7 @@ public class MagmaTokenizer implements Tokenizer {
                 new MagmaTypeTokenizer(previous).tokenize().orElseThrow(() -> this.invalidateType(previous)) : previous;
     }
 
-    private Node parseContent(Content content, ClassPath classPath) {
+    private Node parseContent(Content content) {
         return new MagmaNodeTokenizer(content, classPath)
                 .evaluate()
                 .orElseThrow(supplyInvalidParse(content));
