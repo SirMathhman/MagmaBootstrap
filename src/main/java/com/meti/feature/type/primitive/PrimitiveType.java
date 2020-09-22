@@ -73,12 +73,12 @@ public enum PrimitiveType implements Type {
 
     @Override
     public Type transformField(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Type transformChildren(Function<Type, Type> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     private class PrimitivePrototype implements Prototype {
