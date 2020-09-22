@@ -41,7 +41,7 @@ public class Pointer implements Type {
     }
 
     @Override
-    public Monad<Group> group(){
+    public Monad<Group> group() {
         throw new UnsupportedOperationException();
     }
 
@@ -51,7 +51,7 @@ public class Pointer implements Type {
     }
 
     @Override
-    public String render(){
+    public String render() {
         return child.render("*");
     }
 
@@ -62,11 +62,11 @@ public class Pointer implements Type {
 
     @Override
     public Type transformField(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Type transformChildren(Function<Type, Type> mapping) {
-        throw new UnsupportedOperationException();
+        return new Pointer(mapping.apply(child));
     }
 }
