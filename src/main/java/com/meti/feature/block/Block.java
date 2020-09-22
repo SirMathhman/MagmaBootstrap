@@ -4,6 +4,7 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
+import com.meti.feature.render.UntypedNode;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Block extends Parent {
+public class Block extends Parent implements UntypedNode {
     private final List<Node> children;
 
     public Block(Node... children) {
