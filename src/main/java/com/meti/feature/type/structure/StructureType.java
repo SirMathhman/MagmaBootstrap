@@ -10,30 +10,26 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class StructureType implements Type {
-    private final Content name;
+    private final Content structName;
     private final Set<Field> fields;
 
-    public StructureType(Content name, Set<Field> fields) {
-        this.name = name;
+    public StructureType(Content structName, Set<Field> fields) {
+        this.structName = structName;
         this.fields = fields;
     }
 
-    public StructureType(Content name) {
-        this(name, Collections.emptySet());
+    public StructureType(Content structName) {
+        this(structName, Collections.emptySet());
     }
 
     @Override
     public <R> Optional<R> applyToContent(Function<Content, R> function) {
-        return Optional.of(name).map(function);
-    }
-
-    private Optional<String> renderOptionally(String name) {
-        return this.name.value().map(inner -> "struct " + inner + " " + name).toOption();
+        return Optional.of(structName).map(function);
     }
 
     @Override
     public Prototype createPrototype() {
-        return new StructureTypePrototype(name);
+        return new StructureTypePrototype(structName);
     }
 
     @Override
@@ -51,13 +47,9 @@ public class StructureType implements Type {
         return new Monad<>(Group.Structure);
     }
 
-    private Optional<String> renderOptionally() {
-        return renderOptionally("");
-    }
-
     @Override
     public String render(String name) {
-        return renderOptionally().orElseThrow();
+        return "struct " + structName.asString() + " " + name;
     }
 
     @Override
