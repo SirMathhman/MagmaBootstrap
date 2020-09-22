@@ -5,8 +5,12 @@ import com.meti.feature.render.Field;
 import com.meti.feature.render.Type;
 import com.meti.util.Monad;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StructureType implements Type {
@@ -53,7 +57,7 @@ public class StructureType implements Type {
     }
 
     @Override
-    public String render(){
+    public String render() {
         return render("");
     }
 
@@ -64,12 +68,15 @@ public class StructureType implements Type {
 
     @Override
     public Type transformField(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        Set<Field> newFields = fields.stream()
+                .map(mapping)
+                .collect(Collectors.toSet());
+        return new StructureType(structName, newFields);
     }
 
     @Override
     public Type transformChildren(Function<Type, Type> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     private static class StructureTypePrototype implements Prototype {
