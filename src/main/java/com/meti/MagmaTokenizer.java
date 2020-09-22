@@ -3,6 +3,7 @@ package com.meti;
 import com.meti.content.Content;
 import com.meti.feature.CompileException;
 import com.meti.feature.evaluate.tokenize.MagmaNodeTokenizer;
+import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Type;
 import com.meti.resolve.MagmaTypeTokenizer;
@@ -25,7 +26,7 @@ public class MagmaTokenizer implements Tokenizer {
             Node node = optional.orElseThrow();
             Node.Prototype prototype = node.createPrototype();
             Node.Prototype withFields = node.streamFields()
-                    .map(field -> field.transformByType(this::resolve))
+                    .map(this::resolveField)
                     .reduce(prototype, Node.Prototype::withField, (previous1, next) -> next);
             Node.Prototype withChildren = node.streamChildren()
                     .map(this::tokenize)
@@ -50,15 +51,13 @@ public class MagmaTokenizer implements Tokenizer {
     }
 
     Type resolve(Type previous) {
-        Type parent = tokenizeType(previous);
-        Type.Prototype prototype = parent.createPrototype();
-        Type.Prototype withFields = parent.streamFields()
-                .map(field -> field.transformByType(this::resolve))
-                .reduce(prototype, Type.Prototype::withField, (oldPrototype, newPrototype) -> newPrototype);
-        Type.Prototype withChildren = parent.streamChildren()
-                .map(this::resolve)
-                .reduce(withFields, Type.Prototype::withChild, (oldPrototype, newPrototype) -> newPrototype);
-        return withChildren.build();
+        return tokenizeType(previous)
+                .transformField(this::resolveField)
+                .transformChildren(this::resolve);
+    }
+
+    private Field resolveField(Field field) {
+        return field.transformByType(this::resolve);
     }
 
     private Type tokenizeType(Type previous) {
