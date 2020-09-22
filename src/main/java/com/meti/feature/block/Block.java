@@ -63,8 +63,7 @@ public class Block extends Parent implements Untyped {
     @Override
     public Optional<String> renderOptionally() {
         return Optional.of(children.stream()
-                .map(Node::renderOptionally)
-                .map(Optional::orElseThrow)
+                .map(Node::render)
                 .collect(Collectors.joining("", "{", "}")));
     }
 
@@ -74,7 +73,7 @@ public class Block extends Parent implements Untyped {
     }
 
     @Override
-    public Prototype create(Node child){
+    public Prototype create(Node child) {
         return createPrototype().withChild(child);
     }
 
