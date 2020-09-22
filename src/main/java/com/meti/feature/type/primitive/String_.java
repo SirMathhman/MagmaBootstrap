@@ -4,13 +4,13 @@ import com.meti.content.Content;
 import com.meti.feature.render.Leaf;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.PassPrototype;
-import com.meti.feature.render.UntypedNode;
+import com.meti.feature.render.Untyped;
 import com.meti.util.Monad;
 
 import java.util.Optional;
 import java.util.function.Function;
 
-public class String_ extends Leaf implements UntypedNode {
+public class String_ extends Leaf implements Untyped {
     private final String value;
 
     public String_(String value) {

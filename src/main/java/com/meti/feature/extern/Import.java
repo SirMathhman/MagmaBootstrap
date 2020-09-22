@@ -4,7 +4,7 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
-import com.meti.feature.render.UntypedNode;
+import com.meti.feature.render.Untyped;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class Import extends Parent implements UntypedNode {
+public class Import extends Parent implements Untyped {
     private final Node value;
 
     public Import(Node value) {

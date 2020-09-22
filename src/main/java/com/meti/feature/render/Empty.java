@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class Empty extends Leaf implements UntypedNode {
+public class Empty extends Leaf implements Untyped {
     @Override
     public <R> Optional<R> applyToContent(Function<Content, R> function) {
         return Optional.empty();

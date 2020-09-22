@@ -4,14 +4,14 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Leaf;
 import com.meti.feature.render.Node;
-import com.meti.feature.render.UntypedNode;
+import com.meti.feature.render.Untyped;
 import com.meti.util.Monad;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class Include extends Leaf implements UntypedNode {
+public class Include extends Leaf implements Untyped {
     private final Content value;
 
     public Include(Content value) {
