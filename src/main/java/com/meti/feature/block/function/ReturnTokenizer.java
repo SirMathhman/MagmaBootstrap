@@ -99,8 +99,8 @@ public class ReturnTokenizer extends AbstractNodeTokenizer {
         }
 
         @Override
-        public Optional<String> render() {
-            return Optional.of("return " + value.render().orElseThrow() + ";");
+        public Optional<String> renderOptionally() {
+            return Optional.of("return " + value.renderOptionally().orElseThrow() + ";");
         }
 
         @Override

@@ -40,14 +40,14 @@ class Implementation extends Parent {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         String renderedParameters = renderParameters();
-        return Optional.of(returnType.render(name + renderedParameters) + value.render().orElseThrow());
+        return Optional.of(returnType.render(name + renderedParameters) + value.renderOptionally().orElseThrow());
     }
 
     private String renderParameters() {
         return parameters.stream()
-                .map(Field::render)
+                .map(Field::renderOptionally)
                 .flatMap(Optional::stream)
                 .collect(Collectors.joining(",", "(", ")"));
     }

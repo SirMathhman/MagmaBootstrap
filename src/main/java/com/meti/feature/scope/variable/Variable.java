@@ -39,7 +39,7 @@ public class Variable extends Leaf {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return content.value().toOption();
     }
 

@@ -40,7 +40,7 @@ class Abstraction extends Parent {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         if (flags.contains(Field.Flag.NATIVE)) {
             return Optional.of("");
         } else {
@@ -51,7 +51,7 @@ class Abstraction extends Parent {
 
     private String renderParameters() {
         return parameters.stream()
-                .map(Field::render)
+                .map(Field::renderOptionally)
                 .flatMap(Optional::stream)
                 .collect(Collectors.joining(",", "(", ")"));
     }

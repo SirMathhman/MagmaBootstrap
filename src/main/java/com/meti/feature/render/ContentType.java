@@ -42,7 +42,7 @@ public class ContentType implements Type {
 
     @Override
     public String render(String name) {
-        String message = "Cannot render ContentType of value '%s' with name '%s'.";
+        String message = "Cannot renderOptionally ContentType of value '%s' with name '%s'.";
         String formatted = String.format(message, content, name);
         throw new UnsupportedOperationException(formatted);
     }

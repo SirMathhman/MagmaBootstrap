@@ -38,7 +38,7 @@ public abstract class Invocation extends Parent {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return Optional.of(renderCompletely());
     }
 
@@ -48,13 +48,13 @@ public abstract class Invocation extends Parent {
 
     private String renderArguments() {
         return arguments.stream()
-                .map(Node::render)
+                .map(Node::renderOptionally)
                 .map(Optional::orElseThrow)
                 .collect(Collectors.joining(",", "(", ")"));
     }
 
     private String renderCaller() {
-        return caller.render().orElseThrow();
+        return caller.renderOptionally().orElseThrow();
     }
 
     @Override

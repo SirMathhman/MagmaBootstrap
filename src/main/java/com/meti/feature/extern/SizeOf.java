@@ -39,8 +39,8 @@ public class SizeOf extends Leaf {
     }
 
     @Override
-    public Optional<String> render() {
-        return Optional.of("sizeof(" + identity.render().orElseThrow(() -> new IllegalStateException("Cannot render identity: " + identity)) + ")");
+    public Optional<String> renderOptionally() {
+        return Optional.of("sizeof(" + identity.renderOptionally().orElseThrow(() -> new IllegalStateException("Cannot renderOptionally identity: " + identity)) + ")");
     }
 
     private static class PrototypeImpl implements Prototype {

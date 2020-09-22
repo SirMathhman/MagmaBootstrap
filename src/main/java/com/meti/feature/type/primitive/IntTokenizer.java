@@ -65,7 +65,7 @@ public class IntTokenizer extends AbstractNodeTokenizer {
         }
 
         @Override
-        public Optional<String> render() {
+        public Optional<String> renderOptionally() {
             return Optional.of(String.valueOf(value));
         }
 

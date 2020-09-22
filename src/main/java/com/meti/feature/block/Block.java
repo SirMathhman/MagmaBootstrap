@@ -60,9 +60,9 @@ public class Block extends Parent {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return Optional.of(children.stream()
-                .map(Node::render)
+                .map(Node::renderOptionally)
                 .map(Optional::orElseThrow)
                 .collect(Collectors.joining("", "{", "}")));
     }

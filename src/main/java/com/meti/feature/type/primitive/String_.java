@@ -33,7 +33,7 @@ public class String_ extends Leaf implements UntypedNode {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return Optional.of("\"" + value + "\"");
     }
 

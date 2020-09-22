@@ -28,7 +28,7 @@ public class Compiler {
         Node tree = tokenize(root);
         Processor processor = new MagmaProcessor();
         String output = processor.process(tree)
-                .apply(Node::render)
+                .apply(Node::renderOptionally)
                 .orElseThrow();
         return output.substring(1, output.length() - 1);
     }

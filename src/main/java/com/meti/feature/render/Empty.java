@@ -25,7 +25,7 @@ public class Empty extends Leaf implements UntypedNode {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return Optional.of("");
     }
 

@@ -46,8 +46,8 @@ public class FieldNode extends Parent {
     }
 
     @Override
-    public Optional<String> render() {
-        return Optional.of(parent.render().orElseThrow() + "." + fieldName.value().apply(Function.identity()));
+    public Optional<String> renderOptionally() {
+        return Optional.of(parent.renderOptionally().orElseThrow() + "." + fieldName.value().apply(Function.identity()));
     }
 
     @Override

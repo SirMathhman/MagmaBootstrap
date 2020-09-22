@@ -44,8 +44,8 @@ public class Dereference extends Parent {
     }
 
     @Override
-    public Optional<String> render() {
-        return Optional.of("*" + value.render().orElseThrow());
+    public Optional<String> renderOptionally() {
+        return Optional.of("*" + value.renderOptionally().orElseThrow());
     }
 
     @Override

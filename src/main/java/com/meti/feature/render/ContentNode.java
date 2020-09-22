@@ -38,7 +38,7 @@ public class ContentNode implements Node {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         throw content.value().apply(s -> new UnsupportedOperationException(String.format("Cannot renderOptionally node with value of '%s', this node hasn't been parsed yet.", s)));
     }
 

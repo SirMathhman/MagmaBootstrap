@@ -72,9 +72,9 @@ public class StructureNode implements Node {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return Optional.of("struct " + name + fields.stream()
-                .map(Renderable::render)
+                .map(Renderable::renderOptionally)
                 .map(Optional::orElseThrow)
                 .map(value -> value + ";")
                 .collect(Collectors.joining("", "{", "}")) + ";");

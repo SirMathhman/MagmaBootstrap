@@ -40,8 +40,8 @@ public class Import extends Parent implements UntypedNode {
     }
 
     @Override
-    public Optional<String> render() {
-        return value.render();
+    public Optional<String> renderOptionally() {
+        return value.renderOptionally();
     }
 
     @Override

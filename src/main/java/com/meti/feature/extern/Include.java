@@ -34,7 +34,7 @@ public class Include extends Leaf implements UntypedNode {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         return value.value()
                 .map(s -> "#include <" + s + ".h>\n")
                 .toOption();

@@ -41,10 +41,10 @@ public class Cast extends Free {
     }
 
     @Override
-    public Optional<String> render() {
+    public Optional<String> renderOptionally() {
         String renderedType = type.render().trim();
         String encapsulated = String.format("(%s)", renderedType);
-        String renderedValue = this.value.render().orElseThrow();
+        String renderedValue = this.value.renderOptionally().orElseThrow();
         return Optional.of(encapsulated + renderedValue);
     }
 
