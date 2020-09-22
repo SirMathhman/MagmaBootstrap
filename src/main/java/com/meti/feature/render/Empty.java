@@ -1,7 +1,6 @@
 package com.meti.feature.render;
 
 import com.meti.content.Content;
-import com.meti.feature.scope.UntypedNode;
 import com.meti.util.Monad;
 
 import java.util.List;

@@ -1,12 +1,9 @@
 package com.meti.feature.render;
 
-import com.meti.feature.scope.Renderable;
-import com.meti.feature.scope.Type;
 import com.meti.util.Monad;
 import com.meti.util.Triad;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 

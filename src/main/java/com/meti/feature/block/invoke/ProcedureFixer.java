@@ -6,7 +6,7 @@ import com.meti.feature.evaluate.resolve.Resolver;
 import com.meti.process.State;
 import com.meti.feature.render.Node;
 import com.meti.feature.type.primitive.PrimitiveType;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.util.Monad;
 
 import java.util.List;

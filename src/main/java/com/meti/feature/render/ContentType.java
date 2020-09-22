@@ -1,7 +1,6 @@
 package com.meti.feature.render;
 
 import com.meti.content.Content;
-import com.meti.feature.scope.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -44,7 +43,7 @@ public class ContentType implements Type {
     public String render(String name) {
         String message = "Cannot renderOptionally ContentType of value '%s' with name '%s'.";
         String formatted = String.format(message, content, name);
-        throw new UnsupportedOperationException(formatted);
+        throw new UnrenderableException(formatted);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.meti.feature.scope.variable;
 
 import com.meti.content.Content;
 import com.meti.feature.evaluate.resolve.AbstractResolver;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.process.State;
 import com.meti.feature.render.Node;
 import com.meti.stack.CallStack;

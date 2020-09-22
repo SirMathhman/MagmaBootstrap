@@ -1,6 +1,6 @@
 package com.meti.feature.evaluate.resolve;
 
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.process.State;
 import com.meti.util.Monad;
 

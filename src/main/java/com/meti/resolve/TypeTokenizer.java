@@ -1,6 +1,6 @@
 package com.meti.resolve;
 
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 
 import java.util.Optional;
 

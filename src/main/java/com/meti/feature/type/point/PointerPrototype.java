@@ -1,7 +1,7 @@
 package com.meti.feature.type.point;
 
 import com.meti.feature.render.Field;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 
 class PointerPrototype implements Type.Prototype {
     private final Type child;

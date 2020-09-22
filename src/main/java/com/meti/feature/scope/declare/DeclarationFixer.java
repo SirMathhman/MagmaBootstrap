@@ -1,7 +1,7 @@
 package com.meti.feature.scope.declare;
 
 import com.meti.feature.evaluate.process.AbstractProcessable;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.process.State;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;

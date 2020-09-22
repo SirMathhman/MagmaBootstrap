@@ -1,6 +1,5 @@
 package com.meti.feature.render;
 
-import com.meti.feature.scope.Type;
 import com.meti.util.Monad;
 import com.meti.util.Triad;
 

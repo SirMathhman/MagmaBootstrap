@@ -1,6 +1,6 @@
 package com.meti.feature.type.point;
 
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.feature.type.primitive.PrimitiveType;
 import org.junit.jupiter.api.Test;
 

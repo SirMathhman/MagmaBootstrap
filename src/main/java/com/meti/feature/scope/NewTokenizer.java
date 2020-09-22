@@ -3,11 +3,9 @@ package com.meti.feature.scope;
 import com.meti.content.Content;
 import com.meti.content.StringContent;
 import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
-import com.meti.feature.render.Field;
-import com.meti.feature.render.Node;
+import com.meti.feature.render.*;
 import com.meti.feature.block.invoke.Mapping;
 import com.meti.feature.extern.SizeOf;
-import com.meti.feature.render.ContentType;
 import com.meti.feature.scope.variable.Variable;
 
 import java.util.Optional;

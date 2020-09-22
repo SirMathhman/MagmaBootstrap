@@ -4,7 +4,7 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
-import com.meti.feature.scope.UntypedNode;
+import com.meti.feature.render.UntypedNode;
 import com.meti.util.Monad;
 
 import java.util.List;

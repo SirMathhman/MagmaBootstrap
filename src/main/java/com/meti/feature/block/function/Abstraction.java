@@ -5,7 +5,7 @@ import com.meti.feature.render.Field;
 import com.meti.feature.render.InlineField;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;

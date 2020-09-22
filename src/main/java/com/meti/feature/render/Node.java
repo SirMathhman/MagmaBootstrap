@@ -1,7 +1,6 @@
 package com.meti.feature.render;
 
 import com.meti.content.Content;
-import com.meti.feature.scope.Renderable;
 import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 

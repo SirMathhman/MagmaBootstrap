@@ -1,6 +1,6 @@
 package com.meti.feature.type;
 
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Free;
 import com.meti.feature.render.InlineField;

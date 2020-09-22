@@ -2,7 +2,7 @@ package com.meti.feature.evaluate;
 
 import com.meti.content.Content;
 import com.meti.feature.render.InlineField;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.feature.render.ContentType;
 import com.meti.feature.render.Field;
 

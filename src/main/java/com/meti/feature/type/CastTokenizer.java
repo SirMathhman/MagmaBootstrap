@@ -6,7 +6,7 @@ import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
 import com.meti.feature.render.ContentNode;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.ContentType;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 
 import java.util.Optional;
 import java.util.OptionalInt;

@@ -1,7 +1,7 @@
 package com.meti.feature.evaluate.resolve;
 
 import com.meti.feature.evaluate.Evaluator;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.util.Monad;
 
 import java.util.Optional;

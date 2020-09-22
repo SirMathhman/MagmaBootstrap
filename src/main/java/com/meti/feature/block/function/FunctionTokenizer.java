@@ -7,7 +7,7 @@ import com.meti.content.Strategy;
 import com.meti.feature.evaluate.FieldEvaluator;
 import com.meti.feature.evaluate.FlagStrategy;
 import com.meti.feature.render.*;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
 
 import java.util.*;

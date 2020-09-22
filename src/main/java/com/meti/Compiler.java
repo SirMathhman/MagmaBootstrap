@@ -6,7 +6,7 @@ import com.meti.feature.*;
 import com.meti.feature.evaluate.tokenize.MagmaNodeTokenizer;
 import com.meti.feature.render.ContentNode;
 import com.meti.feature.render.Node;
-import com.meti.feature.scope.Type;
+import com.meti.feature.render.Type;
 import com.meti.util.load.ClassPath;
 import com.meti.process.MagmaProcessor;
 import com.meti.process.Processor;
