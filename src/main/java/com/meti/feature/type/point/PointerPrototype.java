@@ -27,6 +27,6 @@ class PointerPrototype implements Type.Prototype {
     @Override
     public Type build() {
         if (child == null) throw new IllegalStateException("Pointer child is null.");
-        return new PointerType(child);
+        return Pointer.to(child);
     }
 }

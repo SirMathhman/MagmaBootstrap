@@ -52,17 +52,17 @@ public enum PrimitiveType implements Type {
     }
 
     @Override
-    public Monad<Group> group(){
+    public Monad<Group> group() {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public String render(String name) {
-        return value + " " + name;
+        return value + (name.length() == 0 || !Character.isLetter(name.charAt(0)) ? "" : " ") + name;
     }
 
     @Override
-    public String render(){
+    public String render() {
         return value;
     }
 

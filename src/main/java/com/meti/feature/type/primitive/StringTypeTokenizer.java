@@ -1,7 +1,7 @@
 package com.meti.feature.type.primitive;
 
 import com.meti.content.Content;
-import com.meti.feature.type.point.PointerType;
+import com.meti.feature.type.point.Pointer;
 import com.meti.feature.scope.Type;
 import com.meti.resolve.AbstractTypeTokenizer;
 
@@ -20,7 +20,7 @@ public class StringTypeTokenizer extends AbstractTypeTokenizer {
 
     private Optional<Type> isString(Content content) {
         if(content.value().test("String"::equals)) {
-            return Optional.of(new PointerType(PrimitiveType.CHAR));
+            return Optional.of(Pointer.to(PrimitiveType.CHAR));
         } else {
             return Optional.empty();
         }

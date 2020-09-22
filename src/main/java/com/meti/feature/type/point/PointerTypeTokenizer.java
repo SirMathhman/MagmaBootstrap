@@ -23,7 +23,7 @@ public class PointerTypeTokenizer extends AbstractTypeTokenizer {
         if (content.startsWith("Pointer")) {
             Content value = content.slice(8, content.length() - 1);
             ContentType child = new ContentType(value);
-            PointerType value1 = new PointerType(child);
+            Pointer value1 = Pointer.to(child);
             return Optional.of(value1);
         }
         return Optional.empty();
