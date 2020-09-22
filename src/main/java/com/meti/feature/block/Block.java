@@ -46,11 +46,6 @@ public class Block extends Parent implements Untyped {
     }
 
     @Override
-    public Stream<Field> streamFields() {
-        return Stream.empty();
-    }
-
-    @Override
     public Stream<Node> streamChildren() {
         return children.stream();
     }
@@ -90,13 +85,11 @@ public class Block extends Parent implements Untyped {
     }
 
     @Override
-    public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        List<Node> newChildren = children.stream()
+                .map(mapping)
+                .collect(Collectors.toList());
+        return new Block(newChildren);
     }
 
     private static class BlockPrototype implements Prototype {
