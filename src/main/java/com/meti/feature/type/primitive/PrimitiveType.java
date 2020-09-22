@@ -36,10 +36,6 @@ public enum PrimitiveType implements Type {
         return Optional.empty();
     }
 
-    private Optional<String> renderOptionally(String name) {
-        return Optional.of(value + " " + name);
-    }
-
     @Override
     public Prototype createPrototype() {
         return new PrimitivePrototype();
@@ -60,18 +56,14 @@ public enum PrimitiveType implements Type {
         throw new UnsupportedOperationException();
     }
 
-    private Optional<String> renderOptionally() {
-        return renderOptionally("");
-    }
-
     @Override
     public String render(String name) {
-        return renderOptionally().orElseThrow();
+        return value + " " + name;
     }
 
     @Override
     public String render(){
-        return render("");
+        return value;
     }
 
     private class PrimitivePrototype implements Prototype {
