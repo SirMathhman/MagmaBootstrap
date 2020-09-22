@@ -1,8 +1,6 @@
 package com.meti.feature.render;
 
-import com.meti.feature.render.Field;
-import com.meti.feature.render.Node;
-
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public interface UntypedNode extends Node {
@@ -26,5 +24,15 @@ public interface UntypedNode extends Node {
         return streamChildren()
                 .map(this::create)
                 .reduce(createPrototype(), Prototype::merge);
+    }
+
+    @Override
+    default Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default Node transformChildren(Function<Node, Node> mapping) {
+        throw new UnsupportedOperationException();
     }
 }

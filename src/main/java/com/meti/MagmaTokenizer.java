@@ -9,7 +9,6 @@ import com.meti.feature.render.Type;
 import com.meti.resolve.MagmaTypeTokenizer;
 import com.meti.util.load.ClassPath;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class MagmaTokenizer implements Tokenizer {
@@ -21,20 +20,14 @@ public class MagmaTokenizer implements Tokenizer {
 
     @Override
     public Node tokenize(Node previous) {
-        Optional<Node> optional = previous.applyToContent(this::parseContent);
-        if (optional.isPresent()) {
-            Node node = optional.orElseThrow();
-            Node.Prototype prototype = node.createPrototype();
-            Node.Prototype withFields = node.streamFields()
-                    .map(this::resolveField)
-                    .reduce(prototype, Node.Prototype::withField, (previous1, next) -> next);
-            Node.Prototype withChildren = node.streamChildren()
-                    .map(this::tokenize)
-                    .reduce(withFields, Node.Prototype::withChild, (previous1, next) -> next);
-            return withChildren.build();
-        } else {
-            return previous;
-        }
+        return previous.applyToContent(this::parseContent)
+                .map(this::tokenizeParent)
+                .orElse(previous);
+    }
+
+    private Node tokenizeParent(Node node) {
+        return node.transformFields(this::tokenize)
+                .transformChildren(this::tokenize);
     }
 
     private CompileException invalidateType(Type previous) {
@@ -52,11 +45,11 @@ public class MagmaTokenizer implements Tokenizer {
 
     Type resolve(Type previous) {
         return tokenizeType(previous)
-                .transformField(this::resolveField)
+                .transformField(this::tokenize)
                 .transformChildren(this::resolve);
     }
 
-    private Field resolveField(Field field) {
+    private Field tokenize(Field field) {
         return field.transformByType(this::resolve);
     }
 

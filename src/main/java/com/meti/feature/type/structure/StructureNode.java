@@ -98,6 +98,16 @@ public class StructureNode implements Node {
                 .reduce(createPrototype(), Prototype::merge);
     }
 
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Node transformChildren(Function<Node, Node> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class StructureNodePrototype implements Prototype {
         private final Field identity;
 

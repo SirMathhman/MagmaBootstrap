@@ -11,6 +11,10 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public interface Node extends Renderable {
+    Node transformFields(Function<Field, Field> mapping);
+
+    Node transformChildren(Function<Node, Node> mapping);
+
     Prototype create(Field field);
 
     Prototype create(Node child);
@@ -44,6 +48,19 @@ public interface Node extends Renderable {
         return renderOptionally().orElseThrow(() -> new UnrenderableException("Not renderable."));
     }
 
+    enum Group {
+        Implementation,
+        Variable, Block, Return, Integer, Declare, Reference, Dereference, Abstraction, Mapping, Procedure, Structure, Construction, Field, Cast, Include, Empty, Import, SizeOf, String;
+
+        public Predicate<Group> matches() {
+            return (Group group) -> group == this;
+        }
+
+        public boolean matches(Node node) {
+            return node.group().test(matches());
+        }
+    }
+
     interface Prototype {
         Prototype withField(Field field);
 
@@ -56,18 +73,5 @@ public interface Node extends Renderable {
         List<Field> listFields();
 
         Prototype merge(Prototype other);
-    }
-
-    enum Group {
-        Implementation,
-        Variable, Block, Return, Integer, Declare, Reference, Dereference, Abstraction, Mapping, Procedure, Structure, Construction, Field, Cast, Include, Empty, Import, SizeOf, String;
-
-        public Predicate<Group> matches() {
-            return (Group group) -> group == this;
-        }
-
-        public boolean matches(Node node) {
-            return node.group().test(matches());
-        }
     }
 }
