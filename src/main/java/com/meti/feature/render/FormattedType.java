@@ -52,4 +52,9 @@ public abstract class FormattedType implements Type {
     public String render(){
         return render("");
     }
+
+    @Override
+    public boolean is(Group group) {
+        return group().test(group.matches());
+    }
 }

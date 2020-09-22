@@ -23,19 +23,21 @@ public interface Type {
 
     Stream<Field> streamFields();
 
+    boolean is(Group group);
+
+    enum Group {
+        Content, Structure, Primitive;
+
+        public Predicate<Group> matches() {
+            return typeGroup -> typeGroup == this;
+        }
+    }
+
     interface Prototype {
         Prototype withChild(Type child);
 
         Prototype withField(Field field);
 
         Type build();
-    }
-
-    enum Group {
-        Content, Structure;
-
-        public Predicate<Group> matches() {
-            return typeGroup -> typeGroup == this;
-        }
     }
 }

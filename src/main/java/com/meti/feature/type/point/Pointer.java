@@ -54,4 +54,9 @@ public class Pointer implements Type {
     public String render(){
         return child.render("*");
     }
+
+    @Override
+    public boolean is(Group group) {
+        return group().test(group.matches());
+    }
 }

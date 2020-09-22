@@ -57,6 +57,11 @@ public class StructureType implements Type {
         return render("");
     }
 
+    @Override
+    public boolean is(Group group) {
+        return group().test(group.matches());
+    }
+
     private static class StructureTypePrototype implements Prototype {
         private final Set<Field> fields;
         private final Content name;

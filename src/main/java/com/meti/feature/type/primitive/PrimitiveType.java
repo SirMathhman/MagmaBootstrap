@@ -53,7 +53,7 @@ public enum PrimitiveType implements Type {
 
     @Override
     public Monad<Group> group() {
-        throw new UnsupportedOperationException();
+        return new Monad<>(Group.Primitive);
     }
 
     @Override
@@ -64,6 +64,11 @@ public enum PrimitiveType implements Type {
     @Override
     public String render() {
         return value;
+    }
+
+    @Override
+    public boolean is(Group group) {
+        return group().test(group.matches());
     }
 
     private class PrimitivePrototype implements Prototype {
