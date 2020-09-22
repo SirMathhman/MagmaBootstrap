@@ -6,11 +6,14 @@ import com.meti.util.Monad;
 import com.meti.util.Triad;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public interface Field extends Renderable {
+public interface Field extends Renderable, Comparable<Field> {
     Monad<String> name();
+
+    int compareTo(Field o);
 
     <R> R applyDestruction(BiFunction<String, Type, R> function);
 

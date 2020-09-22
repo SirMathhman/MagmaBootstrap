@@ -68,4 +68,9 @@ public class InlineField implements Field {
         Type newType = applyToType(mapping);
         return copy(newType);
     }
+
+    @Override
+    public int compareTo(Field o) {
+        return name().apply(s -> o.name().apply(s::compareTo));
+    }
 }
