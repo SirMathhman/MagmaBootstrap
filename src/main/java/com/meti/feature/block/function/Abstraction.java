@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-class Abstraction extends Function_ {
+public class Abstraction extends Function_ {
     public Abstraction(Field identity, List<Field> parameters) {
         super(identity, parameters);
     }

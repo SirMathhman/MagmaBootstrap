@@ -20,9 +20,9 @@ public class ProcedureFixer extends AbstractProcessable {
 
     @Override
     public Optional<State> evaluate() {
-        if (previous.node().test(this::isMapping)) {
-            Monad<Type> type = findType();
-            if (type.test(value -> value == PrimitiveType.VOID)) {
+        if (previous.has(Node.Group.Mapping)) {
+            boolean test = isVoid();
+            if (test) {
                 Node toReturn = previous.node().apply(this::mapToProcedure);
                 return Optional.ofNullable(previous.with(toReturn));
             } else {
@@ -32,16 +32,18 @@ public class ProcedureFixer extends AbstractProcessable {
         return Optional.empty();
     }
 
+    private boolean isVoid() {
+        return new MagmaResolver(previous)
+                .evaluate()
+                .orElseThrow(this::createResolutionException)
+                .test(value -> value == PrimitiveType.VOID);
+    }
+
     private Procedure mapToProcedure(Node node) {
         List<Node> children = node.streamChildren().collect(Collectors.toList());
         Node caller = children.get(0);
         List<Node> arguments = children.subList(1, children.size());
         return new Procedure(caller, arguments);
-    }
-
-    private Monad<Type> findType() {
-        Resolver resolver = new MagmaResolver(previous);
-        return resolver.resolve().orElseThrow(this::createResolutionException);
     }
 
     private IllegalStateException createResolutionException() {
@@ -51,9 +53,5 @@ public class ProcedureFixer extends AbstractProcessable {
 
     private String createResolutionMessage(Node node) {
         return String.format("Unable to resolve mapping: '%s'", node);
-    }
-
-    private boolean isMapping(Node value) {
-        return value.group().test(Node.Group.Mapping.matches());
     }
 }

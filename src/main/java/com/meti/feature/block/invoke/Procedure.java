@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Procedure extends Invocation {
+    public Procedure(Node caller, Node... arguments) {
+        this(caller, List.of(arguments));
+    }
+
     public Procedure(Node caller, List<Node> arguments) {
         super(caller, arguments);
     }
