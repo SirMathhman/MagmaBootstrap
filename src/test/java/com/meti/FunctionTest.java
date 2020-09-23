@@ -4,18 +4,12 @@ import org.junit.jupiter.api.Test;
 
 class FunctionTest extends CompileTest {
     @Test
-    void invokeNative(){
-        assertCompile("#include <stdio.h>\n" +
-                "int main(){printf(\"%s\",\"Hello World!\");return 0;}", "import native stdio;native def printf(format : String, value : Any) : Void;def main() : I16 => {printf(\"%s\", \"Hello World!\");return 0;}");
-    }
-
-    @Test
-    void validateNative(){
+    void validateNative() {
         assertCompile("", "native def printf(format : String, value : Any) : Void");
     }
 
     @Test
-    void returnParameter(){
+    void returnParameter() {
         assertCompile("int pass(int value){return value;}", "def pass(value : I16) : I16 => {return value;}");
     }
 
