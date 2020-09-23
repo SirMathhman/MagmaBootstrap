@@ -1,37 +1,22 @@
 package com.meti.feature.block.function;
 
-import com.meti.content.Content;
 import com.meti.feature.render.Field;
-import com.meti.feature.render.InlineField;
 import com.meti.feature.render.Node;
-import com.meti.feature.render.Parent;
 import com.meti.feature.render.Type;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class Implementation extends Parent {
-    private final Type returnType;
-    private final String name;
-    private final List<Field> parameters;
+class Implementation extends Function_ {
     private final Node value;
 
-    public Implementation(String name, List<Field> parameters, Type returnType, Node value) {
-        this.returnType = returnType;
-        this.name = name;
-        this.parameters = parameters;
+    public Implementation(Field identity, List<Field> parameters, Node value) {
+        super(identity, parameters);
         this.value = value;
-    }
-
-    @Override
-    public <R> Optional<R> applyToContent(Function<Content, R> function) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -40,24 +25,8 @@ class Implementation extends Parent {
     }
 
     @Override
-    public Optional<String> renderOptionally() {
-        String renderedParameters = renderParameters();
-        return Optional.of(returnType.render(name + renderedParameters) + value.renderOptionally().orElseThrow());
-    }
-
-    private String renderParameters() {
-        return parameters.stream()
-                .map(Field::renderOptionally)
-                .flatMap(Optional::stream)
-                .collect(Collectors.joining(",", "(", ")"));
-    }
-
-    @Override
-    public Stream<Field> streamFields() {
-        List<Field> list = new ArrayList<>();
-        list.add(new InlineField(name, returnType, Collections.emptyList()));
-        list.addAll(parameters);
-        return list.stream();
+    protected String complete() {
+        return value.render();
     }
 
     @Override
@@ -71,7 +40,7 @@ class Implementation extends Parent {
     }
 
     @Override
-    public Prototype create(Node child){
+    public Prototype create(Node child) {
         return createPrototype().withChild(child);
     }
 
@@ -88,13 +57,13 @@ class Implementation extends Parent {
     }
 
     @Override
-    public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+    protected Node complete(Field newIdentity, List<Field> newParameters) {
+        return new Implementation(newIdentity, newParameters, value);
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return new Implementation(identity, parameters, mapping.apply(value));
     }
 
     public static class Builder implements Prototype {
@@ -105,20 +74,20 @@ class Implementation extends Parent {
             this(Collections.emptyList(), null);
         }
 
+        public Builder(List<Field> fields, Node value) {
+            this.fields = new ArrayList<>(fields);
+            this.value = value;
+        }
+
         public Builder withIdentity(Field identity) {
             if (fields.isEmpty()) fields.add(identity);
             else fields.set(0, identity);
             return this;
         }
 
-        public Builder withParameters(List<Field> parameters){
+        public Builder withParameters(List<Field> parameters) {
             this.fields.addAll(parameters);
             return this;
-        }
-
-        public Builder(List<Field> fields, Node value) {
-            this.fields = new ArrayList<>(fields);
-            this.value = value;
         }
 
         @Override
@@ -138,17 +107,17 @@ class Implementation extends Parent {
             if (fields.isEmpty()) {
                 throw new IllegalStateException("No return type was provided.");
             } else {
-                return fields.get(0).applyDestruction(this::createNode);
+                return fields.get(0).applyDestruction((String name, Type name2) -> createNode(name));
             }
         }
 
-        private Implementation createNode(String name, Type returnType) {
+        private Function_ createNode(String name) {
             List<Field> parameters = fields.subList(1, fields.size());
-            if(value == null) {
+            if (value == null) {
                 String message = String.format("Concrete function '%s' must have a value.", name);
                 throw new IllegalStateException(message);
             }
-            return new Implementation(name, parameters, returnType, value);
+            return new Implementation(fields.get(0), parameters, value);
         }
 
         @Override

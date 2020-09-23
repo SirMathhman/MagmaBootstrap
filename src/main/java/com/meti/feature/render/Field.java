@@ -22,10 +22,18 @@ public interface Field extends Renderable, Comparable<Field> {
 
     Field transformByType(Function<Type, Type> mapping);
 
+    String renderWithMore(String more);
+
     @Override
     default String render() {
         return renderOptionally().orElseThrow(() -> new UnrenderableException("Not renderable."));
     }
+
+    default String renderType(){
+        return type().apply(Type::render);
+    }
+
+    boolean isFlagged(Flag flag);
 
     enum Flag {
         CONST,

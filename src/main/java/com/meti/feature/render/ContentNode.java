@@ -54,12 +54,12 @@ public class ContentNode implements Node {
 
     @Override
     public Monad<Group> group(){
-        throw new UnsupportedOperationException();
+        return new Monad<>(Group.Content);
     }
 
     @Override
     public boolean isParent() {
-        throw new UnsupportedOperationException();
+        return false;
     }
 
     @Override

@@ -69,12 +69,12 @@ public class FieldNode extends Parent {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return new FieldNode(mapping.apply(parent), fieldName);
     }
 
     private static class FieldNodePrototype implements Prototype {

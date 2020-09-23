@@ -3,10 +3,7 @@ package com.meti.feature.type;
 import com.meti.feature.CompileException;
 import com.meti.content.Content;
 import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
-import com.meti.feature.render.ContentNode;
-import com.meti.feature.render.Node;
-import com.meti.feature.render.ContentType;
-import com.meti.feature.render.Type;
+import com.meti.feature.render.*;
 
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -33,7 +30,8 @@ public class CastTokenizer extends AbstractNodeTokenizer {
                 throw new CompileException(message);
             }
             Node value = new ContentNode(valueContent);
-            return Optional.of(new Cast(type, value));
+            Field identity = new TypeField(type);
+            return Optional.of(new Cast(value, identity));
         }
         return Optional.empty();
     }

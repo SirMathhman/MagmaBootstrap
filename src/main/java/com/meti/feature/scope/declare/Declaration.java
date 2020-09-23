@@ -70,12 +70,12 @@ class Declaration extends Parent {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return new Declaration(mapping.apply(identity), value);
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return new Declaration(identity, mapping.apply(value));
     }
 
     private static class DeclarePrototype implements Prototype {

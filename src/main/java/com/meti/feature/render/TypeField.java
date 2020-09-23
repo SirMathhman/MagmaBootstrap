@@ -63,4 +63,14 @@ public class TypeField implements Field {
     public int compareTo(Field o) {
         return name().apply(s -> o.name().apply(s::compareTo));
     }
+
+    @Override
+    public String renderWithMore(String more) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isFlagged(Flag flag) {
+        return false;
+    }
 }

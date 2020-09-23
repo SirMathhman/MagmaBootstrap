@@ -48,6 +48,28 @@ public class Int_ extends Leaf {
         return new Monad<>(Group.Integer);
     }
 
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        return this;
+    }
+
     private class IntPrototype implements Prototype {
         @Override
         public Prototype withField(Field field) {

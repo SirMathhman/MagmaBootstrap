@@ -72,4 +72,14 @@ public class InlineField implements Field {
     public int compareTo(Field o) {
         return name().apply(s -> o.name().apply(s::compareTo));
     }
+
+    @Override
+    public String renderWithMore(String more) {
+        return type.render(name + more);
+    }
+
+    @Override
+    public boolean isFlagged(Flag flag) {
+        return flags.contains(flag);
+    }
 }

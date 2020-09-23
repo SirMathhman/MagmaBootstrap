@@ -63,12 +63,12 @@ public class Import extends Parent implements Untyped {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return new Import(mapping.apply(value));
     }
 
     private static class PrototypeImpl implements Prototype {

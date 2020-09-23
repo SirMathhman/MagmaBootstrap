@@ -4,7 +4,6 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.InlineField;
 import com.meti.feature.render.Node;
-import com.meti.feature.render.Parent;
 import com.meti.feature.render.Type;
 import com.meti.util.Monad;
 
@@ -13,20 +12,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class Abstraction extends Parent {
-    private final Type returnType;
-    private final String name;
-    private final List<Field> parameters;
-    private final List<Field.Flag> flags;
-
-    public Abstraction(String name, List<Field> parameters, Type returnType, List<Field.Flag> flags) {
-        this.returnType = returnType;
-        this.name = name;
-        this.parameters = parameters;
-        this.flags = flags;
+class Abstraction extends Function_ {
+    public Abstraction(Field identity, List<Field> parameters) {
+        super(identity, parameters);
     }
 
     @Override
@@ -40,28 +30,8 @@ class Abstraction extends Parent {
     }
 
     @Override
-    public Optional<String> renderOptionally() {
-        if (flags.contains(Field.Flag.NATIVE)) {
-            return Optional.of("");
-        } else {
-            String renderedParameters = renderParameters();
-            return Optional.ofNullable(returnType.render(name + renderedParameters));
-        }
-    }
-
-    private String renderParameters() {
-        return parameters.stream()
-                .map(Field::renderOptionally)
-                .flatMap(Optional::stream)
-                .collect(Collectors.joining(",", "(", ")"));
-    }
-
-    @Override
-    public Stream<Field> streamFields() {
-        List<Field> list = new ArrayList<>();
-        list.add(new InlineField(name, returnType, flags));
-        list.addAll(parameters);
-        return list.stream();
+    protected String complete() {
+        return "";
     }
 
     @Override
@@ -75,7 +45,7 @@ class Abstraction extends Parent {
     }
 
     @Override
-    public Prototype create(Node child){
+    public Prototype create(Node child) {
         return createPrototype().withChild(child);
     }
 
@@ -92,13 +62,13 @@ class Abstraction extends Parent {
     }
 
     @Override
-    public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+    protected Node complete(Field newIdentity, List<Field> newParameters) {
+        return new Abstraction(newIdentity, newParameters);
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     public static class Builder implements Prototype {
@@ -146,7 +116,8 @@ class Abstraction extends Parent {
 
         private Abstraction assemble(String name, Type returnType, List<Field.Flag> flags) {
             List<Field> parameters = fields.subList(1, fields.size());
-            return new Abstraction(name, parameters, returnType, flags);
+            Field identity = new InlineField(name, new FunctionType(returnType, parameters), flags);
+            return new Abstraction(identity, parameters);
         }
 
         @Override

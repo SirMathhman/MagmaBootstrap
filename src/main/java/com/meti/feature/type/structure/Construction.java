@@ -73,12 +73,13 @@ public class Construction extends Parent {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        List<Node> newChildren = children.stream().map(mapping).collect(Collectors.toList());
+        return new Construction(newChildren);
     }
 
     private static class ConstructionPrototype implements Prototype {

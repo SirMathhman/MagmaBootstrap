@@ -67,12 +67,12 @@ public class Reference extends Parent {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return new Reference(mapping.apply(value));
     }
 
     private static class ReferencePrototype implements Prototype {

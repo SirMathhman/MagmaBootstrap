@@ -30,7 +30,7 @@ public interface Type {
     boolean is(Group group);
 
     enum Group {
-        Content, Structure, Primitive;
+        Content, Structure, Primitive, Function;
 
         public Predicate<Group> matches() {
             return typeGroup -> typeGroup == this;

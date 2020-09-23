@@ -100,12 +100,15 @@ public class StructureNode implements Node {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        Set<Field> newFields = fields.stream()
+                .map(mapping)
+                .collect(Collectors.toSet());
+        return new StructureNode(name, newFields);
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     private static class StructureNodePrototype implements Prototype {

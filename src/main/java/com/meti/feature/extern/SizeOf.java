@@ -43,6 +43,28 @@ public class SizeOf extends Leaf {
         return Optional.of("sizeof(" + identity.renderOptionally().orElseThrow(() -> new IllegalStateException("Cannot renderOptionally identity: " + identity)) + ")");
     }
 
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class PrototypeImpl implements Prototype {
         private final Field identity;
 

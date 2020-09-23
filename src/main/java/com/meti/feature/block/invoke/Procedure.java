@@ -1,5 +1,6 @@
 package com.meti.feature.block.invoke;
 
+import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.util.Monad;
 
@@ -24,6 +25,28 @@ public class Procedure extends Invocation {
     @Override
     public Prototype createPrototype() {
         return new ProcedurePrototype();
+    }
+
+    @Override
+    protected Node copy(Node caller, List<Node> arguments) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
+    @Override
+    public Prototype create(Node child) {
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
     }
 
     private static class ProcedurePrototype extends InvocationPrototype {

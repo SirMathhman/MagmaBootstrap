@@ -100,7 +100,7 @@ public class ReturnTokenizer extends AbstractNodeTokenizer {
 
         @Override
         public Optional<String> renderOptionally() {
-            return Optional.of("return " + value.renderOptionally().orElseThrow() + ";");
+            return Optional.of("return " + value.render() + ";");
         }
 
         @Override
@@ -127,12 +127,12 @@ public class ReturnTokenizer extends AbstractNodeTokenizer {
 
         @Override
         public Node transformFields(Function<Field, Field> mapping) {
-            throw new UnsupportedOperationException();
+            return this;
         }
 
         @Override
         public Node transformChildren(Function<Node, Node> mapping) {
-            throw new UnsupportedOperationException();
+            return new Return(mapping.apply(value));
         }
     }
 }

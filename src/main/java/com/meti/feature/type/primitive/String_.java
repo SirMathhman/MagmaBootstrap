@@ -1,10 +1,7 @@
 package com.meti.feature.type.primitive;
 
 import com.meti.content.Content;
-import com.meti.feature.render.Leaf;
-import com.meti.feature.render.Node;
-import com.meti.feature.render.PassPrototype;
-import com.meti.feature.render.Untyped;
+import com.meti.feature.render.*;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -35,6 +32,28 @@ public class String_ extends Leaf implements Untyped {
     @Override
     public Optional<String> renderOptionally() {
         return Optional.of("\"" + value + "\"");
+    }
+
+    @Override
+    public Prototype create(Node child){
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
+    @Override
+    public Node transformFields(Function<Field, Field> mapping) {
+        return this;
     }
 
     private class PrototypeImpl extends PassPrototype {

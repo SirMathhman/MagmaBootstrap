@@ -1,5 +1,6 @@
 package com.meti.feature.block.invoke;
 
+import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.util.Monad;
 
@@ -28,6 +29,28 @@ public class Mapping extends Invocation {
     @Override
     public Prototype createPrototype() {
         return new MappingPrototype();
+    }
+
+    @Override
+    protected Node copy(Node caller, List<Node> arguments) {
+        return new Mapping(caller, arguments);
+    }
+
+    @Override
+    public Prototype createWithChildren() {
+        return streamChildren()
+                .map(this::create)
+                .reduce(createPrototype(), Prototype::merge);
+    }
+
+    @Override
+    public Prototype create(Node child) {
+        return createPrototype().withChild(child);
+    }
+
+    @Override
+    public Prototype create(Field field) {
+        throw new UnsupportedOperationException();
     }
 
     private static class MappingPrototype extends InvocationPrototype {

@@ -67,12 +67,12 @@ public class Dereference extends Parent {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        throw new UnsupportedOperationException();
+        return new Dereference(mapping.apply(value));
     }
 
     private static class DereferencePrototype implements Prototype {

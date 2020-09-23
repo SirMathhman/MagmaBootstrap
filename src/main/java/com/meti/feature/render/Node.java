@@ -50,7 +50,7 @@ public interface Node extends Renderable {
 
     enum Group {
         Implementation,
-        Variable, Block, Return, Integer, Declare, Reference, Dereference, Abstraction, Mapping, Procedure, Structure, Construction, Field, Cast, Include, Empty, Import, SizeOf, String;
+        Variable, Block, Return, Integer, Declare, Reference, Dereference, Abstraction, Mapping, Procedure, Structure, Construction, Field, Cast, Include, Empty, Import, SizeOf, String, Content;
 
         public Predicate<Group> matches() {
             return (Group group) -> group == this;
