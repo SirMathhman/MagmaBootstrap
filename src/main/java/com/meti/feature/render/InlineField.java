@@ -3,7 +3,6 @@ package com.meti.feature.render;
 import com.meti.util.Monad;
 import com.meti.util.Triad;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -13,10 +12,6 @@ public class InlineField implements Field {
     private final String name;
     private final Type type;
     private final List<Flag> flags;
-
-    public InlineField(Type type) {
-        this("", type, Collections.emptyList());
-    }
 
     public InlineField(String name, Type type, List<Flag> flags) {
         this.name = name;
