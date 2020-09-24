@@ -77,4 +77,9 @@ public class InlineField implements Field {
     public boolean isFlagged(Flag flag) {
         return flags.contains(flag);
     }
+
+    @Override
+    public boolean isNamed(String name){
+        return name().test(name::equals);
+    }
 }

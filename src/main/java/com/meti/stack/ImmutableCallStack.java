@@ -1,5 +1,6 @@
 package com.meti.stack;
 
+import com.meti.UndefinedException;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Type;
 import com.meti.util.Monad;
@@ -26,9 +27,9 @@ public class ImmutableCallStack implements CallStack {
                 .collect(Collectors.joining(",", "[", "]"));
     }
 
-    private Frame popLast(){
-        if(!frames.isEmpty()) {
-           return frames.pop();
+    private Frame popLast() {
+        if (!frames.isEmpty()) {
+            return frames.pop();
         } else {
             return new ImmutableFrame();
         }
@@ -69,7 +70,21 @@ public class ImmutableCallStack implements CallStack {
     }
 
     @Override
-    public boolean isDefined(String name){
+    public boolean isDefined(String name) {
         return frames.stream().anyMatch(frame -> frame.isDefined(name));
+    }
+
+    @Override
+    public boolean matches(String name, Type type) {
+        return frames.stream()
+                .map(frame -> frame.match(name, type))
+                .flatMap(Optional::stream)
+                .findFirst()
+                .orElseThrow(() -> createUndefined(name));
+    }
+
+    private UndefinedException createUndefined(String name) {
+        String message = String.format("%s is not defined in %s", name, ImmutableCallStack.this);
+        return new UndefinedException(message);
     }
 }

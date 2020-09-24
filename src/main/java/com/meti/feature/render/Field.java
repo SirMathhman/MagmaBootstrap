@@ -8,6 +8,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public interface Field extends Renderable, Comparable<Field> {
+    boolean isNamed(String name);
+
     Monad<String> name();
 
     int compareTo(Field o);
@@ -29,11 +31,15 @@ public interface Field extends Renderable, Comparable<Field> {
         return renderOptionally().orElseThrow(() -> new UnrenderableException("Not renderable."));
     }
 
-    default String renderType(){
+    default String renderType() {
         return type().apply(Type::render);
     }
 
     boolean isFlagged(Flag flag);
+
+    default boolean isTyped(Type type) {
+        return type().test(type::equals);
+    }
 
     enum Flag {
         CONST,

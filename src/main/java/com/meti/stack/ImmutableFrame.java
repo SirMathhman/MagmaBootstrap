@@ -53,12 +53,20 @@ class ImmutableFrame implements Frame {
 
     @Override
     public Frame define(String name, Set<Field> fields) {
-        if(structures.containsKey(name)){
+        if (structures.containsKey(name)) {
             throw new IllegalArgumentException("Structure with name '" + name + "' has already been defined.");
         } else {
             structures.put(name, fields);
             return new ImmutableFrame(this.fields, structures);
         }
+    }
+
+    @Override
+    public Optional<Boolean> match(String name, Type type) {
+        return fields.stream()
+                .filter(frame -> frame.isNamed(name))
+                .map(frame -> frame.isTyped(type))
+                .findFirst();
     }
 
     private boolean isNamed(Field field, String name) {

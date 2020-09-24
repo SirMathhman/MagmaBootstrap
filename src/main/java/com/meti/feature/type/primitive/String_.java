@@ -2,6 +2,7 @@ package com.meti.feature.type.primitive;
 
 import com.meti.content.Content;
 import com.meti.feature.render.*;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.Optional;
@@ -54,6 +55,11 @@ public class String_ extends Leaf implements Untyped {
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
         return this;
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private class PrototypeImpl extends PassPrototype {

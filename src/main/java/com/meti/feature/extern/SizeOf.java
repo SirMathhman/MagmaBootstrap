@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Leaf;
 import com.meti.feature.render.Node;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -62,6 +64,11 @@ public class SizeOf extends Leaf {
 
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
         throw new UnsupportedOperationException();
     }
 

@@ -6,7 +6,10 @@ import com.meti.util.Monad;
 
 import java.util.Optional;
 
+@Deprecated
 public interface Resolver extends Evaluator<Monad<Type>> {
+    Optional<Boolean> is(Type type);
+
     @Deprecated
     Optional<Monad<Type>> resolve();
 

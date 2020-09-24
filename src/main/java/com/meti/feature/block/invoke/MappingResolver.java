@@ -2,33 +2,32 @@ package com.meti.feature.block.invoke;
 
 import com.meti.feature.evaluate.resolve.AbstractResolver;
 import com.meti.feature.evaluate.resolve.Resolver;
-import com.meti.feature.render.MagmaResolver;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Type;
 import com.meti.process.State;
 import com.meti.util.Monad;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public class MappingResolver extends AbstractResolver {
-    public MappingResolver(State state) {
-        super(state);
+    public MappingResolver(State state, Function<State, Resolver> parentFactory) {
+        super(state, parentFactory);
+    }
+
+    @Override
+    public Optional<Boolean> is(Type type) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Optional<Monad<Type>> resolve() {
-        boolean test = state.node().test(this::isMapping);
-        if (test) {
-            Node caller = state.node().apply(this::findCaller);
-            Resolver resolver = new MagmaResolver(state.with(caller));
-            return resolver.resolve();
+        if (state.has(Node.Group.Mapping)) {
+            State withCaller = state.transformByNode(this::findCaller);
+            return parentFactory.apply(withCaller).evaluate();
         } else {
             return Optional.empty();
         }
-    }
-
-    private boolean isMapping(Node node) {
-        return node.group().test(this::isMapping);
     }
 
     private Node findCaller(Node node) {
@@ -37,7 +36,4 @@ public class MappingResolver extends AbstractResolver {
                 .orElseThrow();
     }
 
-    private boolean isMapping(Node.Group group) {
-        return group == Node.Group.Mapping;
-    }
 }

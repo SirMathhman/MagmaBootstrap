@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -73,6 +75,11 @@ public class Dereference extends Parent {
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
         return new Dereference(mapping.apply(value));
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private static class DereferencePrototype implements Prototype {

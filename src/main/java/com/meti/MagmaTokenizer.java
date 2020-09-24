@@ -39,7 +39,7 @@ public class MagmaTokenizer implements Tokenizer {
     }
 
     private CompileException invalidateType(String s) {
-        String message = String.format("Unable to resolve type: %s", s);
+        String message = String.format("Unable to matches type: %s", s);
         return new CompileException(message);
     }
 

@@ -15,4 +15,6 @@ public interface Frame {
     Optional<Monad<Type>> resolve(String name);
 
     Frame define(String name, Set<Field> fields);
+
+    Optional<Boolean> match(String name, Type type);
 }

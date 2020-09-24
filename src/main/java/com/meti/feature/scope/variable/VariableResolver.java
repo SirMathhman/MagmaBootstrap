@@ -2,6 +2,7 @@ package com.meti.feature.scope.variable;
 
 import com.meti.content.Content;
 import com.meti.feature.evaluate.resolve.AbstractResolver;
+import com.meti.feature.evaluate.resolve.Resolver;
 import com.meti.feature.render.Type;
 import com.meti.process.State;
 import com.meti.feature.render.Node;
@@ -12,13 +13,18 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class VariableResolver extends AbstractResolver {
-    public VariableResolver(State state) {
-        super(state);
+    public VariableResolver(State state, Function<State, Resolver> parentFactory) {
+        super(state, parentFactory);
+    }
+
+    @Override
+    public Optional<Boolean> is(Type type) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Optional<Monad<Type>> resolve() {
-        if (state.node().test(this::isVariable)) {
+        if (state.has(Node.Group.Variable)) {
             return state.destroy().apply(this::resolveNode).flatMap(Function.identity());
         }
         return Optional.empty();
@@ -30,9 +36,5 @@ public class VariableResolver extends AbstractResolver {
 
     private Optional<Monad<Type>> resolveContent(Content content, CallStack callStack) {
         return content.value().apply(callStack::resolve);
-    }
-
-    private boolean isVariable(Node node) {
-        return node.group().test(Node.Group.Variable.matches());
     }
 }

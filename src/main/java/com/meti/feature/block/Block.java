@@ -1,10 +1,8 @@
 package com.meti.feature.block;
 
 import com.meti.content.Content;
-import com.meti.feature.render.Field;
-import com.meti.feature.render.Node;
-import com.meti.feature.render.Parent;
-import com.meti.feature.render.Untyped;
+import com.meti.feature.render.*;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
@@ -90,6 +88,11 @@ public class Block extends Parent implements Untyped {
                 .map(mapping)
                 .collect(Collectors.toList());
         return new Block(newChildren);
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private static class BlockPrototype implements Prototype {

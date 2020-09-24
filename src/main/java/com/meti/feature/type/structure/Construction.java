@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.ArrayList;
@@ -80,6 +82,11 @@ public class Construction extends Parent {
     public Node transformChildren(Function<Node, Node> mapping) {
         List<Node> newChildren = children.stream().map(mapping).collect(Collectors.toList());
         return new Construction(newChildren);
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private static class ConstructionPrototype implements Prototype {

@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Leaf;
 import com.meti.feature.render.Node;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -68,6 +70,11 @@ public class Variable extends Leaf {
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
         return this;
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        return stack.matches(content.asString(), value);
     }
 
     private static class PrototypeImpl implements Prototype {

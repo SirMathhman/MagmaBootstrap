@@ -1,6 +1,7 @@
 package com.meti.feature.render;
 
 import com.meti.content.Content;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -48,6 +49,11 @@ public class Empty extends Leaf implements Untyped {
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
         return this;
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private static class EmptyPrototype implements Prototype {

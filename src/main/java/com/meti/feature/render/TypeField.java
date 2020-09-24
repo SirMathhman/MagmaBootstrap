@@ -73,4 +73,9 @@ public class TypeField implements Field {
     public boolean isFlagged(Flag flag) {
         return false;
     }
+
+    @Override
+    public boolean isNamed(String name){
+        return name().test(name::equals);
+    }
 }

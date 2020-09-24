@@ -1,6 +1,7 @@
 package com.meti.process;
 
 import com.meti.feature.render.Node;
+import com.meti.feature.render.Type;
 import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;
@@ -22,6 +23,10 @@ public interface State {
     State with(CallStack stack);
 
     State with(Node node);
+
+    default boolean matches(Type type) {
+        return destroy().apply((node, stack) -> node.matches(type, stack));
+    }
 
     Monad<CallStack> stack();
 

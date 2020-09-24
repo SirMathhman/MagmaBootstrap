@@ -1,13 +1,9 @@
 package com.meti.feature.block.invoke;
 
 import com.meti.feature.evaluate.process.AbstractProcessable;
-import com.meti.feature.render.MagmaResolver;
-import com.meti.feature.evaluate.resolve.Resolver;
-import com.meti.process.State;
 import com.meti.feature.render.Node;
 import com.meti.feature.type.primitive.PrimitiveType;
-import com.meti.feature.render.Type;
-import com.meti.util.Monad;
+import com.meti.process.State;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,38 +16,23 @@ public class ProcedureFixer extends AbstractProcessable {
 
     @Override
     public Optional<State> evaluate() {
-        if (previous.has(Node.Group.Mapping)) {
-            boolean test = isVoid();
-            if (test) {
-                Node toReturn = previous.node().apply(this::mapToProcedure);
-                return Optional.ofNullable(previous.with(toReturn));
-            } else {
-                return Optional.of(previous);
-            }
-        }
-        return Optional.empty();
+        return Optional.of(previous)
+                .filter(state -> state.has(Node.Group.Mapping))
+                .map(this::transformMapping);
     }
 
-    private boolean isVoid() {
-        return new MagmaResolver(previous)
-                .evaluate()
-                .orElseThrow(this::createResolutionException)
-                .test(value -> value == PrimitiveType.VOID);
+    private State transformMapping(State previous) {
+        return doesReturnVoid() ? previous.transformByNode(this::mapToProcedure) : this.previous;
     }
 
-    private Procedure mapToProcedure(Node node) {
+    private boolean doesReturnVoid() {
+        return previous.matches(PrimitiveType.VOID);
+    }
+
+    private Node mapToProcedure(Node node) {
         List<Node> children = node.streamChildren().collect(Collectors.toList());
         Node caller = children.get(0);
         List<Node> arguments = children.subList(1, children.size());
         return new Procedure(caller, arguments);
-    }
-
-    private IllegalStateException createResolutionException() {
-        String message = previous.node().apply(this::createResolutionMessage);
-        return new IllegalStateException(message);
-    }
-
-    private String createResolutionMessage(Node node) {
-        return String.format("Unable to resolve mapping: '%s'", node);
     }
 }

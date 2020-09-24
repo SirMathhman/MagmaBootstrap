@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,4 +72,9 @@ public abstract class Invocation extends Parent {
     }
 
     protected abstract Node copy(Node caller, List<Node> arguments);
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        return caller.matches(value, stack);
+    }
 }

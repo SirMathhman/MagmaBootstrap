@@ -1,10 +1,8 @@
 package com.meti.feature.extern;
 
 import com.meti.content.Content;
-import com.meti.feature.render.Field;
-import com.meti.feature.render.Node;
-import com.meti.feature.render.Parent;
-import com.meti.feature.render.Untyped;
+import com.meti.feature.render.*;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -69,6 +67,11 @@ public class Import extends Parent implements Untyped {
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
         return new Import(mapping.apply(value));
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private static class PrototypeImpl implements Prototype {

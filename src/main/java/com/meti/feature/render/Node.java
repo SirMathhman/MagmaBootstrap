@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public interface Node extends Renderable {
+    boolean matches(Type value, CallStack stack);
+
     Node transformFields(Function<Field, Field> mapping);
 
     Node transformChildren(Function<Node, Node> mapping);

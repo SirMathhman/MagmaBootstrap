@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.*;
@@ -76,6 +78,11 @@ class Declaration extends Parent {
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
         return new Declaration(identity, mapping.apply(value));
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private static class DeclarePrototype implements Prototype {

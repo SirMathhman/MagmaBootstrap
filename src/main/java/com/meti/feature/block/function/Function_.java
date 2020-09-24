@@ -4,6 +4,8 @@ import com.meti.content.Content;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.Node;
 import com.meti.feature.render.Parent;
+import com.meti.feature.render.Type;
+import com.meti.stack.CallStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,5 +71,10 @@ public abstract class Function_ extends Parent {
         return parameters.stream()
                 .map(mapping)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 }

@@ -1,10 +1,8 @@
 package com.meti.feature.block.function;
 
 import com.meti.feature.evaluate.tokenize.AbstractNodeTokenizer;
-import com.meti.feature.render.ContentNode;
-import com.meti.feature.render.Field;
-import com.meti.feature.render.Node;
-import com.meti.feature.render.Parent;
+import com.meti.feature.render.*;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 import com.meti.content.Content;
 
@@ -133,6 +131,11 @@ public class ReturnTokenizer extends AbstractNodeTokenizer {
         @Override
         public Node transformChildren(Function<Node, Node> mapping) {
             return new Return(mapping.apply(value));
+        }
+
+        @Override
+        public boolean matches(Type value, CallStack stack) {
+            throw new UnsupportedOperationException();
         }
     }
 }

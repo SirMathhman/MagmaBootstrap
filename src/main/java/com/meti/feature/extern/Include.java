@@ -1,10 +1,8 @@
 package com.meti.feature.extern;
 
 import com.meti.content.Content;
-import com.meti.feature.render.Field;
-import com.meti.feature.render.Leaf;
-import com.meti.feature.render.Node;
-import com.meti.feature.render.Untyped;
+import com.meti.feature.render.*;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
@@ -60,6 +58,11 @@ public class Include extends Leaf implements Untyped {
     @Override
     public Node transformFields(Function<Field, Field> mapping) {
         return this;
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
     }
 
     private class PrototypeImpl implements Prototype {

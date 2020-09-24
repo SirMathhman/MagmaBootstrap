@@ -1,6 +1,7 @@
 package com.meti.feature.render;
 
 import com.meti.content.Content;
+import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.Objects;
@@ -86,6 +87,11 @@ public class ContentNode implements Node {
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean matches(Type value, CallStack stack) {
         throw new UnsupportedOperationException();
     }
 }
