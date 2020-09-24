@@ -65,6 +65,11 @@ public class Include extends Leaf implements Untyped {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
+
     private class PrototypeImpl implements Prototype {
         @Override
         public Prototype withField(Field field) {

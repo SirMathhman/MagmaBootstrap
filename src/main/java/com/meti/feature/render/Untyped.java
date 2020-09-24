@@ -20,4 +20,9 @@ public interface Untyped extends Node {
     default boolean matches(Type value, CallStack stack) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    default boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
 }

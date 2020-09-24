@@ -67,4 +67,9 @@ public abstract class FormattedType implements Type {
     public Type transformChildren(Function<Type, Type> mapping) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public boolean doesReturn(Type type) {
+        return false;
+    }
 }

@@ -29,6 +29,8 @@ public interface Type {
 
     boolean is(Group group);
 
+    boolean doesReturn(Type type);
+
     enum Group {
         Content, Structure, Primitive, Function;
 

@@ -79,6 +79,11 @@ public class StructureType implements Type {
         return this;
     }
 
+    @Override
+    public boolean doesReturn(Type type) {
+        return false;
+    }
+
     private static class StructureTypePrototype implements Prototype {
         private final Set<Field> fields;
         private final Content name;

@@ -17,6 +17,15 @@ public abstract class Invocation extends Parent {
     protected final Node caller;
     protected final List<Node> arguments;
 
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Invocation)) return false;
+        Invocation cast = (Invocation) obj;
+        return caller.equals(cast.caller) &&
+                arguments.containsAll(cast.arguments) &&
+                cast.arguments.containsAll(arguments);
+    }
+
     public Invocation(Node caller, List<Node> arguments) {
         this.caller = caller;
         this.arguments = arguments;
@@ -75,6 +84,7 @@ public abstract class Invocation extends Parent {
 
     @Override
     public boolean matches(Type value, CallStack stack) {
-        return caller.matches(value, stack);
+        return caller.doesReturn(value, stack);
     }
+
 }

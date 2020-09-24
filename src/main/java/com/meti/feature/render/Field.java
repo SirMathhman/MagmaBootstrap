@@ -41,6 +41,8 @@ public interface Field extends Renderable, Comparable<Field> {
         return type().test(type::equals);
     }
 
+    boolean doesReturn(Type type);
+
     enum Flag {
         CONST,
         LET,

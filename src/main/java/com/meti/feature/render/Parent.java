@@ -8,4 +8,8 @@ public abstract class Parent implements Node {
         return true;
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
 }

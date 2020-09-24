@@ -24,4 +24,6 @@ public interface CallStack {
     CallStack defineAll(List<Field> fields);
 
     boolean isDefined(String name);
+
+    boolean doesReturn(String name, Type type);
 }

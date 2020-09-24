@@ -75,6 +75,11 @@ public class TypeField implements Field {
     }
 
     @Override
+    public boolean doesReturn(Type type) {
+        return type.doesReturn(type);
+    }
+
+    @Override
     public boolean isNamed(String name){
         return name().test(name::equals);
     }

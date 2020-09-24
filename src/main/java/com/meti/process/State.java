@@ -24,9 +24,7 @@ public interface State {
 
     State with(Node node);
 
-    default boolean matches(Type type) {
-        return destroy().apply((node, stack) -> node.matches(type, stack));
-    }
+    boolean matches(Type type);
 
     Monad<CallStack> stack();
 

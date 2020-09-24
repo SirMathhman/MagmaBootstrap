@@ -72,6 +72,11 @@ public class SizeOf extends Leaf {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class PrototypeImpl implements Prototype {
         private final Field identity;
 

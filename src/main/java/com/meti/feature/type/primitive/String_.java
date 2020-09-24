@@ -62,6 +62,11 @@ public class String_ extends Leaf implements Untyped {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
+
     private class PrototypeImpl extends PassPrototype {
         @Override
         public Node build() {

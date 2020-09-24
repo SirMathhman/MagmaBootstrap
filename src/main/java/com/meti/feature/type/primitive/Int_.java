@@ -77,6 +77,11 @@ public class Int_ extends Leaf {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
+
     private class IntPrototype implements Prototype {
         @Override
         public Prototype withField(Field field) {

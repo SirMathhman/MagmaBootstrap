@@ -17,4 +17,6 @@ public interface Frame {
     Frame define(String name, Set<Field> fields);
 
     Optional<Boolean> match(String name, Type type);
+
+    Optional<Boolean> doesReturn(String name, Type type);
 }

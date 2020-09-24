@@ -69,4 +69,9 @@ public class Pointer implements Type {
     public Type transformChildren(Function<Type, Type> mapping) {
         return new Pointer(mapping.apply(child));
     }
+
+    @Override
+    public boolean doesReturn(Type type) {
+        return false;
+    }
 }

@@ -2,6 +2,7 @@ package com.meti.feature.block.invoke;
 
 import com.meti.content.StringContent;
 import com.meti.feature.block.function.Abstraction;
+import com.meti.feature.block.function.FunctionType;
 import com.meti.feature.evaluate.Evaluator;
 import com.meti.feature.render.Field;
 import com.meti.feature.render.InlineField;
@@ -29,7 +30,7 @@ class ProcedureFixerTest {
         Node asMapping = new Mapping(caller);
         Node asProcedure = new Procedure(caller);
 
-        CallStack stack = new ImmutableCallStack();
+        CallStack stack = new ImmutableCallStack().define(new InlineField("caller", new FunctionType(PrimitiveType.VOID), Collections.emptyList()));
         State previous = new InlineState(asMapping, stack);
         Evaluator<State> fixer = new ProcedureFixer(previous);
         State actual = fixer.evaluate().orElseThrow();

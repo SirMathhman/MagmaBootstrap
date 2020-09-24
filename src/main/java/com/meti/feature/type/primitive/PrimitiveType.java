@@ -81,6 +81,11 @@ public enum PrimitiveType implements Type {
         return this;
     }
 
+    @Override
+    public boolean doesReturn(Type type) {
+        return false;
+    }
+
     private class PrimitivePrototype implements Prototype {
         @Override
         public Prototype withChild(Type child) {

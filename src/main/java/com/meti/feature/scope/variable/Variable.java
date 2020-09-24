@@ -9,6 +9,7 @@ import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -61,6 +62,19 @@ public class Variable extends Leaf {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Variable variable = (Variable) o;
+        return Objects.equals(content, variable.content);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(content);
+    }
+
+    @Override
     public Prototype createWithChildren() {
         return streamChildren()
                 .map(this::create)
@@ -75,6 +89,11 @@ public class Variable extends Leaf {
     @Override
     public boolean matches(Type value, CallStack stack) {
         return stack.matches(content.asString(), value);
+    }
+
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        return stack.doesReturn(content.asString(), value);
     }
 
     private static class PrototypeImpl implements Prototype {

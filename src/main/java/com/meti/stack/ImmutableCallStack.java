@@ -75,6 +75,15 @@ public class ImmutableCallStack implements CallStack {
     }
 
     @Override
+    public boolean doesReturn(String name, Type type) {
+        return frames.stream()
+                .map(frame -> frame.doesReturn(name, type))
+                .flatMap(Optional::stream)
+                .findFirst()
+                .orElseThrow(() -> createUndefined(name));
+    }
+
+    @Override
     public boolean matches(String name, Type type) {
         return frames.stream()
                 .map(frame -> frame.match(name, type))

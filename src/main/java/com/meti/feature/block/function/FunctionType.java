@@ -15,9 +15,13 @@ public class FunctionType implements Type {
     private final Type returnType;
     private final List<Field> parameters;
 
-    public FunctionType(Type returnType,  List<Field> parameters) {
+    public FunctionType(Type returnType, List<Field> parameters) {
         this.returnType = returnType;
         this.parameters = parameters;
+    }
+
+    public FunctionType(Type returnType, Field... parameters) {
+        this(returnType, List.of(parameters));
     }
 
     @Override
@@ -73,5 +77,10 @@ public class FunctionType implements Type {
     @Override
     public boolean is(Group group) {
         return group == Group.Function;
+    }
+
+    @Override
+    public boolean doesReturn(Type type) {
+        return returnType.equals(type);
     }
 }

@@ -1,10 +1,12 @@
 package com.meti.process;
 
 import com.meti.feature.render.Node;
+import com.meti.feature.render.Type;
 import com.meti.stack.CallStack;
 import com.meti.util.Dyad;
 import com.meti.util.Monad;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -62,5 +64,24 @@ public class InlineState implements State {
     @Override
     public State define(){
         return destroy().apply((node, stack) -> with(node.define(stack)));
+    }
+
+    @Override
+    public boolean matches(Type type) {
+        return node.matches(type, stack);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InlineState that = (InlineState) o;
+        return Objects.equals(node, that.node) &&
+                Objects.equals(stack, that.stack);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(node, stack);
     }
 }

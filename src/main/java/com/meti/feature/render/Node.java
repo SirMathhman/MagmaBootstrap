@@ -1,6 +1,7 @@
 package com.meti.feature.render;
 
 import com.meti.content.Content;
+import com.meti.feature.block.invoke.Invocation;
 import com.meti.stack.CallStack;
 import com.meti.util.Monad;
 
@@ -49,6 +50,8 @@ public interface Node extends Renderable {
     default String render() {
         return renderOptionally().orElseThrow(() -> new UnrenderableException("Not renderable."));
     }
+
+    boolean doesReturn(Type value, CallStack stack);
 
     enum Group {
         Implementation,

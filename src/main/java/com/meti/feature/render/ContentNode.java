@@ -94,4 +94,9 @@ public class ContentNode implements Node {
     public boolean matches(Type value, CallStack stack) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
 }

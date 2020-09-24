@@ -56,6 +56,11 @@ public class Empty extends Leaf implements Untyped {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class EmptyPrototype implements Prototype {
         @Override
         public Prototype withField(Field field) {

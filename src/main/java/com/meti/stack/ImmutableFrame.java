@@ -69,6 +69,14 @@ class ImmutableFrame implements Frame {
                 .findFirst();
     }
 
+    @Override
+    public Optional<Boolean> doesReturn(String name, Type type) {
+        return fields.stream()
+                .filter(field -> field.isNamed(name))
+                .map(field -> field.doesReturn(type))
+                .findFirst();
+    }
+
     private boolean isNamed(Field field, String name) {
         return field.applyToName(name::equals);
     }

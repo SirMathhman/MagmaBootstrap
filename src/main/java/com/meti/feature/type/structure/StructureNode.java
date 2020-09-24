@@ -116,6 +116,11 @@ public class StructureNode implements Node {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public boolean doesReturn(Type value, CallStack stack) {
+        throw new UnsupportedOperationException();
+    }
+
     private static class StructureNodePrototype implements Prototype {
         private final Field identity;
 
