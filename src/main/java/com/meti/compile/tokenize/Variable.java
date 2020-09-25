@@ -4,7 +4,7 @@ import com.meti.compile.Content;
 
 import java.util.function.Function;
 
-public class Variable implements Token{
+public class Variable implements Node {
     private final String value;
 
     Variable(String value) {
@@ -12,7 +12,7 @@ public class Variable implements Token{
     }
 
     @Override
-    public Token form(Function<Content, Token> former) {
+    public Node form(Function<Content, Node> former) {
         var message = String.format("Cannot form node of type %s", getClass());
         throw new UnformableException(message);
     }
@@ -20,5 +20,15 @@ public class Variable implements Token{
     @Override
     public boolean is(Group group) {
         return group == Group.Variable;
+    }
+
+    @Override
+    public Node transformChildren(Function<Node, Node> mapping) {
+        return this;
+    }
+
+    @Override
+    public String render() {
+        return value;
     }
 }

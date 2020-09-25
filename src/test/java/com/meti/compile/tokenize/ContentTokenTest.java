@@ -24,6 +24,6 @@ class ContentTokenTest {
     void is() {
         var content = new RootContent("test");
         var token = new ContentToken(content);
-        assertTrue(token.is(Token.Group.Content));
+        assertTrue(token.is(Node.Group.Content));
     }
 }

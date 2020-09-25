@@ -8,13 +8,26 @@ class VariableTest {
 
     @Test
     void form() {
-        Token token = new Variable("test");
+        var token = new Variable("test");
         assertThrows(UnformableException.class, () -> token.form(null));
     }
 
     @Test
     void is() {
-        Token token = new Variable("test");
-        assertTrue(token.is(Token.Group.Variable));
+        var token = new Variable("test");
+        assertTrue(token.is(Node.Group.Variable));
+    }
+
+    @Test
+    void transformChildren() {
+        var expected = new Variable("test");
+        var actual = expected.transformChildren(null);
+        assertSame(expected, actual);
+    }
+
+    @Test
+    void render() {
+        var node = new Variable("test");
+        assertEquals("test", node.render());
     }
 }

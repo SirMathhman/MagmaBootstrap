@@ -4,7 +4,7 @@ import com.meti.compile.Content;
 
 import java.util.function.Function;
 
-public class ContentToken implements Token {
+public class ContentToken implements Node {
     private final Content content;
 
     public ContentToken(Content content) {
@@ -12,12 +12,23 @@ public class ContentToken implements Token {
     }
 
     @Override
-    public Token form(Function<Content, Token> former) {
+    public Node form(Function<Content, Node> former) {
         return former.apply(content);
     }
 
     @Override
     public boolean is(Group group) {
         return group == Group.Content;
+    }
+
+    @Override
+    public String render() {
+        var message = String.format("Content of \"%s\" shouldn't be rendered.", content.asString());
+        throw new UnrenderableException(message);
+    }
+
+    @Override
+    public Node transformChildren(Function<Node, Node> mapping) {
+        return this;
     }
 }
