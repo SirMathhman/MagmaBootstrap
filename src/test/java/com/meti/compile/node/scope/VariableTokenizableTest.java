@@ -1,10 +1,9 @@
-package com.meti.compile.tokenize.node;
+package com.meti.compile.node.scope;
 
 import com.meti.compile.RootContent;
+import com.meti.compile.node.Node;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VariableTokenizableTest {
 
@@ -13,7 +12,7 @@ class VariableTokenizableTest {
         var content = new RootContent("test");
         var tokenizable = new VariableTokenizable(content);
         var node = tokenizable.tokenize().orElseThrow();
-        assertTrue(node.is(Node.Group.Variable));
-        assertEquals("test", node.render());
+        Assertions.assertTrue(node.is(Node.Group.Variable));
+        Assertions.assertEquals("test", node.render());
     }
 }

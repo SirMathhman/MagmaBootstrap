@@ -1,6 +1,7 @@
-package com.meti.compile.tokenize.node;
+package com.meti.compile.node.scope;
 
 import com.meti.compile.Content;
+import com.meti.compile.node.Node;
 import com.meti.compile.tokenize.AbstractTokenizable;
 
 import java.util.Optional;

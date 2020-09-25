@@ -1,6 +1,7 @@
-package com.meti.compile.tokenize.node;
+package com.meti.compile.node.scope;
 
 import com.meti.compile.Content;
+import com.meti.compile.node.Node;
 import com.meti.compile.tokenize.UnformableException;
 
 import java.util.function.Function;
@@ -8,7 +9,7 @@ import java.util.function.Function;
 public class Variable implements Node {
     private final String value;
 
-    Variable(String value) {
+    public Variable(String value) {
         this.value = value;
     }
 

@@ -1,8 +1,8 @@
 package com.meti.compile.tokenize;
 
 import com.meti.compile.Content;
-import com.meti.compile.tokenize.node.MagmaNodeTokenizable;
-import com.meti.compile.tokenize.node.Node;
+import com.meti.compile.node.MagmaNodeTokenizable;
+import com.meti.compile.node.Node;
 
 public class MagmaTokenTokenizer implements Tokenizer<Node> {
     private Node assembleNode(Node node) {

@@ -1,4 +1,4 @@
-package com.meti.compile.tokenize.node;
+package com.meti.compile.node;
 
 import com.meti.compile.Content;
 import com.meti.compile.tokenize.CompoundTokenizable;
