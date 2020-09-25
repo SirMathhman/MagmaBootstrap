@@ -1,6 +1,7 @@
 package com.meti.compile.node;
 
 import com.meti.compile.Content;
+import com.meti.compile.node.scope.VariableTokenizable;
 import com.meti.compile.tokenize.CompoundTokenizable;
 import com.meti.compile.tokenize.TokenizableFactory;
 
@@ -13,6 +14,6 @@ public class MagmaNodeTokenizable extends CompoundTokenizable<Node> {
 
     @Override
     protected Stream<TokenizableFactory<Node>> streamFactories() {
-        return Stream.of();
+        return Stream.of(VariableTokenizable::new);
     }
 }

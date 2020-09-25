@@ -7,7 +7,7 @@ import com.meti.compile.tokenize.AbstractTokenizable;
 import java.util.Optional;
 
 public class VariableTokenizable extends AbstractTokenizable<Node> {
-    protected VariableTokenizable(Content content) {
+    public VariableTokenizable(Content content) {
         super(content);
     }
 
