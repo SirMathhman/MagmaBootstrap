@@ -29,6 +29,8 @@ public class ContentToken implements Node {
 
     @Override
     public Node transformChildren(Function<Node, Node> mapping) {
-        return this;
+        var format = "Cannot transform content with value of '%s'. This error probably means that this instance hasn't been parsed yet.";
+        var message = String.format(format, content.asString());
+        throw new UntransformableException(message);
     }
 }
