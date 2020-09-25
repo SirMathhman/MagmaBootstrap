@@ -13,6 +13,6 @@ public interface Node extends Token {
     boolean is(Group group);
 
     enum Group {
-        Variable, Content
+        Variable, Return, Content
     }
 }

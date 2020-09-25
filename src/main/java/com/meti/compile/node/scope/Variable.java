@@ -1,22 +1,14 @@
 package com.meti.compile.node.scope;
 
-import com.meti.compile.Content;
 import com.meti.compile.node.Node;
-import com.meti.compile.tokenize.UnformableException;
 
 import java.util.function.Function;
 
-public class Variable implements Node {
+public class Variable implements UnformableNode {
     private final String value;
 
     public Variable(String value) {
         this.value = value;
-    }
-
-    @Override
-    public Node form(Function<Content, Node> former) {
-        var message = String.format("Cannot form node of type %s", getClass());
-        throw new UnformableException(message);
     }
 
     @Override
