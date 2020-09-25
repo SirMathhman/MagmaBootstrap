@@ -4,10 +4,10 @@ import com.meti.compile.Content;
 
 import java.util.function.Function;
 
-public class ContentToken implements Node {
+public class ContentNode implements Node {
     private final Content content;
 
-    public ContentToken(Content content) {
+    public ContentNode(Content content) {
         this.content = content;
     }
 
