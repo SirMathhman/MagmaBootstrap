@@ -1,6 +1,7 @@
-package com.meti.compile.tokenize;
+package com.meti.compile.tokenize.node;
 
 import com.meti.compile.Content;
+import com.meti.compile.tokenize.UnformableException;
 
 import java.util.function.Function;
 

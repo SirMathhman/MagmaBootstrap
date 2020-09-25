@@ -1,5 +1,8 @@
-package com.meti.compile.tokenize;
+package com.meti.compile.tokenize.node;
 
+import com.meti.compile.tokenize.UnformableException;
+import com.meti.compile.tokenize.node.Node;
+import com.meti.compile.tokenize.node.Variable;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

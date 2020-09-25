@@ -1,6 +1,8 @@
-package com.meti.compile.tokenize;
+package com.meti.compile.tokenize.node;
 
 import com.meti.compile.Content;
+import com.meti.compile.tokenize.CompoundTokenizable;
+import com.meti.compile.tokenize.TokenizableFactory;
 
 import java.util.stream.Stream;
 
