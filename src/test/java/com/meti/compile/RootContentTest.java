@@ -10,4 +10,10 @@ class RootContentTest {
         Content content = new RootContent(" something\t\n");
         assertEquals("something", content.asString());
     }
+
+    @Test
+    void format() {
+        Content content = new RootContent("value");
+        assertEquals("0 0 >>value<<", content.format("%d %d %s"));
+    }
 }
